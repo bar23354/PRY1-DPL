@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#e17c5a",
+                        "secondary": "#afcbd8",
+                        "on-secondary-fixed": "#021f29",
+                        "outline": "#908f9d",
+                        "on-primary": "#152383",
+                        "on-error-container": "#ffdad6",
+                        "background": "#121416",
+                        "on-primary-fixed-variant": "#303c9a",
+                        "surface-dim": "#121416",
+                        "tertiary-fixed": "#ffdbd0",
+                        "on-secondary": "#19343e",
+                        "primary-fixed": "#dfe0ff",
+                        "surface": "#121416",
+                        "inverse-primary": "#4955b3",
+                        "tertiary": "#ffb59d",
+                        "surface-container-highest": "#333537",
+                        "on-error": "#690005",
+                        "on-primary-fixed": "#000c62",
+                        "primary-container": "#142283",
+                        "surface-container-high": "#282a2c",
+                        "surface-variant": "#333537",
+                        "surface-container-lowest": "#0c0e10",
+                        "inverse-on-surface": "#2f3133",
+                        "outline-variant": "#454652",
+                        "on-primary-container": "#8390f2",
+                        "surface-container-low": "#1a1c1e",
+                        "surface-tint": "#bcc2ff",
+                        "on-secondary-fixed-variant": "#304a55",
+                        "on-surface-variant": "#c6c5d4",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#cbe7f5",
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#afcbd8",
+                        "on-surface": "#e2e2e5",
+                        "primary": "#bcc2ff",
+                        "surface-container": "#1e2022",
+                        "on-tertiary": "#5d1900",
+                        "on-background": "#e2e2e5",
+                        "tertiary-container": "#5c1800",
+                        "primary-fixed-dim": "#bcc2ff",
+                        "on-tertiary-fixed-variant": "#7b2e12",
+                        "on-secondary-container": "#a1bdca",
+                        "on-tertiary-fixed": "#390c00",
+                        "secondary-container": "#334d58",
+                        "inverse-surface": "#e2e2e5",
+                        "surface-bright": "#38393c",
+                        "tertiary-fixed-dim": "#ffb59d"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121416;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(69, 70, 82, 0.2);
+            border-radius: 10px;
+        }
+        .glass-panel {
+            background: rgba(51, 53, 55, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
+<nav class="bg-slate-950/80 backdrop-blur-xl docked full-width top-0 z-50 bg-slate-900 sticky">
+<div class="flex justify-between items-center px-6 py-2 w-full max-w-[1920px] mx-auto">
+<div class="flex items-center gap-8">
+<div class="text-lg font-bold tracking-tighter text-white font-['Space_Grotesk'] flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-sm" data-icon="terminal">terminal</span>
+</div>
+                    Compiler Architect
+                </div>
+<div class="hidden md:flex gap-6 font-['Space_Grotesk'] tracking-tight text-sm font-medium">
+<a class="text-indigo-300 border-b-2 border-indigo-400 pb-1" href="#">Build</a>
+<a class="text-slate-400 hover:text-indigo-100 hover:bg-slate-800/50 rounded-md transition-all px-2" href="#">Analyze</a>
+<a class="text-slate-400 hover:text-indigo-100 hover:bg-slate-800/50 rounded-md transition-all px-2" href="#">Optimize</a>
+<a class="text-slate-400 hover:text-indigo-100 hover:bg-slate-800/50 rounded-md transition-all px-2" href="#">Logs</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<button class="p-2 text-slate-400 hover:text-indigo-100 hover:bg-slate-800/50 rounded-md transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-indigo-100 hover:bg-slate-800/50 rounded-md transition-all">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="h-6 w-[1px] bg-outline-variant/30"></div>
+<button class="bg-gradient-to-br from-primary to-on-primary-container text-on-primary px-4 py-1.5 rounded-md text-sm font-bold flex items-center gap-2 Active: opacity-80 scale-95 duration-150">
+<span class="material-symbols-outlined text-sm" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                    Run Compiler
+                </button>
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-outline-variant/50" data-alt="Close-up portrait of a professional software architect in a dark tech-focused studio with subtle blue ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1QscIZjcMp5GFoYXkuXH6E_B1kMBLi11iCQzAUP1vQAsK1BUr9oBhBJ4VxYoPt6eTpzIJ00c3HAN0yv3qempMfKaWziTK-_mJHF_ZB6iFsw5eWcC61vDXGxE137i7f-X0qcAs-srP9L7IS8t7s12UeUUCkDY_dMvqYD-0ZtD-gFJfOsI-GlD7RiUS6z3CQOTh_V5qS8zxAc5RtMdX7KuzvVsho4qIdCanitD2eP1lx80Ug9oujQwAJcYRMHVLsQ9Gfw-yv98WXiZj"/>
+</div>
+</div>
+</nav>
+<div class="flex min-h-[calc(100vh-48px)]">
+<aside class="hidden md:flex flex-col h-screen py-4 border-r border-slate-800/50 bg-slate-900 docked left-0 h-full w-64 sticky top-[48px]">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl">
+<img alt="Project Icon" class="w-10 h-10 rounded-lg" data-alt="Minimalist abstract logo representing University of the Valley of Guatemala with geometric dark shapes and green accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr2-YI9rqe1P1eAV5MqzhqYjJ-zLQcBcvyVbn_DRGb83Jd4c7dQBqccKXaGJ6vdSnPD3_dPami-K7lwZpH1SWHjtepRlsIbv1Rucst4Fyssj0EY8xi6GMhNCg57jW9jJERkoFPQQh2XSVxRzMT2TsQR9rBatQfuWmuia8xNsvd4fv0-oJmhGs14PypqbFP4VNKMR-zQBuVhSAnWkDiF-K3aFxjiD1Hz5hSx0TlYsjMBeHyTkyDm3eSOe6wQxq0QorBGLFbBrgOP0t4"/>
+<div class="overflow-hidden">
+<h3 class="text-indigo-400 font-black text-xs truncate uppercase tracking-tight">Main Branch</h3>
+<p class="text-[10px] text-slate-500 font-mono">v2.4.0-stable</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 px-3">
+<a class="flex items-center gap-3 px-4 py-3 bg-slate-800 text-indigo-300 font-bold border-r-2 border-indigo-500 font-['Inter'] text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+                    File Explorer
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-800 hover:text-slate-200 transition-colors duration-200 font-['Inter'] text-xs uppercase tracking-widest Hover: translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+                    Global Search
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-800 hover:text-slate-200 transition-colors duration-200 font-['Inter'] text-xs uppercase tracking-widest Hover: translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+                    Source Control
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-800 hover:text-slate-200 transition-colors duration-200 font-['Inter'] text-xs uppercase tracking-widest Hover: translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+                    Debug Console
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-800 hover:text-slate-200 transition-colors duration-200 font-['Inter'] text-xs uppercase tracking-widest Hover: translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="extension">extension</span>
+                    Extensions
+                </a>
+</nav>
+<div class="px-4 mb-4">
+<button class="w-full bg-surface-container-highest text-on-surface hover:bg-surface-bright transition-colors px-4 py-3 rounded-lg flex items-center justify-center gap-2 font-['Inter'] text-xs font-semibold uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                    New Module
+                </button>
+</div>
+<div class="mt-auto px-3 pt-4 border-t border-slate-800/50 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:bg-slate-800 hover:text-slate-200 transition-colors font-['Inter'] text-[10px] uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="person">person</span>
+                    Account
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:bg-slate-800 hover:text-slate-200 transition-colors font-['Inter'] text-[10px] uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="analytics">analytics</span>
+                    System Status
+                </a>
+</div>
+</aside>
+<main class="flex-1 p-8 overflow-y-auto bg-surface-container-low">
+<header class="mb-12">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-primary-container text-on-primary-container uppercase tracking-widest">UVG Engineering</span>
+<span class="text-outline text-xs">CS3012</span>
+</div>
+<h1 class="text-4xl font-headline font-bold tracking-tighter text-on-background mb-2">Proyecto 01: Diseño de Lenguajes de Programación</h1>
+<p class="text-on-surface-variant flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span>
+                            Deadline: <span class="text-primary font-semibold">March 24, 2026</span>
+</p>
+</div>
+<div class="hidden lg:block">
+<div class="p-4 bg-surface-container-high rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border-4 border-primary/20 border-t-primary flex items-center justify-center">
+<span class="text-xs font-bold text-primary">64%</span>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-outline">Overall Progress</p>
+<p class="text-sm font-bold">In Active Sprint</p>
+</div>
+</div>
+</div>
+</div>
+</header>
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="p-6 rounded-2xl bg-surface-container border border-outline-variant/10">
+<div class="flex items-center justify-between mb-4">
+<span class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</span>
+<span class="text-[10px] text-outline font-mono">STABILITY: HIGH</span>
+</div>
+<h4 class="text-3xl font-headline font-bold mb-1">24</h4>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">Low Complexity Cases</p>
+</div>
+<div class="p-6 rounded-2xl bg-surface-container border border-outline-variant/10">
+<div class="flex items-center justify-between mb-4">
+<span class="p-2 rounded-lg bg-amber-500/10 text-amber-400">
+<span class="material-symbols-outlined" data-icon="error">error</span>
+</span>
+<span class="text-[10px] text-outline font-mono">STABILITY: MED</span>
+</div>
+<h4 class="text-3xl font-headline font-bold mb-1">12</h4>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">Medium Complexity Cases</p>
+</div>
+<div class="p-6 rounded-2xl bg-surface-container border border-outline-variant/10">
+<div class="flex items-center justify-between mb-4">
+<span class="p-2 rounded-lg bg-rose-500/10 text-rose-400">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</span>
+<span class="text-[10px] text-outline font-mono">STABILITY: LOW</span>
+</div>
+<h4 class="text-3xl font-headline font-bold mb-1">08</h4>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">High Complexity Cases</p>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-8 space-y-8">
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-xl font-headline font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="grid_view">grid_view</span>
+                                Project Modules
+                            </h2>
+<button class="text-xs text-primary font-bold hover:underline uppercase tracking-widest">View Map</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-5 rounded-2xl bg-surface-container-high hover:bg-surface-bright transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-6">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</div>
+<span class="px-2 py-1 rounded text-[10px] bg-secondary-container text-on-secondary-container font-bold">READY</span>
+</div>
+<h5 class="font-bold mb-1 group-hover:text-primary transition-colors">Lexical Analyzer</h5>
+<p class="text-xs text-on-surface-variant line-clamp-2">Finite automata implementation for token identification and regex parsing.</p>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-high hover:bg-surface-bright transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-6">
+<div class="w-10 h-10 rounded-xl bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="schema">schema</span>
+</div>
+<span class="px-2 py-1 rounded text-[10px] bg-error-container text-on-error-container font-bold">IN PROGRESS</span>
+</div>
+<h5 class="font-bold mb-1 group-hover:text-tertiary transition-colors">Syntax Parser</h5>
+<p class="text-xs text-on-surface-variant line-clamp-2">LR(1) table construction and syntax tree generation for the target grammar.</p>
+</div>
+</div>
+</section>
+<section>
+<h2 class="text-xl font-headline font-semibold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="history">history</span>
+                            Recent Files
+                        </h2>
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden">
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="border-b border-outline-variant/10 text-[10px] uppercase tracking-widest text-outline">
+<th class="px-6 py-4 font-semibold">Name</th>
+<th class="px-6 py-4 font-semibold">Size</th>
+<th class="px-6 py-4 font-semibold">Last Modified</th>
+<th class="px-6 py-4 font-semibold">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-amber-400 text-lg" data-icon="javascript">javascript</span>
+<span class="font-mono text-xs">scanner.ll</span>
+</td>
+<td class="px-6 py-4 text-xs font-mono">12.4 KB</td>
+<td class="px-6 py-4 text-xs text-on-surface-variant">2h ago</td>
+<td class="px-6 py-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-indigo-400 text-lg" data-icon="data_object">data_object</span>
+<span class="font-mono text-xs">grammar.y</span>
+</td>
+<td class="px-6 py-4 text-xs font-mono">45.1 KB</td>
+<td class="px-6 py-4 text-xs text-on-surface-variant">Yesterday</td>
+<td class="px-6 py-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<div class="lg:col-span-4 space-y-8">
+<section class="glass-panel p-6 rounded-2xl border border-primary/20">
+<h3 class="text-lg font-headline font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="rule">rule</span>
+                            Rubric Breakdown
+                        </h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-[10px] uppercase tracking-widest mb-1.5">
+<span class="text-on-surface">Lexical Analysis</span>
+<span class="text-primary font-bold">30/30 pts</span>
+</div>
+<div class="h-1 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[10px] uppercase tracking-widest mb-1.5">
+<span class="text-on-surface">Syntax Parsing</span>
+<span class="text-tertiary font-bold">15/40 pts</span>
+</div>
+<div class="h-1 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[37.5%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[10px] uppercase tracking-widest mb-1.5">
+<span class="text-on-surface">Error Handling</span>
+<span class="text-outline font-bold">0/20 pts</span>
+</div>
+<div class="h-1 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-outline-variant w-0"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[10px] uppercase tracking-widest mb-1.5">
+<span class="text-on-surface">Documentation</span>
+<span class="text-secondary font-bold">10/10 pts</span>
+</div>
+<div class="h-1 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-full"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/20">
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold">Current Grade</span>
+<span class="text-2xl font-headline font-black text-primary">55/100</span>
+</div>
+</div>
+</section>
+<section class="p-6 rounded-2xl bg-surface-container border border-outline-variant/10 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-3xl transition-all group-hover:bg-primary/10"></div>
+<h3 class="text-lg font-headline font-bold mb-2">New Project</h3>
+<p class="text-xs text-on-surface-variant mb-6">Initialize a new compiler project with standard UVG directory structure.</p>
+<button class="w-full py-3 rounded-xl bg-surface-container-highest border border-outline-variant/20 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="rocket_launch">rocket_launch</span>
+                            Create Boilerplate
+                        </button>
+</section>
+</div>
+</div>
+</main>
+</div>
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-slate-950/90 backdrop-blur-md border-t border-slate-800 px-6 py-3 flex justify-around items-center z-50">
+<a class="flex flex-col items-center gap-1 text-indigo-300" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open" style="font-variation-settings: 'FILL' 1;">folder_open</span>
+<span class="text-[10px] uppercase font-bold tracking-tighter">Files</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="text-[10px] uppercase font-bold tracking-tighter">Search</span>
+</a>
+<div class="relative -top-6">
+<button class="w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg shadow-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="text-[10px] uppercase font-bold tracking-tighter">Debug</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] uppercase font-bold tracking-tighter">User</span>
+</a>
+</div>
+</body></html>
