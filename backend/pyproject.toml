@@ -7,7 +7,13 @@ name = "proyecto01-generador-lexers-backend"
 version = "0.1.0"
 description = "Backend Python para el generador de analizadores lexicos del Proyecto 01."
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "fastapi>=0.135,<1",
+    "uvicorn>=0.42,<1",
+]
+
+[project.scripts]
+laboratorio-api = "laboratorio.cli.serve:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10"]
@@ -17,4 +23,3 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
