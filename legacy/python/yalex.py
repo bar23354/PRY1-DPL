@@ -1,5 +1,10 @@
 import argparse
+import sys
 from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from laboratorio.yalex_codegen import write_lexer_file
 from laboratorio.yalex_compiler import compile_yalex

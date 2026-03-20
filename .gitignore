@@ -424,3 +424,7 @@ yalex_consideraciones_extracted.txt
 
 # Local tests directory
 tests/
+!backend/tests/
+!backend/tests/**
+backend/tests/**/__pycache__/
+backend/tests/**/*.pyc

@@ -4,6 +4,10 @@ import sys
 import webbrowser
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 from laboratorio.analizador import formatearSimbolo, formatearTokens, prepararExpresion
 from laboratorio.arbol import construirArbolDirecto
 from laboratorio.construccion_afd import construirAfd
@@ -83,7 +87,7 @@ def ejecutar_consola_regex():
             break
 
 def abrir_interfaz() -> bool:
-    base_dir = Path(__file__).resolve().parent / 'interfaz'
+    base_dir = REPO_ROOT / 'legacy' / 'web' / 'interfaz'
     required_files = [
         base_dir / 'index.html',
         base_dir / 'dashboard_project_01' / 'code.html',

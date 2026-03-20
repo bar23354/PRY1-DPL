@@ -1,35 +1,58 @@
 # Proyecto 01
 
-Implementacion de construccion de AFD por metodo directo, minimizacion de AFD y compilacion YALex.
+Implementación de construcción de AFD por método directo, minimización de AFD y compilación YALex.
 
-La interfaz oficial del proyecto para presentacion esta en [interfaz/index.html](interfaz/index.html).
+La fuente normativa principal del proyecto es `docs/instrucciones_generales.md`.
 
-El proyecto evita librerias regex para el matching lexico.
+El proyecto evita librerías regex para el matching léxico.
 
-## Ejecutar flujo original del curso
+## Estado actual del repositorio
 
-Comando principal:
+La estructura ya fue preparada para el refactor grande:
 
-python main.py
+- `backend/`: espacio reservado para el backend Python y sus pruebas.
+- `frontend/`: espacio reservado para la futura app en Next.js + React + TypeScript.
+- `fixtures/`: fixtures legacy de YALex e inputs.
+- `legacy/`: referencia histórica de entrypoints Python e interfaz web estática.
+- `docs/`: documentación oficial y técnica.
+
+En esta etapa, el núcleo Python vigente todavía permanece en `laboratorio/`.
+
+## Ejecutar flujo legacy del curso
+
+Comando principal legacy:
+
+```bash
+python legacy/python/main.py
+```
 
 Entrada legacy equivalente:
 
-python programa_afd.py
+```bash
+python legacy/python/programa_afd.py
+```
 
-CLI de compilacion YALex:
+CLI legacy de compilación YALex:
 
-python yalex.py examples/yalex_baja.yal -o thelexer
+```bash
+python legacy/python/yalex.py fixtures/legacy/yalex/yalex_baja.yal -o thelexer
+```
 
 ## Pruebas
 
-python -m pytest -q
+Suite legacy reubicada:
+
+```bash
+python -m pytest -q backend/tests/legacy_tests
+```
 
 ## Estructura relevante
 
-- [main.py](main.py): lanzador consola e interfaz estatica
-- [yalex.py](yalex.py): generador de lexer desde .yal
-- [laboratorio](laboratorio): implementacion base del proyecto y rubrica
-- [examples](examples): insumos baja/media/alta
-- [tests](tests): suite automatizada
-- [interfaz/index.html](interfaz/index.html): interfaz unificada para presentacion
-
+- `docs/instrucciones_generales.md`: fuente normativa principal.
+- `docs/Consideraciones de YALex.pdf`: especificación complementaria de YALex.
+- `docs/Proyecto 01 - Rúbrica de evaluación.pdf`: rúbrica académica.
+- `laboratorio/`: implementación Python vigente del núcleo actual.
+- `legacy/python/`: entrypoints históricos del proyecto.
+- `legacy/web/interfaz/`: baseline visual HTML estático para comparación 1:1.
+- `fixtures/legacy/`: insumos legacy de YALex e inputs de validación.
+- `backend/tests/legacy_tests/`: suite automatizada heredada.
