@@ -1,0 +1,62 @@
+"use client";
+
+import { MODULES, getModuleDefinition } from "../../lib/modules";
+import { useActiveView } from "../../hooks/use-active-view";
+import { ModuleCard } from "./module-card";
+import { ModulePanel } from "./module-panel";
+
+export function AppShell() {
+  const { activeView, setActiveView } = useActiveView();
+  const activeModule = getModuleDefinition(activeView);
+
+  return (
+    <div className="mx-auto max-w-[1500px] p-4 md:p-6">
+      <header className="glass mb-4 rounded-2xl p-4 md:mb-6 md:p-5">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-slate-400">UVG | Diseno de Lenguajes</p>
+            <h1 className="font-headline text-2xl font-bold md:text-3xl">Proyecto 01 - Interfaz Integrada</h1>
+            <p className="text-sm text-slate-300">
+              Un solo punto de acceso para Dashboard, Analisis, Generador Lexico y Test Cases.
+            </p>
+          </div>
+          <div className="text-xs text-slate-300">
+            <p>Complejidades disponibles: Baja, Media, Alta</p>
+            <p>Cumple con enfoque de evidencia para rubrica</p>
+          </div>
+        </div>
+      </header>
+
+      <section className="mb-4 grid grid-cols-1 gap-3 md:mb-6 md:grid-cols-2 md:gap-4 xl:grid-cols-4" aria-label="Module selector">
+        {MODULES.map((moduleDefinition) => (
+          <ModuleCard
+            key={moduleDefinition.key}
+            moduleDefinition={moduleDefinition}
+            isActive={activeView === moduleDefinition.key}
+            onSelect={setActiveView}
+          />
+        ))}
+      </section>
+
+      <section className="overflow-hidden rounded-2xl border border-slate-700/30 bg-[color:var(--color-panel)]/85">
+        <div className="flex items-center justify-between bg-slate-900/60 p-3 md:p-4">
+          <div>
+            <p className="text-xs uppercase tracking-[0.16em] text-slate-400">Modulo activo</p>
+            <h3 className="font-headline text-lg" data-testid="active-title">
+              {activeModule.activeTitle}
+            </h3>
+          </div>
+          <a
+            className="rounded-md bg-[linear-gradient(135deg,var(--color-primary),#8390f2)] px-3 py-2 text-xs font-semibold text-[#152383] md:text-sm"
+            href={`../legacy/web/interfaz/${activeModule.standalonePath}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Abrir vista independiente
+          </a>
+        </div>
+        <ModulePanel moduleDefinition={activeModule} />
+      </section>
+    </div>
+  );
+}

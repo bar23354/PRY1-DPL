@@ -428,3 +428,7 @@ tests/
 !backend/tests/**
 backend/tests/**/__pycache__/
 backend/tests/**/*.pyc
+
+# Next.js frontend artifacts
+frontend/node_modules/
+frontend/.next/
