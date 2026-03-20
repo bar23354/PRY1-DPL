@@ -1,4 +1,6 @@
 import type { ModuleDefinition } from "../../types/shell";
+import { AnalysisTool } from "../analysis/analysis-tool";
+import { GeneratorTool } from "../generator/generator-tool";
 
 interface ModulePanelProps {
   moduleDefinition: ModuleDefinition;
@@ -28,6 +30,14 @@ const PANEL_CONTENT: Record<ModuleDefinition["key"], { eyebrow: string; headline
 };
 
 export function ModulePanel({ moduleDefinition }: ModulePanelProps) {
+  if (moduleDefinition.key === "analysis") {
+    return <AnalysisTool />;
+  }
+
+  if (moduleDefinition.key === "generator") {
+    return <GeneratorTool />;
+  }
+
   const content = PANEL_CONTENT[moduleDefinition.key];
 
   return (

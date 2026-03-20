@@ -20,7 +20,7 @@ describe("AppShell", () => {
     await user.click(screen.getByRole("button", { name: /lexical generator/i }));
 
     expect(screen.getByTestId("active-title")).toHaveTextContent("Lexical Generator");
-    expect(screen.getByText("El shell ya reemplaza la vista legacy. Luego se conectaran editor YALex, compilacion, diagrama y descargas reales.")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /generate diagram/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Abrir vista independiente" })).toHaveAttribute(
       "href",
       "../legacy/web/interfaz/lexical_generator/code.html",
