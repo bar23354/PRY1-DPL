@@ -1,0 +1,19 @@
+{
+TOKEN_INT = "TOKEN_INT"
+}
+let vocal = [aeiou]
+let minus = [a-z]
+let consonante = minus # vocal
+let dig = ['0'-'9']
+rule main [mode] =
+  [' ''\t''\n']+ {
+    skip
+  }
+| consonante+ { return "CONS" }
+| [^a-z]+ { return "NOLOWER" }
+| _ { return "ANY" }
+| dig+ {
+    val = int(lexeme)
+    return TOKEN_INT
+  }
+| eof { return "EOF" }

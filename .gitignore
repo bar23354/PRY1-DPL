@@ -421,3 +421,6 @@ temp/
 # Temporary requirement-extraction artifacts
 rubrica_extracted.txt
 yalex_consideraciones_extracted.txt
+
+# Local tests directory
+tests/

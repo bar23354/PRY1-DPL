@@ -1,0 +1,38 @@
+(* Complejidad alta, no exhaustiva *)
+
+let ws = [' ''\t''\n']+
+let digit = ['0'-'9']
+let lower = ['a'-'z']
+let upper = ['A'-'Z']
+let letter = lower|upper|'_'
+let id = letter(letter|digit)*
+let int = digit+
+let frac = '.'digit+
+let number = int(frac)?
+let rel = "=="|"!="|">="|"<="|">"|"<"
+let addop = '+'|'-'
+let mulop = '*'|'/'
+let logic = "&&"|"||"
+
+rule tokens =
+  ws {}
+| "if" { return IF }
+| "else" { return ELSE }
+| "while" { return WHILE }
+| "return" { return RETURN }
+| "int" { return KW_INT }
+| "float" { return KW_FLOAT }
+| "bool" { return KW_BOOL }
+| number { return NUMBER }
+| id { return ID }
+| rel { return RELOP }
+| logic { return LOGICOP }
+| addop { return ADDOP }
+| mulop { return MULOP }
+| '=' { return ASSIGN }
+| ';' { return SEMI }
+| ',' { return COMMA }
+| '(' { return LPAREN }
+| ')' { return RPAREN }
+| '{' { return LBRACE }
+| '}' { return RBRACE }

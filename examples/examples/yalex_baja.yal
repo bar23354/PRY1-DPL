@@ -1,0 +1,16 @@
+(* Complejidad baja *)
+
+let delimitador = [' ''\t''\n']
+let espacioEnBlanco = delimitador+
+let digito = ['0'-'9']
+let numero = '-'?digito+
+let letra = ['a'-'z''A'-'Z']
+let identificador = letra(letra|digito)*
+
+rule tokens =
+  espacioEnBlanco {}
+| identificador { return IDENT }
+| numero { return NUM }
+| '+' { return PLUS }
+| '*' { return TIMES }
+| '=' { return ASSIGN }

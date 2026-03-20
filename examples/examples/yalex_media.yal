@@ -1,0 +1,23 @@
+(* Complejidad media *)
+
+let delimitador = [' ''\t''\n']
+let ws = delimitador+
+let digito = ['0'-'9']
+let letra = ['a'-'z''A'-'Z''_']
+let identificador = letra(letra|digito)*
+let entero = digito+
+let relop = "=="|">="|"<="|"!="|">"|"<"
+let stringSimple = '"' letra+ '"'
+
+rule tokens =
+  ws {}
+| "if" { return IF }
+| "else" { return ELSE }
+| "while" { return WHILE }
+| relop { return RELOP }
+| stringSimple { return STRING }
+| entero { return INT }
+| identificador { return ID }
+| '=' { return ASSIGN }
+| '+' { return PLUS }
+| '-' { return MINUS }
