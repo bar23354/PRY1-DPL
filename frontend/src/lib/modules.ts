@@ -5,7 +5,7 @@ export const MODULES: ModuleDefinition[] = [
     key: "dashboard",
     badge: "Vista 01",
     cardTitle: "Dashboard General",
-    cardDescription: "Estado global del proyecto, rubrica y modulos.",
+    cardDescription: "Resumen global de fixtures, casos y modulos activos.",
     activeTitle: "Dashboard General",
     standalonePath: "dashboard_project_01/code.html",
   },

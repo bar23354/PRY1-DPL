@@ -17,12 +17,12 @@ export function AppShell() {
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">UVG | Diseno de Lenguajes</p>
             <h1 className="font-headline text-2xl font-bold md:text-3xl">Proyecto 01 - Interfaz Integrada</h1>
             <p className="text-sm text-slate-300">
-              Un solo punto de acceso para Dashboard, Analisis, Generador Lexico y Test Cases.
+              Un solo punto de acceso para dashboard, analisis, generador lexico y ejecucion de pruebas.
             </p>
           </div>
           <div className="text-xs text-slate-300">
             <p>Complejidades disponibles: Baja, Media, Alta</p>
-            <p>Cumple con enfoque de evidencia para rubrica</p>
+            <p>Backend Python + API FastAPI + frontend integrado</p>
           </div>
         </div>
       </header>

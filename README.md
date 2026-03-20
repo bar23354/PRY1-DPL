@@ -1,58 +1,80 @@
 # Proyecto 01
 
-Implementación de construcción de AFD por método directo, minimización de AFD y compilación YALex.
+Implementacion de construccion de AFD por metodo directo, minimizacion de AFD, compilacion YALex e interfaz integrada para analisis, generacion y validacion.
 
 La fuente normativa principal del proyecto es `docs/instrucciones_generales.md`.
 
-El proyecto evita librerías regex para el matching léxico.
+El proyecto evita librerias regex para el matching lexico.
 
-## Estado actual del repositorio
+## Estructura actual
 
-La estructura ya fue preparada para el refactor grande:
+- `backend/`: backend Python, API FastAPI y pruebas del backend.
+- `frontend/`: aplicacion Next.js + React + TypeScript.
+- `fixtures/`: catalogo declarativo, especificaciones YALex e inputs de prueba.
+- `legacy/`: referencia historica de entrypoints Python e interfaz web estatica.
+- `docs/`: documentacion tecnica y academica.
+- `e2e/`: pruebas end-to-end y soporte de validacion visual.
 
-- `backend/`: backend Python y pruebas del backend.
-- `frontend/`: espacio reservado para la futura app en Next.js + React + TypeScript.
-- `fixtures/`: fixtures legacy de YALex e inputs.
-- `legacy/`: referencia histórica de entrypoints Python e interfaz web estática.
-- `docs/`: documentación oficial y técnica.
+El nucleo Python vigente vive en `backend/src/laboratorio/`.
 
-En esta etapa, el núcleo Python vigente ya fue movido a `backend/src/laboratorio/`.
+## Ejecutar la aplicacion integrada
 
-## Ejecutar flujo legacy del curso
+Backend:
 
-Comando principal legacy:
-
-```bash
-python legacy/python/main.py
+```powershell
+$env:PYTHONPATH="backend/src"
+python -m laboratorio.cli.serve
 ```
 
-Entrada legacy equivalente:
+Frontend:
 
-```bash
-python legacy/python/programa_afd.py
+```powershell
+cd frontend
+$env:BACKEND_API_ORIGIN="http://127.0.0.1:8000"
+npm run dev
 ```
 
-CLI legacy de compilación YALex:
+Abrir:
 
-```bash
-python legacy/python/yalex.py fixtures/legacy/yalex/yalex_baja.yal -o thelexer
+```text
+http://localhost:3000
 ```
 
 ## Pruebas
 
-Suite legacy reubicada:
+Backend:
 
 ```bash
-python -m pytest -q backend/tests/legacy_tests
+python -m pytest -q backend/tests
+```
+
+Frontend:
+
+```bash
+cd frontend
+npm test
+npm run build
+```
+
+End-to-end:
+
+```bash
+cd frontend
+npm run test:e2e
+```
+
+Actualizacion de snapshots visuales:
+
+```bash
+cd frontend
+npm run test:e2e:update
 ```
 
 ## Estructura relevante
 
 - `docs/instrucciones_generales.md`: fuente normativa principal.
-- `docs/Consideraciones de YALex.pdf`: especificación complementaria de YALex.
-- `docs/Proyecto 01 - Rúbrica de evaluación.pdf`: rúbrica académica.
-- `backend/src/laboratorio/`: implementación Python vigente del núcleo actual.
-- `legacy/python/`: entrypoints históricos del proyecto.
-- `legacy/web/interfaz/`: baseline visual HTML estático para comparación 1:1.
-- `fixtures/legacy/`: insumos legacy de YALex e inputs de validación.
-- `backend/tests/legacy_tests/`: suite automatizada heredada.
+- `docs/manual_validation.md`: checklist manual de validacion.
+- `backend/src/laboratorio/`: implementacion Python del nucleo.
+- `frontend/src/`: shell, features, hooks, tipos y utilidades del frontend.
+- `fixtures/catalog.json`: catalogo declarativo de fixtures y casos.
+- `legacy/`: referencia historica preservada para comparacion.

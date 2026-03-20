@@ -432,3 +432,4 @@ backend/tests/**/*.pyc
 # Next.js frontend artifacts
 frontend/node_modules/
 frontend/.next/
+artifacts/reports/

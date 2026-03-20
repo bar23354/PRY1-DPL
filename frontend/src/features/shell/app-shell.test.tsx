@@ -9,15 +9,51 @@ describe("AppShell", () => {
     vi.restoreAllMocks();
   });
 
-  it("renders the dashboard as the default active module", () => {
+  it("renders the dashboard as the default active module", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({
+          totalFixtures: 5,
+          totalTestCases: 6,
+          complexities: { low: 2, medium: 2, high: 2 },
+          modules: { analysis: 3, generator: 2, "test-manager": 6 },
+        }),
+        { status: 200 },
+      ),
+    );
+
     render(<AppShell />);
 
+    expect(await screen.findByText("UVG Project 01: Dashboard")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Proyecto 01 - Interfaz Integrada" })).toBeInTheDocument();
     expect(screen.getByTestId("active-title")).toHaveTextContent("Dashboard General");
     expect(screen.queryByTitle("Interfaz de modulo")).not.toBeInTheDocument();
   });
 
   it("switches the active module without using an iframe", async () => {
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            totalFixtures: 5,
+            totalTestCases: 6,
+            complexities: { low: 2, medium: 2, high: 2 },
+            modules: { analysis: 3, generator: 2, "test-manager": 6 },
+          }),
+          { status: 200 },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            fixtures: [
+              { id: "generator-low", module: "generator", complexity: "low", label: "Generator Low", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_baja.yal", inputPath: null, hasInput: false },
+            ],
+          }),
+          { status: 200 },
+        ),
+      );
+
     const user = userEvent.setup();
     render(<AppShell />);
 
@@ -32,26 +68,38 @@ describe("AppShell", () => {
   });
 
   it("mounts the test case manager inside the shell", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
-      new Response(
-        JSON.stringify({
-          testCases: [
-            {
-              id: "rubric-low-valid",
-              complexity: "low",
-              label: "Low Valid",
-              fixtureId: "analysis-low",
-              specPath: "fixtures/legacy/yalex/yalex_baja.yal",
-              inputPath: "fixtures/legacy/inputs/yalex_baja_input.txt",
-              expectation: "accept",
-              expectedTokens: ["IDENT"],
-              expectedError: null,
-            },
-          ],
-        }),
-        { status: 200 },
-      ),
-    );
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            totalFixtures: 5,
+            totalTestCases: 6,
+            complexities: { low: 2, medium: 2, high: 2 },
+            modules: { analysis: 3, generator: 2, "test-manager": 6 },
+          }),
+          { status: 200 },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            testCases: [
+              {
+                id: "rubric-low-valid",
+                complexity: "low",
+                label: "Low Valid",
+                fixtureId: "analysis-low",
+                specPath: "fixtures/legacy/yalex/yalex_baja.yal",
+                inputPath: "fixtures/legacy/inputs/yalex_baja_input.txt",
+                expectation: "accept",
+                expectedTokens: ["IDENT"],
+                expectedError: null,
+              },
+            ],
+          }),
+          { status: 200 },
+        ),
+      );
 
     const user = userEvent.setup();
     render(<AppShell />);

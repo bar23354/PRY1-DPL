@@ -5,9 +5,12 @@
   "scripts": {
     "predev": "node -e \"require('node:fs').rmSync('.next', { recursive: true, force: true })\"",
     "dev": "next dev",
+    "prebuild": "node -e \"require('node:fs').rmSync('.next', { recursive: true, force: true })\"",
     "build": "next build",
     "start": "next start",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:e2e": "playwright test -c playwright.config.ts",
+    "test:e2e:update": "playwright test -c playwright.config.ts --update-snapshots"
   },
   "dependencies": {
     "next": "^15.3.0",
@@ -15,6 +18,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",

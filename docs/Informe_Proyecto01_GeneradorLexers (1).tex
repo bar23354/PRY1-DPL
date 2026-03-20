@@ -108,6 +108,7 @@
 \fancyhead[R]{\small\textcolor{gray}{Proyecto 01 -- Generador de Analizadores Léxicos}}
 \fancyfoot[C]{\thepage\ / \pageref{LastPage}}
 \fancyfoot[R]{\small\textcolor{gray}{DLP 2026-I}}
+\setlength{\headheight}{24pt}
 \renewcommand{\headrulewidth}{0.8pt}
 \renewcommand{\footrulewidth}{0.4pt}
 \renewcommand{\headrule}{\hbox to\headwidth{\color{uvggreen}\leaders\hrule height \headrulewidth\hfill}}
@@ -290,7 +291,6 @@ La plataforma se diseña como un sistema por capas, con separación clara entre 
 
 \begin{figure}[H]
 \centering
-\resizebox{\textwidth}{!}{
 \begin{tikzpicture}[
     node distance=0.9cm and 0.6cm,
     box/.style={
@@ -298,14 +298,14 @@ La plataforma se diseña como un sistema por capas, con separación clara entre 
         draw=darkblue, thick,
         fill=blue!6,
         minimum width=3.3cm, minimum height=1cm,
-        text centered, font=\small\bfseries,
+        align=center, text centered, font=\small\bfseries,
         text=darkblue
     },
     io/.style={
         trapezium, trapezium left angle=70, trapezium right angle=110,
         draw=uvggreen, thick, fill=green!6,
         minimum width=2.6cm, minimum height=0.8cm,
-        text centered, font=\small,
+        align=center, text centered, font=\small,
         text=uvggreen!80!black
     },
     arr/.style={-{Stealth[length=6pt]}, thick, color=darkblue!70},
@@ -338,7 +338,6 @@ La plataforma se diseña como un sistema por capas, con separación clara entre 
 \draw[arr, dashed, color=gray] (runtime) -- (tests);
 
 \end{tikzpicture}
-}
 \caption{Arquitectura general de la plataforma integrada.}
 \label{fig:arquitectura_general}
 \end{figure}
@@ -393,15 +392,58 @@ El generador de código produce un archivo Python que contiene:
 
 \section{Diseño del Frontend}
 
-La interfaz web está implementada con \textbf{Next.js}, \textbf{React} y \textbf{TypeScript}. El diseño visual mantiene una sola experiencia integrada, sin delegar navegación a documentos aislados ni duplicar lógica de presentación.
+El frontend se implementa dentro de la carpeta \texttt{frontend/} como una aplicación de \textbf{Next.js}, \textbf{React} y \textbf{TypeScript}. Su responsabilidad consiste en concentrar la visualización y operación de los módulos del sistema, mientras que el procesamiento formal, la compilación YALex y la ejecución del lexer se mantienen en el backend Python.
 
-La estructura del frontend se apoya en tres principios:
+La base del proyecto frontend se define a partir de los siguientes archivos:
 
 \begin{itemize}[leftmargin=2em]
-  \item \textbf{Responsabilidad única}: cada módulo encapsula su propia vista, estado y comunicación con la API.
-  \item \textbf{Hooks especializados}: la lógica de carga, compilación, ejecución y descarga se modela con hooks reutilizables y tipados.
-  \item \textbf{Paridad visual}: la interfaz preserva una experiencia estética uniforme entre dashboard, análisis, generación y ejecución de pruebas.
+  \item \texttt{frontend/package.json}: administra dependencias y scripts de desarrollo, pruebas y construcción.
+  \item \texttt{frontend/next.config.ts}: configura Next.js y centraliza la reescritura de rutas relativas \texttt{/api/*} hacia el backend.
+  \item \texttt{frontend/src/app/layout.tsx}: declara el layout raíz compartido por toda la aplicación.
+  \item \texttt{frontend/src/app/page.tsx}: monta la vista principal y delega la interfaz al shell de navegación.
+  \item \texttt{frontend/src/app/globals.css}: contiene estilos globales, definiciones visuales y reglas compartidas por todos los módulos.
 \end{itemize}
+
+La estructura funcional del frontend se organiza alrededor de un shell principal. Esta capa se implementa en:
+
+\begin{itemize}[leftmargin=2em]
+  \item \texttt{frontend/src/features/shell/app-shell.tsx}: compone la interfaz general del sistema.
+  \item \texttt{frontend/src/features/shell/module-card.tsx}: representa los accesos a cada módulo desde la vista principal.
+  \item \texttt{frontend/src/features/shell/module-panel.tsx}: decide qué módulo se renderiza en el panel activo.
+  \item \texttt{frontend/src/hooks/use-active-view.ts}: mantiene el estado de la vista seleccionada.
+  \item \texttt{frontend/src/lib/modules.ts}: define la metadata de los módulos visibles dentro de la interfaz.
+\end{itemize}
+
+La elección de esta estructura responde a una consideración técnica concreta: la interfaz debía funcionar como una sola aplicación integrada. Por ello, el cambio entre \emph{Dashboard}, \emph{Lexical Analysis}, \emph{Lexical Generator} y \emph{Test Case Manager} se resuelve dentro del mismo shell, sin delegarlo a documentos incrustados o a vistas aisladas.
+
+Cada herramienta se implementa como una feature independiente dentro de \texttt{frontend/src/features/}:
+
+\begin{itemize}[leftmargin=2em]
+  \item \texttt{analysis/}: contiene \texttt{analysis-tool.tsx} y \texttt{use-analysis-tool.ts}, encargados de la entrada de texto, carga de archivos, ejecución del análisis y presentación de tokens y errores.
+  \item \texttt{generator/}: contiene \texttt{generator-tool.tsx}, \texttt{use-generator-tool.ts}, \texttt{generator-graph.tsx} y \texttt{generator-templates.ts}; estos archivos resuelven la edición de especificaciones YALex, la compilación, la selección de reglas y la visualización del autómata en SVG.
+  \item \texttt{test-manager/}: contiene \texttt{test-manager.tsx} y \texttt{use-test-manager.ts}, responsables de cargar el catálogo de pruebas, ejecutar casos individuales o masivos y calcular métricas de sesión.
+  \item \texttt{shell/}: agrupa los componentes estructurales que mantienen la navegación y el ensamblaje general de la interfaz.
+\end{itemize}
+
+El intercambio de datos y artefactos se concentra en archivos auxiliares compartidos:
+
+\begin{itemize}[leftmargin=2em]
+  \item \texttt{frontend/src/lib/api.ts}: implementa la capa de acceso HTTP y la lectura de respuestas JSON.
+  \item \texttt{frontend/src/lib/download.ts}: gestiona la descarga de tokens, del lexer generado y de representaciones serializadas del autómata.
+  \item \texttt{frontend/src/types/analysis.ts}, \texttt{frontend/src/types/generator.ts}, \texttt{frontend/src/types/test-manager.ts} y \texttt{frontend/src/types/shell.ts}: tipan las estructuras intercambiadas entre componentes, hooks y API.
+\end{itemize}
+
+Las consideraciones principales de diseño para esta capa fueron:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Consumo por rutas relativas}: toda comunicación con el backend se realiza mediante \texttt{/api/*}, y la resolución final se concentra en \texttt{next.config.ts}.
+  \item \textbf{Renderizado integrado}: la aplicación principal se monta desde \texttt{page.tsx} y el shell administra el cambio de módulo sin abandonar la interfaz.
+  \item \textbf{Visualización especializada}: el analizador muestra tablas y errores estructurados, el generador añade matriz de transiciones y renderizado SVG, y el gestor de pruebas incorpora ejecución y seguimiento de estados.
+  \item \textbf{Manejo local de descargas}: la exportación de resultados se resuelve del lado del cliente para no introducir rutas auxiliares adicionales en la API.
+  \item \textbf{Soporte de pruebas}: archivos como \texttt{vitest.config.ts}, \texttt{vitest.setup.ts} y las pruebas ubicadas junto a cada feature permiten validar hooks, componentes y flujos de interacción del frontend.
+\end{itemize}
+
+En conjunto, el frontend queda definido como una capa formada por una entrada de aplicación, un shell de navegación, features independientes por módulo, utilidades compartidas para API y descargas, y tipos explícitos que documentan la integración con el backend.
 
 \section{Integración entre Frontend y Backend}
 
@@ -525,24 +567,6 @@ La plataforma ofrece un resultado integral sobre cuatro ejes principales:
 \end{enumerate}
 
 La combinación de estos resultados convierte al proyecto en una plataforma didáctica y técnica capaz de mostrar tanto la teoría subyacente como su ejecución práctica.
-
-\section{Restricciones y Decisiones de Diseño}
-
-\subsection{Prohibición de Librerías de Regex}
-
-La plataforma implementa el reconocimiento léxico sin recurrir a librerías externas de expresiones regulares. El matching se realiza exclusivamente a partir de autómatas construidos dentro del sistema, lo que asegura fidelidad al enfoque formal del proyecto y control total sobre el proceso de reconocimiento.
-
-\subsection{Independencia del Lexer Generado}
-
-El archivo Python producido por el generador es autosuficiente y portable. Esta decisión de diseño evita dependencias innecesarias y convierte al lexer final en un artefacto reutilizable.
-
-\subsection{Separación por Responsabilidades}
-
-El sistema separa con claridad frontend, API, compilación, runtime y generación de código. Esta modularidad reduce acoplamiento, facilita pruebas y permite evolucionar la interfaz sin comprometer la exactitud del núcleo algorítmico.
-
-\subsection{Interfaz Unificada}
-
-La interfaz se diseña como una experiencia única que centraliza visualización, compilación, análisis y ejecución de pruebas. Esta decisión mejora la trazabilidad del proceso completo y fortalece el valor pedagógico del sistema.
 
 \section{Conclusiones}
 
