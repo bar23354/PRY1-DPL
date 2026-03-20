@@ -1,8 +1,8 @@
-# Validación Manual
+# Validacion Manual
 
-## Preparación
+## Preparacion
 
-1. Iniciar el backend:
+1. Iniciar el backend desde la raiz del proyecto:
    ```powershell
    $env:PYTHONPATH="backend/src"
    python -m laboratorio.cli.serve
@@ -17,51 +17,64 @@
 
 ## Checklist
 
-### Shell y Dashboard
+### Shell y panel general
 
-1. Verificar que la vista inicial sea `Dashboard General`.
-2. Confirmar que no exista ningún `iframe` dentro de la interfaz.
-3. Validar que el dashboard muestre:
-   - `totalFixtures`
-   - `totalTestCases`
-   - distribución `Low / Medium / High`
-   - inventario de módulos
+1. Verificar que la vista inicial sea `Panel general`.
+2. Confirmar que no exista ningun `iframe` dentro de la interfaz.
+3. Validar que el panel general muestre:
+   - `Casos base`
+   - `Casos de prueba`
+   - distribucion `Baja / Media / Alta`
+   - inventario de modulos
 
-### Lexical Analysis
+### Analisis lexico
 
-1. Entrar a `Lexical Analysis`.
-2. Seleccionar `Low`.
-3. Ejecutar `Run Analysis` con el editor vacío.
+1. Entrar a `Analisis lexico`.
+2. Seleccionar `Baja`.
+3. Ejecutar `Ejecutar analisis` con el editor vacio.
 4. Confirmar que aparezcan tokens en la tabla.
 5. Cargar `fixtures/legacy/inputs/yalex_baja_invalid_input.txt`.
-6. Ejecutar `Run Analysis` y verificar que aparezca un error léxico.
-7. Ejecutar `Export Tokens` después de una corrida exitosa y confirmar descarga.
+6. Ejecutar `Ejecutar analisis` y verificar que aparezca un error lexico.
+7. Ejecutar `Exportar tokens` despues de una corrida exitosa y confirmar descarga de `tokens_analisis.tsv`.
 
-### Lexical Generator
+### Generador lexico
 
-1. Entrar a `Lexical Generator`.
-2. Ejecutar `Generate Diagram`.
+1. Entrar a `Generador lexico`.
+2. Ejecutar `Generar diagrama`.
 3. Confirmar que aparezcan:
    - regla activa
-   - autómata SVG
-   - matriz de transiciones
-4. Descargar `Download Lexer` y verificar que el archivo sea `thelexer.py`.
-5. Descargar `Download Automaton`.
-6. Reemplazar el contenido del editor con una especificación inválida, por ejemplo:
+   - automata SVG
+   - matriz de transicion
+4. Descargar `Descargar lexer` y verificar que el archivo sea `lexer_generado.py`.
+5. Descargar `Descargar automata` y verificar que el archivo sea `automata.svg`.
+6. Reemplazar el contenido del editor con una especificacion invalida, por ejemplo:
    ```text
    let digit = ['0'-'9']
    ```
-7. Ejecutar `Generate Diagram` y confirmar que se muestre el error.
+7. Ejecutar `Generar diagrama` y confirmar que se muestre el error.
 
-### Test Case Manager
+### Gestor de pruebas
 
-1. Entrar a `Test Case Manager`.
-2. Ejecutar `Run Case` sobre `Low valid input`.
-3. Confirmar que el estado cambie a `Passed`.
-4. Ejecutar `Run All Tests`.
-5. Verificar que el porcentaje de éxito y el total de ejecuciones se actualicen.
+1. Entrar a `Gestor de pruebas`.
+2. Ejecutar `Ejecutar caso` sobre `Entrada valida de baja`.
+3. Confirmar que el estado cambie a `Aprobado`.
+4. Ejecutar `Ejecutar todas las pruebas`.
+5. Verificar que el porcentaje de exito y el total de ejecuciones se actualicen.
+6. Confirmar que las filas de todos los casos de la rubrica queden en estado `Aprobado`:
+   - `Entrada valida de baja`
+   - `Entrada invalida de baja`
+   - `Entrada valida modificada de baja`
+   - `Entrada invalida modificada de baja`
+   - `Entrada valida de media`
+   - `Entrada invalida de media`
+   - `Entrada valida modificada de media`
+   - `Entrada invalida modificada de media`
+   - `Entrada valida de alta`
+   - `Entrada invalida de alta`
+   - `Entrada valida modificada de alta`
+   - `Entrada invalida modificada de alta`
 
-## Validación adicional
+## Validacion automatizada adicional
 
 - Ejecutar `python -m pytest -q backend/tests`
 - Ejecutar `cd frontend && npm test`

@@ -63,6 +63,14 @@ cd frontend
 npm run test:e2e
 ```
 
+La suite E2E valida:
+
+- shell integrado sin `iframe`
+- panel general con datos reales
+- analisis lexico con entrada valida e invalida
+- generador lexico con compilacion valida, error de compilacion y descarga de lexer
+- gestor de pruebas con ejecucion individual, ejecucion total y cobertura de todos los casos de la rubrica
+
 Actualizacion de snapshots visuales:
 
 ```bash

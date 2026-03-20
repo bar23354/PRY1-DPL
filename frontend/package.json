@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node -e \"require('node:fs').rmSync('.next', { recursive: true, force: true })\"",
+    "predev": "node scripts/clean-next.mjs",
     "dev": "next dev",
-    "prebuild": "node -e \"require('node:fs').rmSync('.next', { recursive: true, force: true })\"",
+    "prebuild": "node scripts/clean-next.mjs",
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
