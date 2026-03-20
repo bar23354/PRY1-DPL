@@ -7,17 +7,17 @@ const lowInvalidInput = path.join(repoRoot, "fixtures", "legacy", "inputs", "yal
 
 test("runs lexical analysis with valid and invalid inputs", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: /lexical analysis/i }).click();
+  await page.getByRole("button", { name: /analisis lexico/i }).click();
 
-  await expect(page.getByTestId("active-title")).toHaveText("Lexical Analysis");
-  await page.getByRole("button", { name: "Low" }).click();
-  await page.getByRole("button", { name: /run analysis/i }).click();
+  await expect(page.getByTestId("active-title")).toHaveText("Analisis lexico");
+  await page.getByRole("button", { name: /^Baja$/i }).click();
+  await page.getByRole("button", { name: /ejecutar analisis/i }).click();
 
   await expect(page.locator("tbody").getByText("IDENT", { exact: true }).first()).toBeVisible();
-  await expect(page.getByText("No lexical errors reported for the latest analysis run.")).toBeVisible();
+  await expect(page.getByText("No se reportaron errores lexicos en la ultima ejecucion.")).toBeVisible();
 
-  await page.locator('input[aria-label="Load file"]').setInputFiles(lowInvalidInput);
-  await page.getByRole("button", { name: /run analysis/i }).click();
+  await page.locator('input[aria-label="Cargar archivo"]').setInputFiles(lowInvalidInput);
+  await page.getByRole("button", { name: /ejecutar analisis/i }).click();
 
   await expect(page.getByText(/No se pudo tokenizar/)).toBeVisible();
   await expect(page).toHaveScreenshot("analysis-results.png", { fullPage: true });
@@ -25,19 +25,19 @@ test("runs lexical analysis with valid and invalid inputs", async ({ page }) => 
 
 test("compiles generator source, handles invalid source and downloads the lexer", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: /lexical generator/i }).click();
+  await page.getByRole("button", { name: /generador lexico/i }).click();
 
-  await expect(page.getByTestId("active-title")).toHaveText("Lexical Generator");
-  await page.getByRole("button", { name: /generate diagram/i }).click();
+  await expect(page.getByTestId("active-title")).toHaveText("Generador lexico");
+  await page.getByRole("button", { name: /generar diagrama/i }).click();
   await expect(page.getByTestId("generator-graph")).toBeVisible();
 
   const downloadPromise = page.waitForEvent("download");
-  await page.getByRole("button", { name: /download lexer/i }).click();
+  await page.getByRole("button", { name: /descargar lexer/i }).click();
   const download = await downloadPromise;
-  await expect(download.suggestedFilename()).toBe("thelexer.py");
+  await expect(download.suggestedFilename()).toBe("lexer_generado.py");
 
-  await page.getByLabel("YALex source").fill("let digit = ['0'-'9']");
-  await page.getByRole("button", { name: /generate diagram/i }).click();
+  await page.getByLabel("Fuente YALex").fill("let digit = ['0'-'9']");
+  await page.getByRole("button", { name: /generar diagrama/i }).click();
   await expect(page.getByText("No se encontro una seccion rule.")).toBeVisible();
 
   await expect(page).toHaveScreenshot("generator-results.png", { fullPage: true });

@@ -52,12 +52,12 @@ describe("AnalysisTool", () => {
     const user = userEvent.setup();
     render(<AnalysisTool />);
 
-    await waitFor(() => expect(screen.getByRole("button", { name: "Medium" })).toBeInTheDocument());
-    await user.click(screen.getByRole("button", { name: /run analysis/i }));
+    await waitFor(() => expect(screen.getByRole("button", { name: "Media" })).toBeInTheDocument());
+    await user.click(screen.getByRole("button", { name: /ejecutar analisis/i }));
 
     expect(await screen.findByText("IF")).toBeInTheDocument();
     expect(screen.getByText("if")).toBeInTheDocument();
-    expect(screen.getByText("No lexical errors reported for the latest analysis run.")).toBeInTheDocument();
+    expect(screen.getByText("No se reportaron errores lexicos en la ultima ejecucion.")).toBeInTheDocument();
   });
 
   it("uploads a file into the editor and exports current tokens", async () => {
@@ -90,20 +90,20 @@ describe("AnalysisTool", () => {
     const user = userEvent.setup();
     render(<AnalysisTool />);
 
-    const fileInput = await screen.findByLabelText("Load file");
+    const fileInput = await screen.findByLabelText("Cargar archivo");
     await user.upload(fileInput, new File(["sample"], "sample.txt", { type: "text/plain" }));
 
-    await waitFor(() => expect(screen.getByLabelText("Source input")).toHaveValue("sample"));
+    await waitFor(() => expect(screen.getByLabelText("Entrada fuente")).toHaveValue("sample"));
 
-    await user.click(screen.getByRole("button", { name: /low/i }));
-    await user.click(screen.getByRole("button", { name: /run analysis/i }));
+    await user.click(screen.getByRole("button", { name: /baja/i }));
+    await user.click(screen.getByRole("button", { name: /ejecutar analisis/i }));
     await screen.findByText("IDENT");
 
-    await user.click(screen.getByRole("button", { name: /export tokens/i }));
+    await user.click(screen.getByRole("button", { name: /exportar tokens/i }));
 
     expect(downloadTextFileMock).toHaveBeenCalledWith(
-      "analysis-tokens.tsv",
-      "type\tlexeme\tline\tcolumn\tstart\tend\truleIndex\nIDENT\tsample\t1\t1\t0\t6\t1",
+      "tokens_analisis.tsv",
+      "tipo\tlexema\tlinea\tcolumna\tinicio\tfin\tindiceRegla\nIDENT\tsample\t1\t1\t0\t6\t1",
       "text/tab-separated-values;charset=utf-8",
     );
   });

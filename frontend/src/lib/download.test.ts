@@ -9,7 +9,7 @@ describe("buildTokensExportContent", () => {
     ]);
 
     expect(content).toBe(
-      "type\tlexeme\tline\tcolumn\tstart\tend\truleIndex\nIDENT\tvalue\t1\t1\t0\t5\t2\nNUM\t12\t1\t9\t8\t10\t3",
+      "tipo\tlexema\tlinea\tcolumna\tinicio\tfin\tindiceRegla\nIDENT\tvalue\t1\t1\t0\t5\t2\nNUM\t12\t1\t9\t8\t10\t3",
     );
   });
 });

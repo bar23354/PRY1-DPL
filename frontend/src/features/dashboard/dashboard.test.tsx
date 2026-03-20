@@ -22,14 +22,14 @@ describe("Dashboard", () => {
 
     render(<Dashboard />);
 
-    expect(await screen.findByText("UVG Project 01: Dashboard")).toBeInTheDocument();
+    expect(await screen.findByText("Proyecto 01 UVG: Panel general")).toBeInTheDocument();
     expect(screen.getByText("5")).toBeInTheDocument();
-    expect(screen.getByText("6 total")).toBeInTheDocument();
+    expect(screen.getByText("6 totales")).toBeInTheDocument();
     expect(screen.getAllByText("6").length).toBeGreaterThanOrEqual(2);
-    expect(screen.getByText("analysis")).toBeInTheDocument();
-    expect(screen.getByText("generator")).toBeInTheDocument();
-    expect(screen.getByText("test-manager")).toBeInTheDocument();
-    expect(screen.getByText("Low")).toBeInTheDocument();
+    expect(screen.getByText("Analisis lexico")).toBeInTheDocument();
+    expect(screen.getByText("Generador lexico")).toBeInTheDocument();
+    expect(screen.getByText("Gestor de pruebas")).toBeInTheDocument();
+    expect(screen.getByText("Baja")).toBeInTheDocument();
     expect(screen.getAllByText("2").length).toBeGreaterThanOrEqual(3);
   });
 
@@ -40,7 +40,7 @@ describe("Dashboard", () => {
 
     render(<Dashboard />);
 
-    await waitFor(() => expect(screen.getByText("Dashboard data unavailable.")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("No se pudieron cargar los datos del panel general.")).toBeInTheDocument());
     expect(screen.getByText("Backend unavailable")).toBeInTheDocument();
   });
 });

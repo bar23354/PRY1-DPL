@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { messages } from "../../i18n/messages";
 import { fetchJson } from "../../lib/api";
 import type {
   TestCaseItem,
@@ -71,7 +72,7 @@ export function useTestManager() {
         if (!mounted) {
           return;
         }
-        setRequestError(error instanceof Error ? error.message : "No se pudo cargar el catalogo de pruebas.");
+        setRequestError(error instanceof Error ? error.message : messages.errors.testManager.loadCatalog);
       } finally {
         if (mounted) {
           setIsCatalogLoading(false);
@@ -116,7 +117,7 @@ export function useTestManager() {
       });
       applyRunResponse(response);
     } catch (error) {
-      setRequestError(error instanceof Error ? error.message : "No se pudo ejecutar el caso seleccionado.");
+      setRequestError(error instanceof Error ? error.message : messages.errors.testManager.runCase);
     } finally {
       setRunningCaseId(null);
     }
@@ -135,7 +136,7 @@ export function useTestManager() {
       });
       applyRunResponse(response);
     } catch (error) {
-      setRequestError(error instanceof Error ? error.message : "No se pudieron ejecutar las pruebas.");
+      setRequestError(error instanceof Error ? error.message : messages.errors.testManager.runAll);
     } finally {
       setIsRunningAll(false);
     }

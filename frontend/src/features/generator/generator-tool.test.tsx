@@ -72,8 +72,8 @@ describe("GeneratorTool", () => {
     const user = userEvent.setup();
     render(<GeneratorTool />);
 
-    await waitFor(() => expect(screen.getByRole("button", { name: /generate diagram/i })).toBeInTheDocument());
-    await user.click(screen.getByRole("button", { name: /generate diagram/i }));
+    await waitFor(() => expect(screen.getByRole("button", { name: /generar diagrama/i })).toBeInTheDocument());
+    await user.click(screen.getByRole("button", { name: /generar diagrama/i }));
 
     expect(await screen.findByTestId("active-rule-token")).toHaveTextContent("IDENT");
     expect(screen.getByTestId("generator-graph")).toBeInTheDocument();
@@ -121,24 +121,24 @@ describe("GeneratorTool", () => {
     const user = userEvent.setup();
     render(<GeneratorTool />);
 
-    const fileInput = await screen.findByLabelText("Upload file");
+    const fileInput = await screen.findByLabelText("Cargar archivo");
     const file = new File(["rule tokens =\n  'a' { return A }\n"], "lexer.yal", { type: "text/plain" });
     await user.upload(fileInput, file);
-    await waitFor(() => expect(screen.getByLabelText("YALex source")).toHaveValue("rule tokens =\n  'a' { return A }\n"));
+    await waitFor(() => expect(screen.getByLabelText("Fuente YALex")).toHaveValue("rule tokens =\n  'a' { return A }\n"));
 
-    await user.click(screen.getByRole("button", { name: /generate diagram/i }));
+    await user.click(screen.getByRole("button", { name: /generar diagrama/i }));
     await screen.findByTestId("generator-graph");
 
-    await user.click(screen.getByRole("button", { name: /download lexer/i }));
-    await user.click(screen.getByRole("button", { name: /download automaton/i }));
+    await user.click(screen.getByRole("button", { name: /descargar lexer/i }));
+    await user.click(screen.getByRole("button", { name: /descargar automata/i }));
 
     expect(downloadTextFileMock).toHaveBeenCalledWith(
-      "thelexer.py",
+      "lexer_generado.py",
       "def tokens(text, *args, **kwargs):\\n    return []\\n",
       "text/x-python;charset=utf-8",
     );
     expect(downloadTextFileMock).toHaveBeenCalledWith(
-      "automaton.svg",
+      "automata.svg",
       expect.stringContaining("<svg"),
       "image/svg+xml;charset=utf-8",
     );

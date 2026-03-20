@@ -1,7 +1,8 @@
 import type { AnalysisToken } from "../types/analysis";
+import { messages } from "../i18n/messages";
 
 export function buildTokensExportContent(tokens: AnalysisToken[]): string {
-  const header = "type\tlexeme\tline\tcolumn\tstart\tend\truleIndex";
+  const header = messages.downloads.analysisTokensHeader;
   const rows = tokens.map((token) =>
     [token.type, token.lexeme, token.line, token.column, token.start, token.end, token.ruleIndex].join("\t"),
   );

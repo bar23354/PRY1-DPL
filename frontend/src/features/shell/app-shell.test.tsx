@@ -24,9 +24,9 @@ describe("AppShell", () => {
 
     render(<AppShell />);
 
-    expect(await screen.findByText("UVG Project 01: Dashboard")).toBeInTheDocument();
+    expect(await screen.findByText("Proyecto 01 UVG: Panel general")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Proyecto 01 - Interfaz Integrada" })).toBeInTheDocument();
-    expect(screen.getByTestId("active-title")).toHaveTextContent("Dashboard General");
+    expect(screen.getByTestId("active-title")).toHaveTextContent("Panel general");
     expect(screen.queryByTitle("Interfaz de modulo")).not.toBeInTheDocument();
   });
 
@@ -57,10 +57,10 @@ describe("AppShell", () => {
     const user = userEvent.setup();
     render(<AppShell />);
 
-    await user.click(screen.getByRole("button", { name: /lexical generator/i }));
+    await user.click(screen.getByRole("button", { name: /generador lexico/i }));
 
-    expect(screen.getByTestId("active-title")).toHaveTextContent("Lexical Generator");
-    expect(screen.getByRole("button", { name: /generate diagram/i })).toBeInTheDocument();
+    expect(screen.getByTestId("active-title")).toHaveTextContent("Generador lexico");
+    expect(screen.getByRole("button", { name: /generar diagrama/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Abrir vista independiente" })).toHaveAttribute(
       "href",
       "../legacy/web/interfaz/lexical_generator/code.html",
@@ -104,9 +104,9 @@ describe("AppShell", () => {
     const user = userEvent.setup();
     render(<AppShell />);
 
-    await user.click(screen.getByRole("button", { name: /test case manager/i }));
+    await user.click(screen.getByRole("button", { name: /gestor de pruebas/i }));
 
-    expect(screen.getByTestId("active-title")).toHaveTextContent("Test Case Manager");
-    expect(await screen.findByText("UVG Project 01: Test Case Manager")).toBeInTheDocument();
+    expect(screen.getByTestId("active-title")).toHaveTextContent("Gestor de pruebas");
+    expect(await screen.findByText("Proyecto 01 UVG: Gestor de pruebas")).toBeInTheDocument();
   });
 });

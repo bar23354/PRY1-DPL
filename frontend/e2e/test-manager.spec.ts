@@ -2,15 +2,15 @@ import { expect, test } from "@playwright/test";
 
 test("runs single and bulk executions from the test manager", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: /test case manager/i }).click();
+  await page.getByRole("button", { name: /gestor de pruebas/i }).click();
 
-  await expect(page.getByTestId("active-title")).toHaveText("Test Case Manager");
-  await expect(page.getByRole("heading", { name: "UVG Project 01: Test Case Manager" })).toBeVisible();
+  await expect(page.getByTestId("active-title")).toHaveText("Gestor de pruebas");
+  await expect(page.getByRole("heading", { name: "Proyecto 01 UVG: Gestor de pruebas" })).toBeVisible();
 
-  await page.getByRole("button", { name: /run case low valid input/i }).click();
-  await expect(page.getByText("Passed", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: /ejecutar caso entrada valida de baja/i }).click();
+  await expect(page.getByText("Aprobado", { exact: true })).toBeVisible();
 
-  await page.getByRole("button", { name: /run all tests/i }).click();
+  await page.getByRole("button", { name: /ejecutar todas las pruebas/i }).click();
   await expect(page.getByText("100.0%")).toBeVisible();
 
   await expect(page).toHaveScreenshot("test-manager-results.png", { fullPage: true });

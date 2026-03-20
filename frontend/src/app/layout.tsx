@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Proyecto 01 | Interfaz Unificada",
-  description: "Interfaz integrada para Dashboard, Analisis, Generador Lexico y Test Cases.",
+  description: "Interfaz integrada para dashboard, analisis, generador lexico y gestor de pruebas.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

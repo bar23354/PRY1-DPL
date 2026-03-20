@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 
+import { getGeneratorFixtureLabel, messages } from "../../i18n/messages";
 import { downloadTextFile } from "../../lib/download";
 import { GeneratorGraphView } from "./generator-graph";
 import { useGeneratorTool } from "./use-generator-tool";
@@ -30,17 +31,25 @@ export function GeneratorTool() {
     if (!result) {
       return;
     }
-    downloadTextFile("thelexer.py", result.lexerSource, "text/x-python;charset=utf-8");
+    downloadTextFile(messages.downloads.generatorLexerFilename, result.lexerSource, messages.downloads.generatorLexerMime);
   }
 
   function handleDownloadAutomaton() {
     if (svgRef.current) {
-      downloadTextFile("automaton.svg", svgRef.current.outerHTML, "image/svg+xml;charset=utf-8");
+      downloadTextFile(
+        messages.downloads.generatorAutomatonFilename,
+        svgRef.current.outerHTML,
+        messages.downloads.generatorAutomatonMime,
+      );
       return;
     }
 
     if (activeRule) {
-      downloadTextFile("automaton.json", JSON.stringify(activeRule.graph, null, 2), "application/json;charset=utf-8");
+      downloadTextFile(
+        messages.downloads.generatorAutomatonJsonFilename,
+        JSON.stringify(activeRule.graph, null, 2),
+        messages.downloads.generatorAutomatonJsonMime,
+      );
     }
   }
 
@@ -48,13 +57,13 @@ export function GeneratorTool() {
     <div className="flex min-h-[78vh] flex-col overflow-hidden bg-[linear-gradient(180deg,#121416_0%,#17191c_100%)]">
       <div className="flex items-center justify-between bg-[rgba(30,32,34,0.9)] px-6 py-4">
         <div className="flex items-center gap-4">
-          <h4 className="font-headline text-xl font-bold text-white">Lexical Generator</h4>
-          <span className="rounded-full bg-[rgba(51,77,88,0.75)] px-2 py-1 text-[10px] uppercase tracking-[0.18em] text-slate-100">YALex Mode</span>
+          <h4 className="font-headline text-xl font-bold text-white">{messages.generator.title}</h4>
+          <span className="rounded-full bg-[rgba(51,77,88,0.75)] px-2 py-1 text-[10px] uppercase tracking-[0.18em] text-slate-100">{messages.generator.mode}</span>
         </div>
         <div className="flex items-center gap-3">
           <input
             ref={fileInputRef}
-            aria-label="Upload file"
+            aria-label={messages.generator.controls.uploadFile}
             className="hidden"
             type="file"
             accept=".yal,text/plain"
@@ -70,7 +79,7 @@ export function GeneratorTool() {
             className="rounded-md bg-[rgba(51,53,55,0.85)] px-4 py-2 text-sm font-medium text-slate-100 transition hover:bg-[rgba(56,57,60,0.95)]"
             onClick={() => fileInputRef.current?.click()}
           >
-            Upload File
+            {messages.generator.controls.uploadFile}
           </button>
           <button
             type="button"
@@ -80,7 +89,7 @@ export function GeneratorTool() {
               void compileSource();
             }}
           >
-            {isCompiling ? "Compiling..." : "Generate Diagram"}
+            {isCompiling ? messages.generator.controls.compiling : messages.generator.controls.generateDiagram}
           </button>
           <button
             type="button"
@@ -88,7 +97,7 @@ export function GeneratorTool() {
             disabled={!result}
             onClick={handleDownloadAutomaton}
           >
-            Download Automaton
+            {messages.generator.controls.downloadAutomaton}
           </button>
           <button
             type="button"
@@ -96,7 +105,7 @@ export function GeneratorTool() {
             disabled={!result}
             onClick={handleDownloadLexer}
           >
-            Download Lexer
+            {messages.generator.controls.downloadLexer}
           </button>
         </div>
       </div>
@@ -105,27 +114,27 @@ export function GeneratorTool() {
         <section className="border-r border-white/5 bg-[rgba(26,28,30,0.94)]">
           <div className="flex items-center justify-between border-b border-white/5 bg-[rgba(12,14,16,0.7)] px-4 py-3">
             <div className="flex items-center gap-3">
-              <span className="text-xs uppercase tracking-[0.18em] text-slate-400">YALex Source</span>
+              <span className="text-xs uppercase tracking-[0.18em] text-slate-400">{messages.generator.labels.source}</span>
               <select
-                aria-label="Generator fixture"
+                aria-label={messages.generator.labels.fixtureSelector}
                 className="rounded-md border border-white/5 bg-[rgba(51,53,55,0.9)] px-3 py-1 text-xs text-slate-100 outline-none"
                 value={activeFixtureId}
                 onChange={(event) => setActiveFixtureId(event.target.value)}
               >
                 {fixtures.map((fixture) => (
                   <option key={fixture.id} value={fixture.id}>
-                    {fixture.label}
+                    {getGeneratorFixtureLabel(fixture)}
                   </option>
                 ))}
               </select>
             </div>
             <span className="text-[10px] uppercase tracking-[0.18em] text-slate-500">
-              {result ? `${result.stats.ruleCount} rules` : "No compilation yet"}
+              {result ? `${result.stats.ruleCount} ${messages.generator.labels.rulesSuffix}` : messages.generator.labels.noCompilation}
             </span>
           </div>
 
           <textarea
-            aria-label="YALex source"
+            aria-label={messages.generator.labels.sourceEditor}
             className="min-h-[420px] w-full resize-none bg-[rgba(12,14,16,0.92)] p-5 font-mono text-sm leading-7 text-indigo-100 outline-none"
             value={sourceText}
             onChange={(event) => setSourceText(event.target.value)}
@@ -135,14 +144,14 @@ export function GeneratorTool() {
         <section className="flex flex-col bg-[rgba(30,32,34,0.92)]">
           <div className="flex items-center justify-between border-b border-white/5 bg-[rgba(12,14,16,0.7)] px-4 py-3">
             <div>
-              <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Active Rule</p>
+              <p className="text-xs uppercase tracking-[0.18em] text-slate-400">{messages.generator.labels.activeRule}</p>
               <p className="mt-1 text-sm font-semibold text-white" data-testid="active-rule-token">
-                {activeRule?.tokenName ?? "No active rule"}
+                {activeRule?.tokenName ?? messages.generator.labels.noActiveRule}
               </p>
             </div>
             <div className="text-right text-xs text-slate-400">
-              <p>Entrypoint: {result?.entrypoint ?? "-"}</p>
-              <p>Entry args: {result?.stats.entryArgsCount ?? 0}</p>
+              <p>{messages.generator.labels.entrypoint}: {result?.entrypoint ?? "-"}</p>
+              <p>{messages.generator.labels.entryArgs}: {result?.stats.entryArgsCount ?? 0}</p>
             </div>
           </div>
 
@@ -179,15 +188,15 @@ export function GeneratorTool() {
               </div>
               <div className="mt-4 grid gap-4 md:grid-cols-3">
                 <div className="rounded-2xl border border-white/5 bg-[rgba(51,53,55,0.45)] p-4">
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">States</p>
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">{messages.generator.labels.states}</p>
                   <p className="mt-2 text-lg font-semibold text-white">{activeRule?.graph.states.length ?? 0}</p>
                 </div>
                 <div className="rounded-2xl border border-white/5 bg-[rgba(51,53,55,0.45)] p-4">
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">Alphabet</p>
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">{messages.generator.labels.alphabet}</p>
                   <p className="mt-2 text-lg font-semibold text-white">{activeRule?.graph.alphabet.length ?? 0}</p>
                 </div>
                 <div className="rounded-2xl border border-white/5 bg-[rgba(51,53,55,0.45)] p-4">
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">Recognized Tokens</p>
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">{messages.generator.labels.recognizedTokens}</p>
                   <p className="mt-2 text-lg font-semibold text-white">{result?.recognizedTokens.length ?? 0}</p>
                 </div>
               </div>
@@ -195,7 +204,7 @@ export function GeneratorTool() {
 
             <div className="flex flex-col">
               <div className="border-b border-white/5 px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Recognized Tokens</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-slate-400">{messages.generator.labels.recognizedTokens}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {(result?.recognizedTokens ?? []).map((token) => (
                     <span key={token} className="rounded-full bg-[rgba(51,53,55,0.9)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-100">
@@ -206,20 +215,20 @@ export function GeneratorTool() {
               </div>
 
               <div className="flex-1 overflow-auto p-4">
-                <p className="mb-3 text-xs uppercase tracking-[0.18em] text-slate-400">Transition Matrix</p>
+                <p className="mb-3 text-xs uppercase tracking-[0.18em] text-slate-400">{messages.generator.labels.transitionMatrix}</p>
                 <table className="w-full text-left text-xs">
                   <thead className="text-[10px] uppercase tracking-[0.16em] text-slate-400">
                     <tr>
-                      <th className="px-2 py-2">State</th>
-                      <th className="px-2 py-2">Accepting</th>
-                      <th className="px-2 py-2">Transitions</th>
+                      <th className="px-2 py-2">{messages.generator.labels.columns.state}</th>
+                      <th className="px-2 py-2">{messages.generator.labels.columns.accepting}</th>
+                      <th className="px-2 py-2">{messages.generator.labels.columns.transitions}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5 font-mono">
                     {(activeRule?.transitionMatrix ?? []).map((row) => (
                       <tr key={row.state}>
                         <td className="px-2 py-2 text-slate-100">{row.state}</td>
-                        <td className="px-2 py-2 text-slate-400">{row.accepting ? "Yes" : "No"}</td>
+                        <td className="px-2 py-2 text-slate-400">{row.accepting ? messages.shared.states.yes : messages.shared.states.no}</td>
                         <td className="px-2 py-2 text-slate-400">
                           {Object.entries(row.transitions)
                             .map(([symbol, target]) => `${symbol}:${target ?? "-"}`)

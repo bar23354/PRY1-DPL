@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { messages } from "../../i18n/messages";
 import { fetchJson } from "../../lib/api";
 import type { FixtureCatalogItem } from "../../types/analysis";
 import type { GeneratorResult, GeneratorRule } from "../../types/generator";
@@ -41,7 +42,7 @@ export function useGeneratorTool() {
         if (!mounted) {
           return;
         }
-        setRequestError(error instanceof Error ? error.message : "No se pudo cargar el catalogo del generador.");
+        setRequestError(error instanceof Error ? error.message : messages.errors.generator.loadCatalog);
       } finally {
         if (mounted) {
           setIsCatalogLoading(false);
@@ -91,7 +92,7 @@ export function useGeneratorTool() {
       setResult(response);
       setActiveRuleIndex(firstVisibleRule(response.rules)?.index ?? null);
     } catch (error) {
-      setRequestError(error instanceof Error ? error.message : "No se pudo compilar la especificacion YALex.");
+      setRequestError(error instanceof Error ? error.message : messages.errors.generator.compile);
       setResult(null);
       setActiveRuleIndex(null);
     } finally {
@@ -109,7 +110,7 @@ export function useGeneratorTool() {
     const text = await new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(typeof reader.result === "string" ? reader.result : "");
-      reader.onerror = () => reject(new Error("No se pudo leer el archivo seleccionado."));
+      reader.onerror = () => reject(new Error(messages.errors.generator.readFile));
       reader.readAsText(file);
     });
     setSourceText(text);

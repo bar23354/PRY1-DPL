@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { messages } from "../../i18n/messages";
 import { fetchJson } from "../../lib/api";
 import type { AnalysisComplexity, AnalysisResult, FixtureCatalogItem } from "../../types/analysis";
 
@@ -20,7 +21,7 @@ async function readFileAsText(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(typeof reader.result === "string" ? reader.result : "");
-    reader.onerror = () => reject(new Error("No se pudo leer el archivo seleccionado."));
+    reader.onerror = () => reject(new Error(messages.errors.analysis.readFile));
     reader.readAsText(file);
   });
 }
@@ -58,7 +59,7 @@ export function useAnalysisTool() {
         if (!isMounted) {
           return;
         }
-        setRequestError(error instanceof Error ? error.message : "No se pudo cargar el catalogo.");
+        setRequestError(error instanceof Error ? error.message : messages.errors.analysis.loadCatalog);
       } finally {
         if (isMounted) {
           setIsCatalogLoading(false);
@@ -102,7 +103,7 @@ export function useAnalysisTool() {
 
       setResult(response);
     } catch (error) {
-      setRequestError(error instanceof Error ? error.message : "No se pudo ejecutar el analisis.");
+      setRequestError(error instanceof Error ? error.message : messages.errors.analysis.run);
       setResult(null);
     } finally {
       setIsRunning(false);

@@ -1,4 +1,5 @@
 import type { ModuleDefinition } from "../../types/shell";
+import { messages } from "../../i18n/messages";
 import { AnalysisTool } from "../analysis/analysis-tool";
 import { Dashboard } from "../dashboard/dashboard";
 import { GeneratorTool } from "../generator/generator-tool";
@@ -25,5 +26,5 @@ export function ModulePanel({ moduleDefinition }: ModulePanelProps) {
     return <TestManager />;
   }
 
-  throw new Error(`Unsupported module key: ${moduleDefinition.key}`);
+  throw new Error(`${messages.shared.errors.unsupportedModule}: ${moduleDefinition.key}`);
 }

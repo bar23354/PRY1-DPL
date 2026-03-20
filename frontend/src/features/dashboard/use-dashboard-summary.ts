@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { messages } from "../../i18n/messages";
 import { fetchJson } from "../../lib/api";
 import type { DashboardSummary } from "../../types/dashboard";
 
@@ -23,7 +24,7 @@ export function useDashboardSummary() {
       } catch (caughtError) {
         if (!cancelled) {
           setSummary(null);
-          setError(caughtError instanceof Error ? caughtError.message : "Unknown dashboard error");
+          setError(caughtError instanceof Error ? caughtError.message : messages.dashboard.unavailable);
         }
       } finally {
         if (!cancelled) {

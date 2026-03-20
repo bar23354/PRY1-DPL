@@ -2,15 +2,12 @@
 
 import { useRef } from "react";
 
+import { getAnalysisFixtureLabel, getComplexityLabel, messages } from "../../i18n/messages";
 import { buildTokensExportContent, downloadTextFile } from "../../lib/download";
 import type { AnalysisComplexity } from "../../types/analysis";
 import { useAnalysisTool } from "./use-analysis-tool";
 
 const COMPLEXITY_OPTIONS: AnalysisComplexity[] = ["low", "medium", "high"];
-
-function complexityLabel(complexity: AnalysisComplexity): string {
-  return complexity.charAt(0).toUpperCase() + complexity.slice(1);
-}
 
 export function AnalysisTool() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -37,7 +34,11 @@ export function AnalysisTool() {
       return;
     }
 
-    downloadTextFile("analysis-tokens.tsv", buildTokensExportContent(tokens), "text/tab-separated-values;charset=utf-8");
+    downloadTextFile(
+      messages.downloads.analysisTokensFilename,
+      buildTokensExportContent(tokens),
+      messages.downloads.analysisTokensMime,
+    );
   }
 
   return (
@@ -45,13 +46,11 @@ export function AnalysisTool() {
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h4 className="font-headline text-3xl font-bold tracking-tight text-white">Lexical Analysis</h4>
-            <p className="mt-1 text-sm text-slate-400">
-              Tokeniza, valida y reporta errores usando el backend Python real a traves de rutas relativas.
-            </p>
+            <h4 className="font-headline text-3xl font-bold tracking-tight text-white">{messages.analysis.title}</h4>
+            <p className="mt-1 text-sm text-slate-400">{messages.analysis.description}</p>
           </div>
           <div className="flex items-center gap-4 rounded-xl border border-white/5 bg-[rgba(30,32,34,0.88)] p-1.5">
-            <span className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400">Complexity</span>
+            <span className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400">{messages.analysis.controls.complexity}</span>
             <div className="flex gap-1">
               {COMPLEXITY_OPTIONS.map((complexity) => (
                 <button
@@ -68,7 +67,7 @@ export function AnalysisTool() {
                         : "rounded-md bg-slate-800 px-4 py-1.5 text-slate-300"
                     }
                   >
-                    {complexityLabel(complexity)}
+                    {getComplexityLabel(complexity)}
                   </span>
                 </button>
               ))}
@@ -78,21 +77,21 @@ export function AnalysisTool() {
 
         <div className="grid gap-4 md:grid-cols-3">
           <div className="rounded-2xl border border-white/5 bg-[rgba(30,32,34,0.88)] p-4">
-            <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">Fixture activo</p>
-            <p className="mt-2 text-lg font-semibold text-white">{activeFixture?.label ?? "Cargando catalogo..."}</p>
+            <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">{messages.analysis.cards.activeFixture}</p>
+            <p className="mt-2 text-lg font-semibold text-white">{getAnalysisFixtureLabel(activeFixture)}</p>
             <p className="mt-2 text-sm text-slate-400">
-              {inputText.trim() === "" ? "Si el editor esta vacio, se usara el sample del fixture." : "Se analizara el contenido actual del editor."}
+              {inputText.trim() === "" ? messages.analysis.cards.useFixtureSample : messages.analysis.cards.useCurrentEditor}
             </p>
           </div>
           <div className="rounded-2xl border border-white/5 bg-[rgba(30,32,34,0.88)] p-4">
-            <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">Metricas</p>
-            <p className="mt-2 text-lg font-semibold text-white">{stats.tokenCount} Tokens</p>
-            <p className="mt-2 text-sm text-slate-400">{stats.errorCount} Errors</p>
+            <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">{messages.analysis.cards.metrics}</p>
+            <p className="mt-2 text-lg font-semibold text-white">{stats.tokenCount} {messages.analysis.cards.tokensSuffix}</p>
+            <p className="mt-2 text-sm text-slate-400">{stats.errorCount} {messages.analysis.cards.errorsSuffix}</p>
           </div>
           <div className="rounded-2xl border border-white/5 bg-[rgba(30,32,34,0.88)] p-4">
-            <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">Entrada</p>
-            <p className="mt-2 text-lg font-semibold text-white">{stats.inputLength} Chars</p>
-            <p className="mt-2 text-sm text-slate-400">{result?.accepted ? "Analisis aceptado" : "Pendiente o con errores"}</p>
+            <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">{messages.analysis.cards.input}</p>
+            <p className="mt-2 text-lg font-semibold text-white">{stats.inputLength} {messages.analysis.cards.charsSuffix}</p>
+            <p className="mt-2 text-sm text-slate-400">{result?.accepted ? messages.analysis.cards.accepted : messages.analysis.cards.pending}</p>
           </div>
         </div>
 
@@ -104,15 +103,15 @@ export function AnalysisTool() {
           <div className="col-span-12 flex flex-col overflow-hidden rounded-xl border border-white/5 bg-[rgba(26,28,30,0.92)] lg:col-span-7">
             <div className="flex items-center justify-between border-b border-white/5 bg-[rgba(30,32,34,0.96)] px-4 py-3">
               <div className="flex items-center gap-3">
-                <span className="text-xs font-bold uppercase tracking-widest text-slate-300">Source Input</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-slate-300">{messages.analysis.editor.label}</span>
                 <span className="rounded-full bg-slate-800 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-slate-400">
-                  {activeFixture?.id ?? "loading"}
+                  {activeFixture?.id ?? messages.analysis.editor.loadingTag}
                 </span>
               </div>
               <div className="flex gap-2">
                 <input
                   ref={fileInputRef}
-                  aria-label="Load file"
+                  aria-label={messages.analysis.controls.loadFile}
                   className="hidden"
                   type="file"
                   accept=".txt,text/plain"
@@ -128,7 +127,7 @@ export function AnalysisTool() {
                   className="rounded-md px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-300 transition hover:bg-slate-800"
                   onClick={() => fileInputRef.current?.click()}
                 >
-                  Load File
+                  {messages.analysis.controls.loadFile}
                 </button>
                 <button
                   type="button"
@@ -136,7 +135,7 @@ export function AnalysisTool() {
                   disabled={tokens.length === 0}
                   onClick={handleExportTokens}
                 >
-                  Export Tokens
+                  {messages.analysis.controls.exportTokens}
                 </button>
               </div>
             </div>
@@ -150,16 +149,16 @@ export function AnalysisTool() {
                 ))}
               </div>
               <textarea
-                aria-label="Source input"
+                aria-label={messages.analysis.editor.label}
                 className="h-full min-h-[420px] w-full resize-none bg-transparent p-4 font-mono text-sm leading-7 text-indigo-100 outline-none md:pl-16"
-                placeholder="// Leave empty to use the fixture sample input."
+                placeholder={messages.analysis.editor.placeholder}
                 value={inputText}
                 onChange={(event) => setInputText(event.target.value)}
               />
             </div>
 
             <div className="flex items-center justify-between border-t border-white/5 bg-[rgba(30,32,34,0.96)] p-4">
-              <span className="text-[10px] uppercase tracking-[0.18em] text-slate-400">ASCII / UTF-8 Encoded</span>
+              <span className="text-[10px] uppercase tracking-[0.18em] text-slate-400">{messages.analysis.editor.encoding}</span>
               <button
                 type="button"
                 className="rounded-md bg-[linear-gradient(135deg,var(--color-primary),#8390f2)] px-8 py-2 text-xs font-black uppercase tracking-[0.15em] text-[#152383] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
@@ -168,7 +167,7 @@ export function AnalysisTool() {
                   void runAnalysis();
                 }}
               >
-                {isRunning ? "Running..." : "Run Analysis"}
+                {isRunning ? messages.analysis.controls.running : messages.analysis.controls.run}
               </button>
             </div>
           </div>
@@ -176,26 +175,26 @@ export function AnalysisTool() {
           <div className="col-span-12 flex flex-col gap-6 lg:col-span-5">
             <div className="flex min-h-[320px] flex-col overflow-hidden rounded-xl border border-white/5 bg-[rgba(30,32,34,0.92)]">
               <div className="flex items-center justify-between border-b border-white/5 bg-[rgba(40,42,44,0.92)] px-4 py-3">
-                <span className="text-xs font-bold uppercase tracking-widest text-slate-300">Identified Tokens</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-slate-300">{messages.analysis.tokens.title}</span>
                 <span className="rounded-full bg-slate-800 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-slate-400">
-                  {tokens.length} Found
+                  {tokens.length} {messages.analysis.tokens.foundSuffix}
                 </span>
               </div>
               <div className="flex-1 overflow-auto">
                 <table className="w-full text-left text-xs">
                   <thead className="sticky top-0 bg-[rgba(40,42,44,0.98)] text-[10px] uppercase tracking-widest text-slate-400">
                     <tr>
-                      <th className="px-4 py-2">Lexeme</th>
-                      <th className="px-4 py-2">Token</th>
-                      <th className="px-4 py-2 text-right">Ln</th>
-                      <th className="px-4 py-2 text-right">Col</th>
+                      <th className="px-4 py-2">{messages.analysis.tokens.columns.lexeme}</th>
+                      <th className="px-4 py-2">{messages.analysis.tokens.columns.token}</th>
+                      <th className="px-4 py-2 text-right">{messages.analysis.tokens.columns.line}</th>
+                      <th className="px-4 py-2 text-right">{messages.analysis.tokens.columns.column}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5 font-mono">
                     {tokens.length === 0 ? (
                       <tr>
                         <td className="px-4 py-4 text-slate-500" colSpan={4}>
-                          Run analysis to populate the token table.
+                          {messages.analysis.tokens.empty}
                         </td>
                       </tr>
                     ) : (
@@ -217,21 +216,23 @@ export function AnalysisTool() {
 
             <div className="flex min-h-[220px] flex-col overflow-hidden rounded-xl border border-red-400/10 bg-[rgba(30,32,34,0.92)]">
               <div className="flex items-center justify-between border-b border-red-400/10 bg-[rgba(147,0,10,0.12)] px-4 py-3">
-                <span className="text-xs font-bold uppercase tracking-widest text-red-200">Lexical Errors</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-red-200">{messages.analysis.errors.title}</span>
                 <span className="rounded-full bg-red-500/20 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-red-100">
-                  {errors.length} Errors
+                  {errors.length} {messages.analysis.errors.suffix}
                 </span>
               </div>
               <div className="flex-1 space-y-3 p-4">
                 {errors.length === 0 ? (
-                  <p className="text-sm text-slate-400">No lexical errors reported for the latest analysis run.</p>
+                  <p className="text-sm text-slate-400">{messages.analysis.errors.empty}</p>
                 ) : (
                   errors.map((error, index) => (
                     <div key={`${error.start}-${index}`} className="rounded-xl border border-red-400/10 bg-[rgba(12,14,16,0.45)] p-3">
                       <p className="font-mono text-[11px] font-bold text-red-200">
-                        {error.message} [Ln {error.line}, Col {error.column}]
+                        {error.message} [{messages.analysis.tokens.columns.line} {error.line}, {messages.analysis.tokens.columns.column} {error.column}]
                       </p>
-                      <p className="mt-1 text-[11px] text-slate-400">Preview: {error.preview || "n/a"}</p>
+                      <p className="mt-1 text-[11px] text-slate-400">
+                        {messages.analysis.errors.preview}: {error.preview || messages.analysis.errors.notAvailable}
+                      </p>
                     </div>
                   ))
                 )}

@@ -1,0 +1,269 @@
+{
+  "shared": {
+    "appTitle": "Proyecto 01 - Interfaz Integrada",
+    "moduleSelectorAria": "Selector de modulos",
+    "activeModuleLabel": "Modulo activo",
+    "openStandalone": "Abrir vista independiente",
+    "loading": "Cargando...",
+    "moduleLabels": {
+      "analysis": "Analisis lexico",
+      "generator": "Generador lexico",
+      "testManager": "Gestor de pruebas"
+    },
+    "complexityLabels": {
+      "low": "Baja",
+      "medium": "Media",
+      "high": "Alta"
+    },
+    "states": {
+      "pending": "Pendiente",
+      "passed": "Aprobado",
+      "failed": "Fallido",
+      "yes": "Si",
+      "no": "No"
+    },
+    "errors": {
+      "unsupportedModule": "Clave de modulo no soportada"
+    }
+  },
+  "shell": {
+    "header": {
+      "eyebrow": "UVG | Diseno de Lenguajes",
+      "subtitle": "Un solo punto de acceso para panel general, analisis, generador lexico y ejecucion de pruebas.",
+      "availableComplexities": "Complejidades disponibles: Baja, Media, Alta",
+      "stack": "Motor Python + API FastAPI + interfaz integrada"
+    },
+    "modules": {
+      "dashboard": {
+        "badge": "Vista 01",
+        "cardTitle": "Panel general",
+        "cardDescription": "Resumen global de casos base, casos de prueba y modulos activos.",
+        "activeTitle": "Panel general"
+      },
+      "analysis": {
+        "badge": "Vista 02",
+        "cardTitle": "Analisis lexico",
+        "cardDescription": "Identificacion de tokens y deteccion de errores.",
+        "activeTitle": "Analisis lexico"
+      },
+      "generator": {
+        "badge": "Vista 03",
+        "cardTitle": "Generador lexico",
+        "cardDescription": "Editor YALex y diagrama de transiciones.",
+        "activeTitle": "Generador lexico"
+      },
+      "tests": {
+        "badge": "Vista 04",
+        "cardTitle": "Gestor de pruebas",
+        "cardDescription": "Casos baja, media y alta con ejecucion de pruebas.",
+        "activeTitle": "Gestor de pruebas"
+      }
+    }
+  },
+  "dashboard": {
+    "eyebrow": "Resumen del proyecto",
+    "title": "Proyecto 01 UVG: Panel general",
+    "description": "Resumen consolidado de casos base declarativos, casos registrados y modulos activos dentro de la plataforma integrada.",
+    "loading": "Cargando resumen del panel general...",
+    "unavailable": "No se pudieron cargar los datos del panel general.",
+    "cards": {
+      "fixtures": {
+        "label": "Casos base",
+        "description": "Entradas declarativas expuestas por el catalogo de casos base."
+      },
+      "testCases": {
+        "label": "Casos de prueba",
+        "description": "Casos ejecutables disponibles para el gestor de pruebas."
+      },
+      "analysis": {
+        "label": "Casos base de analisis",
+        "description": "Entradas listas para escanear desde Analisis lexico."
+      },
+      "generator": {
+        "label": "Especificaciones del generador",
+        "description": "Especificaciones YALex listas para compilar en el generador."
+      }
+    },
+    "complexity": {
+      "label": "Distribucion por complejidad",
+      "title": "Cobertura baja / media / alta",
+      "totalSuffix": "totales"
+    },
+    "modules": {
+      "label": "Inventario de modulos",
+      "title": "Modulos integrados del frontend",
+      "analysis": "Analisis lexico",
+      "generator": "Generador lexico",
+      "test-manager": "Gestor de pruebas"
+    }
+  },
+  "analysis": {
+    "title": "Analisis lexico",
+    "description": "Tokeniza, valida y reporta errores usando el backend Python real a traves de rutas relativas.",
+    "controls": {
+      "complexity": "Complejidad",
+      "loadFile": "Cargar archivo",
+      "exportTokens": "Exportar tokens",
+      "run": "Ejecutar analisis",
+      "running": "Ejecutando..."
+    },
+    "cards": {
+      "activeFixture": "Caso base activo",
+      "metrics": "Metricas",
+      "input": "Entrada",
+      "loadingFixture": "Cargando catalogo...",
+      "useFixtureSample": "Si el editor esta vacio, se usara el ejemplo del caso base.",
+      "useCurrentEditor": "Se analizara el contenido actual del editor.",
+      "tokensSuffix": "tokens",
+      "errorsSuffix": "errores",
+      "charsSuffix": "caracteres",
+      "accepted": "Analisis aceptado",
+      "pending": "Pendiente o con errores"
+    },
+    "editor": {
+      "label": "Entrada fuente",
+      "loadingTag": "cargando",
+      "placeholder": "// Dejalo vacio para usar la entrada de ejemplo del fixture.",
+      "encoding": "Codificado en ASCII / UTF-8"
+    },
+    "tokens": {
+      "title": "Tokens identificados",
+      "foundSuffix": "encontrados",
+      "empty": "Ejecuta el analisis para llenar la tabla de tokens.",
+      "columns": {
+        "lexeme": "Lexema",
+        "token": "Token",
+        "line": "Linea",
+        "column": "Columna"
+      }
+    },
+    "errors": {
+      "title": "Errores lexicos",
+      "suffix": "errores",
+      "empty": "No se reportaron errores lexicos en la ultima ejecucion.",
+      "preview": "Vista previa",
+      "notAvailable": "n/d"
+    },
+    "fixtures": {
+      "analysis-low": "Analisis lexico - baja",
+      "analysis-medium": "Analisis lexico - media",
+      "analysis-high": "Analisis lexico - alta"
+    }
+  },
+  "generator": {
+    "title": "Generador lexico",
+    "mode": "Modo YALex",
+    "controls": {
+      "uploadFile": "Cargar archivo",
+      "generateDiagram": "Generar diagrama",
+      "compiling": "Compilando...",
+      "downloadAutomaton": "Descargar automata",
+      "downloadLexer": "Descargar lexer"
+    },
+    "labels": {
+      "source": "Fuente YALex",
+      "fixtureSelector": "Caso base del generador",
+      "sourceEditor": "Fuente YALex",
+      "noCompilation": "Sin compilacion todavia",
+      "rulesSuffix": "reglas",
+      "activeRule": "Regla activa",
+      "noActiveRule": "Sin regla activa",
+      "entrypoint": "Punto de entrada",
+      "entryArgs": "Argumentos de entrada",
+      "states": "Estados",
+      "alphabet": "Alfabeto",
+      "recognizedTokens": "Tokens reconocidos",
+      "transitionMatrix": "Matriz de transicion",
+      "columns": {
+        "state": "Estado",
+        "accepting": "Aceptacion",
+        "transitions": "Transiciones"
+      }
+    },
+    "fixtures": {
+      "generator-low": "Generador lexico - baja",
+      "generator-medium": "Generador lexico - media",
+      "generator-high": "Generador lexico - alta",
+      "generator-full-features": "Generador lexico - funcionalidades completas"
+    }
+  },
+  "testManager": {
+    "title": "Proyecto 01 UVG: Gestor de pruebas",
+    "description": "Suite integral de pruebas para generacion de analizadores lexicos y verificacion de flujos de entrada.",
+    "controls": {
+      "addUnavailable": "Agregar caso de prueba",
+      "addUnavailableAria": "Agregar caso de prueba no disponible",
+      "runAll": "Ejecutar todas las pruebas",
+      "runningAll": "Ejecutando...",
+      "runCasePrefix": "Ejecutar caso",
+      "runCase": "Ejecutar caso",
+      "runningCase": "Ejecutando...",
+      "editUnavailable": "Editar",
+      "editUnavailableAria": "Editar no disponible",
+      "deleteUnavailable": "Eliminar",
+      "deleteUnavailableAria": "Eliminar no disponible"
+    },
+    "metrics": {
+      "successRate": "Tasa de exito",
+      "totalExecutions": "Ejecuciones totales",
+      "pendingValidation": "Validaciones pendientes",
+      "session": "Sesion",
+      "notRunYet": "Sin ejecutar",
+      "noExecutions": "Sin ejecuciones todavia",
+      "summary": "{{passed}} aprobadas / {{failed}} fallidas"
+    },
+    "table": {
+      "complexity": "Complejidad",
+      "specSource": "Archivo YALex",
+      "inputStream": "Flujo de entrada",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "expectation": {
+      "accept": "aceptar",
+      "lexical_error": "error lexico"
+    },
+    "cases": {
+      "rubric-low-valid": "Entrada valida de baja",
+      "rubric-low-invalid": "Entrada invalida de baja",
+      "rubric-low-modified-valid": "Entrada valida modificada de baja",
+      "rubric-low-modified-invalid": "Entrada invalida modificada de baja",
+      "rubric-medium-valid": "Entrada valida de media",
+      "rubric-medium-invalid": "Entrada invalida de media",
+      "rubric-medium-modified-valid": "Entrada valida modificada de media",
+      "rubric-medium-modified-invalid": "Entrada invalida modificada de media",
+      "rubric-high-valid": "Entrada valida de alta",
+      "rubric-high-invalid": "Entrada invalida de alta",
+      "rubric-high-modified-valid": "Entrada valida modificada de alta",
+      "rubric-high-modified-invalid": "Entrada invalida modificada de alta"
+    }
+  },
+  "downloads": {
+    "analysisTokensFilename": "tokens_analisis.tsv",
+    "analysisTokensMime": "text/tab-separated-values;charset=utf-8",
+    "analysisTokensHeader": "tipo\tlexema\tlinea\tcolumna\tinicio\tfin\tindiceRegla",
+    "generatorLexerFilename": "lexer_generado.py",
+    "generatorLexerMime": "text/x-python;charset=utf-8",
+    "generatorAutomatonFilename": "automata.svg",
+    "generatorAutomatonMime": "image/svg+xml;charset=utf-8",
+    "generatorAutomatonJsonFilename": "automata.json",
+    "generatorAutomatonJsonMime": "application/json;charset=utf-8"
+  },
+  "errors": {
+    "analysis": {
+      "readFile": "No se pudo leer el archivo seleccionado.",
+      "loadCatalog": "No se pudo cargar el catalogo.",
+      "run": "No se pudo ejecutar el analisis."
+    },
+    "generator": {
+      "loadCatalog": "No se pudo cargar el catalogo del generador.",
+      "compile": "No se pudo compilar la especificacion YALex.",
+      "readFile": "No se pudo leer el archivo seleccionado."
+    },
+    "testManager": {
+      "loadCatalog": "No se pudo cargar el catalogo de pruebas.",
+      "runCase": "No se pudo ejecutar el caso seleccionado.",
+      "runAll": "No se pudieron ejecutar las pruebas."
+    }
+  }
+}
