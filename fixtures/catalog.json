@@ -1,0 +1,200 @@
+{
+  "fixtures": [
+    {
+      "id": "analysis-low",
+      "module": "analysis",
+      "complexity": "low",
+      "label": "Lexical Analysis Low",
+      "specPath": "legacy/yalex/yalex_baja.yal",
+      "inputPath": "legacy/inputs/yalex_baja_input.txt",
+      "kind": "yalex"
+    },
+    {
+      "id": "analysis-medium",
+      "module": "analysis",
+      "complexity": "medium",
+      "label": "Lexical Analysis Medium",
+      "specPath": "legacy/yalex/yalex_media.yal",
+      "inputPath": "legacy/inputs/yalex_media_input.txt",
+      "kind": "yalex"
+    },
+    {
+      "id": "analysis-high",
+      "module": "analysis",
+      "complexity": "high",
+      "label": "Lexical Analysis High",
+      "specPath": "legacy/yalex/yalex_alta.yal",
+      "inputPath": "legacy/inputs/yalex_alta_input.txt",
+      "kind": "yalex"
+    },
+    {
+      "id": "generator-low",
+      "module": "generator",
+      "complexity": "low",
+      "label": "Lexical Generator Low",
+      "specPath": "legacy/yalex/yalex_baja.yal",
+      "kind": "yalex"
+    },
+    {
+      "id": "generator-medium",
+      "module": "generator",
+      "complexity": "medium",
+      "label": "Lexical Generator Medium",
+      "specPath": "legacy/yalex/yalex_media.yal",
+      "kind": "yalex"
+    },
+    {
+      "id": "generator-high",
+      "module": "generator",
+      "complexity": "high",
+      "label": "Lexical Generator High",
+      "specPath": "legacy/yalex/yalex_alta.yal",
+      "kind": "yalex"
+    },
+    {
+      "id": "generator-full-features",
+      "module": "generator",
+      "complexity": "high",
+      "label": "Lexical Generator Full Features",
+      "specPath": "legacy/yalex/yalex_full_features.yal",
+      "kind": "yalex"
+    },
+    {
+      "id": "rubric-low-modified-spec",
+      "module": "generator",
+      "complexity": "low",
+      "label": "Rubric Low Modified Spec",
+      "specPath": "legacy/yalex/variants/yalex_baja_minus.yal",
+      "kind": "yalex",
+      "listed": false
+    },
+    {
+      "id": "rubric-medium-modified-spec",
+      "module": "generator",
+      "complexity": "medium",
+      "label": "Rubric Medium Modified Spec",
+      "specPath": "legacy/yalex/variants/yalex_media_for.yal",
+      "kind": "yalex",
+      "listed": false
+    },
+    {
+      "id": "rubric-high-modified-spec",
+      "module": "generator",
+      "complexity": "high",
+      "label": "Rubric High Modified Spec",
+      "specPath": "legacy/yalex/variants/yalex_alta_bang.yal",
+      "kind": "yalex",
+      "listed": false
+    }
+  ],
+  "testCases": [
+    {
+      "id": "rubric-low-valid",
+      "complexity": "low",
+      "label": "Low valid input",
+      "fixtureId": "analysis-low",
+      "inputPath": "legacy/inputs/yalex_baja_input.txt",
+      "expectation": "accept",
+      "expectedTokens": ["IDENT", "PLUS", "NUM", "TIMES", "NUM", "ASSIGN", "IDENT"]
+    },
+    {
+      "id": "rubric-low-invalid",
+      "complexity": "low",
+      "label": "Low invalid input",
+      "fixtureId": "analysis-low",
+      "inputPath": "legacy/inputs/yalex_baja_invalid_input.txt",
+      "expectation": "lexical_error",
+      "expectedError": "YalexLexError"
+    },
+    {
+      "id": "rubric-low-modified-valid",
+      "complexity": "low",
+      "label": "Low modified valid input",
+      "fixtureId": "rubric-low-modified-spec",
+      "inputPath": "legacy/inputs/yalex_baja_modified_input.txt",
+      "expectation": "accept",
+      "expectedTokens": ["IDENT", "MINUS", "NUM"]
+    },
+    {
+      "id": "rubric-low-modified-invalid",
+      "complexity": "low",
+      "label": "Low modified invalid input",
+      "fixtureId": "rubric-low-modified-spec",
+      "inputPath": "legacy/inputs/yalex_baja_modified_invalid_input.txt",
+      "expectation": "lexical_error",
+      "expectedError": "YalexLexError"
+    },
+    {
+      "id": "rubric-medium-valid",
+      "complexity": "medium",
+      "label": "Medium valid input",
+      "fixtureId": "analysis-medium",
+      "inputPath": "legacy/inputs/yalex_media_input.txt",
+      "expectation": "accept",
+      "expectedTokens": ["IF", "ID", "RELOP", "INT", "ELSE", "WHILE", "ID", "RELOP", "STRING"]
+    },
+    {
+      "id": "rubric-medium-invalid",
+      "complexity": "medium",
+      "label": "Medium invalid input",
+      "fixtureId": "analysis-medium",
+      "inputPath": "legacy/inputs/yalex_media_invalid_input.txt",
+      "expectation": "lexical_error",
+      "expectedError": "YalexLexError"
+    },
+    {
+      "id": "rubric-medium-modified-valid",
+      "complexity": "medium",
+      "label": "Medium modified valid input",
+      "fixtureId": "rubric-medium-modified-spec",
+      "inputPath": "legacy/inputs/yalex_media_modified_input.txt",
+      "expectation": "accept",
+      "expectedTokens": ["FOR", "ID"]
+    },
+    {
+      "id": "rubric-medium-modified-invalid",
+      "complexity": "medium",
+      "label": "Medium modified invalid input",
+      "fixtureId": "rubric-medium-modified-spec",
+      "inputPath": "legacy/inputs/yalex_media_modified_invalid_input.txt",
+      "expectation": "lexical_error",
+      "expectedError": "YalexLexError"
+    },
+    {
+      "id": "rubric-high-valid",
+      "complexity": "high",
+      "label": "High valid input",
+      "fixtureId": "analysis-high",
+      "inputPath": "legacy/inputs/yalex_alta_input.txt",
+      "expectation": "accept",
+      "expectedTokens": ["KW_INT", "ID", "ASSIGN", "NUMBER", "SEMI", "KW_FLOAT", "ID", "ASSIGN", "NUMBER", "SEMI", "IF", "LPAREN", "ID", "RELOP", "ID", "LOGICOP", "ID", "RELOP", "NUMBER", "RPAREN", "LBRACE", "RETURN", "ID", "SEMI", "RBRACE"]
+    },
+    {
+      "id": "rubric-high-invalid",
+      "complexity": "high",
+      "label": "High invalid input",
+      "fixtureId": "analysis-high",
+      "inputPath": "legacy/inputs/yalex_alta_invalid_input.txt",
+      "expectation": "lexical_error",
+      "expectedError": "YalexLexError"
+    },
+    {
+      "id": "rubric-high-modified-valid",
+      "complexity": "high",
+      "label": "High modified valid input",
+      "fixtureId": "rubric-high-modified-spec",
+      "inputPath": "legacy/inputs/yalex_alta_modified_input.txt",
+      "expectation": "accept",
+      "expectedTokens": ["BANG", "ID"]
+    },
+    {
+      "id": "rubric-high-modified-invalid",
+      "complexity": "high",
+      "label": "High modified invalid input",
+      "fixtureId": "rubric-high-modified-spec",
+      "inputPath": "legacy/inputs/yalex_alta_invalid_input.txt",
+      "expectation": "lexical_error",
+      "expectedError": "YalexLexError"
+    }
+  ]
+}

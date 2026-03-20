@@ -2,22 +2,31 @@ from pathlib import Path
 
 import pytest
 
+from laboratorio.application.catalog import FixtureCatalogService, load_default_fixture_catalog
 from laboratorio.yalex_compiler import compile_yalex
 from laboratorio.yalex_parser import parse_yalex
 from laboratorio.yalex_runtime import YalexLexError, scan
 
 
 ROOT = Path(__file__).resolve().parents[3]
-FIXTURES_ROOT = ROOT / "fixtures" / "legacy"
+CATALOG = load_default_fixture_catalog()
+CATALOG_SERVICE = FixtureCatalogService(CATALOG)
 
 
-def _compile_from_file(rel_path: str):
-    text = (FIXTURES_ROOT / rel_path).read_text(encoding="utf-8")
-    return compile_yalex(parse_yalex(text))
+def _compile_spec(spec_path: Path):
+    return compile_yalex(parse_yalex(spec_path.read_text(encoding="utf-8")))
+
+
+def _compile_fixture(fixture_id: str):
+    return _compile_spec(CATALOG_SERVICE.get_fixture(fixture_id).spec_path)
+
+
+def _get_case(case_id: str):
+    return CATALOG_SERVICE.get_test_case(case_id)
 
 
 def test_diagrama_transicion_se_puede_generar_desde_reglas_compiladas():
-    compiled = _compile_from_file("yalex/yalex_alta.yal")
+    compiled = _compile_fixture("generator-high")
     transiciones_totales = 0
     for rule in compiled.rules:
         if rule.is_eof:
@@ -31,67 +40,56 @@ def test_diagrama_transicion_se_puede_generar_desde_reglas_compiladas():
 
 
 def test_baja_identifica_tokens_en_entrada_plana():
-    compiled = _compile_from_file("yalex/yalex_baja.yal")
-    text = (FIXTURES_ROOT / "inputs/yalex_baja_input.txt").read_text(encoding="utf-8")
-    tokens = scan(compiled, text)
+    case = _get_case("rubric-low-valid")
+    tokens = scan(_compile_spec(case.spec_path), case.input_text)
     assert [token.type for token in tokens] == ["IDENT", "PLUS", "NUM", "TIMES", "NUM", "ASSIGN", "IDENT"]
 
 
 def test_baja_detecta_error_lexico_en_entrada_invalida():
-    compiled = _compile_from_file("yalex/yalex_baja.yal")
+    case = _get_case("rubric-low-invalid")
     with pytest.raises(YalexLexError):
-        scan(compiled, "var @ -4")
+        scan(_compile_spec(case.spec_path), case.input_text)
 
 
 def test_baja_modificada_identifica_tokens_nuevos():
-    source = (FIXTURES_ROOT / "yalex/yalex_baja.yal").read_text(encoding="utf-8")
-    source += "\n| '-' { return MINUS }\n"
-    compiled = compile_yalex(parse_yalex(source))
-    tokens = scan(compiled, "abc - 12")
+    case = _get_case("rubric-low-modified-valid")
+    tokens = scan(_compile_spec(case.spec_path), case.input_text)
     assert [token.type for token in tokens] == ["IDENT", "MINUS", "NUM"]
 
 
 def test_baja_modificada_detecta_error_lexico():
-    source = (FIXTURES_ROOT / "yalex/yalex_baja.yal").read_text(encoding="utf-8")
-    source += "\n| '-' { return MINUS }\n"
-    compiled = compile_yalex(parse_yalex(source))
+    case = _get_case("rubric-low-modified-invalid")
     with pytest.raises(YalexLexError):
-        scan(compiled, "abc % 12")
+        scan(_compile_spec(case.spec_path), case.input_text)
 
 
 def test_media_identifica_tokens_en_entrada_plana():
-    compiled = _compile_from_file("yalex/yalex_media.yal")
-    text = (FIXTURES_ROOT / "inputs/yalex_media_input.txt").read_text(encoding="utf-8")
-    tokens = scan(compiled, text)
+    case = _get_case("rubric-medium-valid")
+    tokens = scan(_compile_spec(case.spec_path), case.input_text)
     assert [token.type for token in tokens] == ["IF", "ID", "RELOP", "INT", "ELSE", "WHILE", "ID", "RELOP", "STRING"]
 
 
 def test_media_detecta_error_lexico_en_entrada_invalida():
-    compiled = _compile_from_file("yalex/yalex_media.yal")
+    case = _get_case("rubric-medium-invalid")
     with pytest.raises(YalexLexError):
-        scan(compiled, "if nombre $ 10")
+        scan(_compile_spec(case.spec_path), case.input_text)
 
 
 def test_media_modificada_identifica_tokens_nuevos():
-    source = (FIXTURES_ROOT / "yalex/yalex_media.yal").read_text(encoding="utf-8")
-    source = source.replace('| "if" { return IF }', '| "for" { return FOR }\n| "if" { return IF }')
-    compiled = compile_yalex(parse_yalex(source))
-    tokens = scan(compiled, "for i")
+    case = _get_case("rubric-medium-modified-valid")
+    tokens = scan(_compile_spec(case.spec_path), case.input_text)
     assert [token.type for token in tokens] == ["FOR", "ID"]
 
 
 def test_media_modificada_detecta_error_lexico():
-    source = (FIXTURES_ROOT / "yalex/yalex_media.yal").read_text(encoding="utf-8")
-    source = source.replace('| "if" { return IF }', '| "for" { return FOR }\n| "if" { return IF }')
-    compiled = compile_yalex(parse_yalex(source))
+    case = _get_case("rubric-medium-modified-invalid")
     with pytest.raises(YalexLexError):
-        scan(compiled, "for ?")
+        scan(_compile_spec(case.spec_path), case.input_text)
 
 
 def test_alta_identifica_tokens_en_entrada_plana():
-    compiled = _compile_from_file("yalex/yalex_alta.yal")
-    text = (FIXTURES_ROOT / "inputs/yalex_alta_input.txt").read_text(encoding="utf-8")
-    tokens = scan(compiled, text)
+    case = _get_case("rubric-high-valid")
+    tokens = scan(_compile_spec(case.spec_path), case.input_text)
     assert [token.type for token in tokens] == [
         "KW_INT",
         "ID",
@@ -122,22 +120,18 @@ def test_alta_identifica_tokens_en_entrada_plana():
 
 
 def test_alta_detecta_error_lexico_en_entrada_invalida():
-    compiled = _compile_from_file("yalex/yalex_alta.yal")
+    case = _get_case("rubric-high-invalid")
     with pytest.raises(YalexLexError):
-        scan(compiled, "int x = 1 @")
+        scan(_compile_spec(case.spec_path), case.input_text)
 
 
 def test_alta_modificada_identifica_tokens_nuevos():
-    source = (FIXTURES_ROOT / "yalex/yalex_alta.yal").read_text(encoding="utf-8")
-    source += "\n| '!' { return BANG }\n"
-    compiled = compile_yalex(parse_yalex(source))
-    tokens = scan(compiled, "! x")
+    case = _get_case("rubric-high-modified-valid")
+    tokens = scan(_compile_spec(case.spec_path), case.input_text)
     assert [token.type for token in tokens] == ["BANG", "ID"]
 
 
 def test_alta_modificada_detecta_error_lexico():
-    source = (FIXTURES_ROOT / "yalex/yalex_alta.yal").read_text(encoding="utf-8")
-    source += "\n| '!' { return BANG }\n"
-    compiled = compile_yalex(parse_yalex(source))
+    case = _get_case("rubric-high-modified-invalid")
     with pytest.raises(YalexLexError):
-        scan(compiled, "int x = 1 @")
+        scan(_compile_spec(case.spec_path), case.input_text)

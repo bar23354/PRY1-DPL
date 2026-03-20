@@ -10,13 +10,13 @@ El proyecto evita librerías regex para el matching léxico.
 
 La estructura ya fue preparada para el refactor grande:
 
-- `backend/`: espacio reservado para el backend Python y sus pruebas.
+- `backend/`: backend Python y pruebas del backend.
 - `frontend/`: espacio reservado para la futura app en Next.js + React + TypeScript.
 - `fixtures/`: fixtures legacy de YALex e inputs.
 - `legacy/`: referencia histórica de entrypoints Python e interfaz web estática.
 - `docs/`: documentación oficial y técnica.
 
-En esta etapa, el núcleo Python vigente todavía permanece en `laboratorio/`.
+En esta etapa, el núcleo Python vigente ya fue movido a `backend/src/laboratorio/`.
 
 ## Ejecutar flujo legacy del curso
 
@@ -51,7 +51,7 @@ python -m pytest -q backend/tests/legacy_tests
 - `docs/instrucciones_generales.md`: fuente normativa principal.
 - `docs/Consideraciones de YALex.pdf`: especificación complementaria de YALex.
 - `docs/Proyecto 01 - Rúbrica de evaluación.pdf`: rúbrica académica.
-- `laboratorio/`: implementación Python vigente del núcleo actual.
+- `backend/src/laboratorio/`: implementación Python vigente del núcleo actual.
 - `legacy/python/`: entrypoints históricos del proyecto.
 - `legacy/web/interfaz/`: baseline visual HTML estático para comparación 1:1.
 - `fixtures/legacy/`: insumos legacy de YALex e inputs de validación.

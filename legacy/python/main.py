@@ -5,8 +5,11 @@ import webbrowser
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+BACKEND_SRC = REPO_ROOT / 'backend' / 'src'
+if str(BACKEND_SRC) not in sys.path:
+    sys.path.insert(0, str(BACKEND_SRC))
 if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
+    sys.path.insert(1, str(REPO_ROOT))
 
 from laboratorio.analizador import formatearSimbolo, formatearTokens, prepararExpresion
 from laboratorio.arbol import construirArbolDirecto

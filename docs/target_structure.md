@@ -26,7 +26,6 @@ Ya fue completado el aislamiento inicial:
 
 Pendiente para el refactor grande:
 
-- `laboratorio/` -> `backend/src/laboratorio/`
 - implementación real de `frontend/` en Next.js
 - definición de integración entre frontend y backend
 - validación E2E del producto final integrado

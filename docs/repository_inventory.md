@@ -13,7 +13,7 @@ Documentos académicos complementarios:
 
 ### Núcleo activo actual
 
-- `laboratorio/`: implementación Python vigente del núcleo léxico.
+- `backend/src/laboratorio/`: implementación Python vigente del núcleo léxico.
 
 ### Legacy preservado
 
@@ -31,7 +31,7 @@ Documentos académicos complementarios:
 
 ### Estructura preparada para el refactor mayor
 
-- `backend/`: espacio reservado para el backend Python refactorizado.
+- `backend/`: backend Python productivo, empaquetado y pruebas.
 - `frontend/`: espacio reservado para la futura app Next.js.
 - `e2e/`: espacio reservado para validación end-to-end.
 - `artifacts/`: espacio reservado para salidas generadas.
@@ -46,7 +46,8 @@ Documentos académicos complementarios:
 ## Observaciones relevantes
 
 - La raíz ya no mezcla entrypoints legacy, interfaz HTML y fixtures operativos.
-- El núcleo Python sigue intacto en `laboratorio/`; todavía no se ha migrado a `backend/src/`.
+- El núcleo Python ya vive en `backend/src/laboratorio/`.
+- Los imports públicos del paquete siguen siendo `laboratorio.*`, pero ahora resuelven desde `backend/src`.
 - `legacy/` se conserva para comparación y compatibilidad transicional.
 - La documentación académica quedó consolidada en `docs/`.
 - El siguiente refactor grande podrá trabajar sobre `backend/` y `frontend/` sin otra reorganización previa de alto nivel.
