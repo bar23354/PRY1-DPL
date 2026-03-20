@@ -1,29 +1,25 @@
 \documentclass[12pt,a4paper]{article}
 
-% ── Codificación y lenguaje ──
+% Codificacion y lenguaje
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-% babel removed (Spanish language pack not available)
 
-% ── Diseño de página ──
+% Diseno de pagina
 \usepackage[margin=2.5cm, top=3cm, bottom=3cm]{geometry}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 
-% ── Tipografía ──
-% lmodern and microtype removed (not available)
-
-% ── Colores y gráficos ──
+% Colores y graficos
 \usepackage[dvipsnames,svgnames,x11names]{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric, calc, fit, backgrounds}
 \usepackage{graphicx}
 \usepackage{float}
 
-% ── Código fuente ──
+% Codigo fuente
 \usepackage{listings}
 
-% ── Tablas ──
+% Tablas
 \usepackage{array}
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -31,7 +27,7 @@
 \usepackage{tabularx}
 \usepackage{colortbl}
 
-% ── Otros ──
+% Otros
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{amsmath}
@@ -39,9 +35,7 @@
 \usepackage{parskip}
 \usepackage{titlesec}
 
-% ══════════════════════════════════════════════════
-%  CONFIGURACIÓN DE COLORES
-% ══════════════════════════════════════════════════
+% Configuracion de colores
 \definecolor{uvggreen}{RGB}{0,100,60}
 \definecolor{uvggold}{RGB}{192,160,64}
 \definecolor{darkblue}{RGB}{20,40,80}
@@ -54,9 +48,7 @@
 \definecolor{lightgray}{RGB}{240,240,245}
 \definecolor{accentred}{RGB}{180,30,30}
 
-% ══════════════════════════════════════════════════
-%  CONFIGURACIÓN DE LISTINGS
-% ══════════════════════════════════════════════════
+% Configuracion de listings
 \lstdefinestyle{pythonstyle}{
     language=Python,
     backgroundcolor=\color{codebg},
@@ -103,14 +95,13 @@
     morestring=[b]',
     morestring=[b]",
     morecomment=[s]{(*}{*)},
-    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {ε}{{$\varepsilon$}}1,
 }
 
 \lstset{style=pythonstyle}
 
-% ══════════════════════════════════════════════════
-%  CONFIGURACIÓN DE ENCABEZADOS
-% ══════════════════════════════════════════════════
+% Configuracion de encabezados
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\textcolor{uvggreen}{\textbf{Universidad del Valle de Guatemala}}}
@@ -121,9 +112,7 @@
 \renewcommand{\footrulewidth}{0.4pt}
 \renewcommand{\headrule}{\hbox to\headwidth{\color{uvggreen}\leaders\hrule height \headrulewidth\hfill}}
 
-% ══════════════════════════════════════════════════
-%  FORMATO DE SECCIONES
-% ══════════════════════════════════════════════════
+% Formato de secciones
 \titleformat{\section}
   {\Large\bfseries\color{sectionblue}}
   {\thesection.}{0.5em}{}
@@ -137,9 +126,7 @@
   {\normalsize\bfseries\color{darkblue}}
   {\thesubsubsection}{0.5em}{}
 
-% ══════════════════════════════════════════════════
-%  HYPERREF
-% ══════════════════════════════════════════════════
+% Hyperref
 \hypersetup{
     colorlinks=true,
     linkcolor=darkblue,
@@ -149,19 +136,12 @@
     pdfauthor={Diego Lopez, Jennifer Toxcon, Roberto Barreda},
 }
 
-% ══════════════════════════════════════════════════
-%  DOCUMENTO
-% ══════════════════════════════════════════════════
 \begin{document}
 
-% ── PORTADA ──────────────────────────────────────
 \begin{titlepage}
 \begin{tikzpicture}[remember picture, overlay]
-  % Fondo superior
   \fill[uvggreen] (current page.north west) rectangle ([yshift=-6cm]current page.north east);
-  % Franja dorada
   \fill[uvggold] ([yshift=-6cm]current page.north west) rectangle ([yshift=-6.4cm]current page.north east);
-  % Franja inferior
   \fill[darkblue] (current page.south west) rectangle ([yshift=2.5cm]current page.south east);
 \end{tikzpicture}
 
@@ -169,7 +149,7 @@
 \begin{center}
   {\Huge\bfseries\textcolor{white}{Universidad del Valle}}\\[6pt]
   {\Huge\bfseries\textcolor{white}{de Guatemala}}\\[14pt]
-  {\large\textcolor{White}{Facultad de Ingeniería}}\\[4pt]
+  {\large\textcolor{white}{Facultad de Ingeniería}}\\[4pt]
   {\large\textcolor{black}{Facultad de Ingeniería}}\\[4pt]
   {\large\textcolor{black}{Ciencia de la Computación y Tecnologías de la Información}}\\[1pt]
   {\normalsize\textcolor{black}{Diseño de Lenguajes de Programación - Sección 10}}\\[4pt]
@@ -181,7 +161,7 @@
 \begin{center}
   {\fontsize{28}{34}\selectfont\bfseries\textcolor{sectionblue}{Proyecto 01}}\\[18pt]
   {\fontsize{20}{26}\selectfont\textcolor{darkblue}{Generador de Analizadores Léxicos}}\\[10pt]
-  {\Large\textcolor{uvggreen}{Implementación basada en YALex}}
+  {\Large\textcolor{uvggreen}{Plataforma Integrada basada en YALex}}
 \end{center}
 
 \vspace{3cm}
@@ -190,107 +170,108 @@
   \renewcommand{\arraystretch}{1.4}
   \begin{tabular}{r l}
     \textcolor{darkblue}{\textbf{Diego Lopez}}      & \textcolor{gray}{\#23747} \\
-    \textcolor{darkblue}{\textbf{Jennifer Toxcon}}   & \textcolor{gray}{\#21276} \\
-    \textcolor{darkblue}{\textbf{Roberto Barreda}}   & \textcolor{gray}{\#23354} \\
+    \textcolor{darkblue}{\textbf{Jennifer Toxcon}}  & \textcolor{gray}{\#21276} \\
+    \textcolor{darkblue}{\textbf{Roberto Barreda}}  & \textcolor{gray}{\#23354} \\
   \end{tabular}
 \end{center}
 
 \vfill
 \begin{tikzpicture}[remember picture, overlay]
   \node[anchor=south, yshift=0.8cm] at (current page.south) {
-    \textcolor{white}{\small Guatemala, 24 de marzo de 2026}
+    \textcolor{white}{\small Guatemala, 20 de marzo de 2026}
   };
 \end{tikzpicture}
 \end{titlepage}
 
-% ── ÍNDICE ───────────────────────────────────────
 \newpage
 \tableofcontents
 \newpage
 
-% ══════════════════════════════════════════════════
-%  1. INTRODUCCIÓN
-% ══════════════════════════════════════════════════
 \section{Introducción}
 
-El presente informe documenta el diseño, la implementación y los resultados obtenidos en el \textbf{Proyecto 01} del curso \emph{Diseño de Lenguajes de Programación} (CC3071). El objetivo central del proyecto consiste en la construcción de un \textbf{generador de analizadores léxicos} inspirado en la herramienta YALex (\emph{Yet Another Lex}), la cual toma como referencia la implementación de \texttt{ocamllex} para OCaml.
+El presente informe documenta el diseño y la implementación de una plataforma integrada para la generación, validación y visualización de analizadores léxicos a partir de especificaciones YALex. El sistema combina un motor de compilación léxica en Python, una API de servicios para integración y una interfaz web unificada orientada a la exploración visual del proceso completo de análisis léxico.
 
-Un analizador léxico (o \emph{lexer}) es la primera fase de un compilador o intérprete: su responsabilidad es leer una secuencia de caracteres de entrada y producir una secuencia de \emph{tokens}, es decir, unidades léxicas con significado dentro de la gramática del lenguaje. La generación automática de estos analizadores a partir de especificaciones de expresiones regulares es un problema clásico en ciencia de la computación, que involucra la teoría de autómatas finitos y la minimización de estados.
+Un analizador léxico es la primera fase de un compilador o intérprete. Su responsabilidad consiste en transformar una secuencia de caracteres en una secuencia de tokens con estructura y significado sintáctico. Automatizar la construcción de analizadores léxicos a partir de reglas y expresiones regulares es un problema clásico que integra teoría de lenguajes formales, autómatas finitos, construcción directa de AFD y generación de código.
 
-El proyecto abarca desde el \emph{parsing} de archivos de especificación \texttt{.yal}, pasando por la normalización de expresiones regulares, la construcción directa de Autómatas Finitos Deterministas (AFD) mediante el método del árbol sintáctico, la minimización de estados mediante particiones, y finalmente la generación de código Python autosuficiente que implementa el lexer resultante.
+La plataforma desarrollada cubre el ciclo completo del problema: especificar reglas léxicas en formato \texttt{.yal}, parsear y normalizar dichas especificaciones, construir AFDs directos minimizados, generar un lexer Python autosuficiente, analizar entradas reales, visualizar autómatas y ejecutar lotes de casos de prueba desde una sola interfaz.
 
-\subsection{Objetivos}
+\section{Objetivos}
+
+\subsection{Objetivo General}
+
+Diseñar e implementar una plataforma integrada para la generación de analizadores léxicos basada en YALex, con backend en Python, API de servicios y frontend web moderno, validada con casos de complejidad baja, media y alta.
+
+\subsection{Objetivos Específicos}
 
 \begin{itemize}[leftmargin=2em]
-  \item Implementar la construcción directa de AFD a partir de expresiones regulares utilizando el método del árbol sintáctico aumentado, sin recurrir a librerías de expresiones regulares.
-  \item Implementar el algoritmo de minimización de AFD por particiones sucesivas.
-  \item Diseñar y construir un parser para archivos de especificación en formato YALex (\texttt{.yal}).
+  \item Implementar la construcción directa de AFD a partir de expresiones regulares mediante el método del árbol sintáctico aumentado.
+  \item Implementar la minimización de AFD mediante refinamiento de particiones.
+  \item Diseñar un parser para especificaciones YALex que soporte definiciones \texttt{let}, reglas, argumentos y bloques auxiliares.
   \item Generar archivos Python autosuficientes que funcionen como analizadores léxicos independientes del generador.
-  \item Proveer una interfaz gráfica web amigable y estética para la interacción con el sistema.
-  \item Validar el correcto funcionamiento con archivos de prueba de complejidad baja, media y alta.
+  \item Exponer las capacidades del motor léxico mediante una API tipada y consistente.
+  \item Construir una interfaz web amigable y estética para compilar especificaciones, analizar entradas, visualizar autómatas y ejecutar casos de prueba.
+  \item Validar el correcto funcionamiento del sistema con casos representativos de complejidad baja, media y alta.
 \end{itemize}
 
-\subsection{Repositorio}
+\section{Alcance del Sistema}
 
-El código fuente completo del proyecto se encuentra disponible en el siguiente repositorio de GitHub:
+La plataforma se organiza en cuatro módulos funcionales principales:
 
-\begin{center}
-  \url{https://github.com/bar23354/PRY1-DPL.git}
-\end{center}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Dashboard}: resume el estado general del sistema y sus métricas operativas.
+  \item \textbf{Lexical Analysis}: permite seleccionar una complejidad, cargar o editar una entrada y obtener tokens, errores léxicos y estadísticas de análisis.
+  \item \textbf{Lexical Generator}: permite cargar o editar una especificación YALex, compilarla, inspeccionar una regla activa, visualizar su autómata y descargar el lexer generado.
+  \item \textbf{Test Case Manager}: permite listar casos de prueba, ejecutar casos individuales o lotes completos y mostrar resultados agregados de validación.
+\end{itemize}
 
-% ══════════════════════════════════════════════════
-%  2. MARCO TEÓRICO
-% ══════════════════════════════════════════════════
+El sistema se concibe como una herramienta integral de experimentación, verificación y documentación del proceso de análisis léxico.
+
 \section{Marco Teórico}
 
 \subsection{Expresiones Regulares}
 
-Las expresiones regulares constituyen un formalismo para describir conjuntos de cadenas (lenguajes regulares). En el contexto de la generación de analizadores léxicos, cada token se define mediante una expresión regular que describe el conjunto de lexemas válidos. Los operadores fundamentales son:
+Las expresiones regulares constituyen un formalismo para describir conjuntos de cadenas, es decir, lenguajes regulares. En el contexto de la generación de analizadores léxicos, cada token se define por medio de una expresión regular que describe los lexemas aceptados por la regla correspondiente.
+
+Los operadores fundamentales considerados en el sistema son:
 
 \begin{itemize}[leftmargin=2em]
-  \item \textbf{Unión} (\texttt{|}): denota la alternativa entre dos expresiones.
-  \item \textbf{Concatenación} (implícita): la yuxtaposición de dos expresiones.
+  \item \textbf{Unión} (\texttt{|}): representa alternancia entre expresiones.
+  \item \textbf{Concatenación}: representa la yuxtaposición de subexpresiones.
   \item \textbf{Cerradura de Kleene} (\texttt{*}): cero o más repeticiones.
   \item \textbf{Cerradura positiva} (\texttt{+}): una o más repeticiones.
   \item \textbf{Opcionalidad} (\texttt{?}): cero o una ocurrencia.
 \end{itemize}
 
-La precedencia adoptada en YALex es, de mayor a menor: diferencia de conjuntos (\texttt{\#}), operadores unarios (\texttt{*}, \texttt{+}, \texttt{?}), concatenación, y unión (\texttt|}). Adicionalmente, se soportan conjuntos de caracteres (\texttt{[...]}), conjuntos negados (\texttt{[\^{}...]}), literales con comillas simples y dobles, el comodín \texttt{\_} (cualquier carácter) y la palabra reservada \texttt{eof}.
+En YALex se soportan, además, conjuntos de caracteres, rangos, conjuntos negados, literales simples y dobles, diferencia de conjuntos (\texttt{\#}), el comodín \texttt{\_} y el símbolo especial \texttt{eof}. La precedencia adoptada es, de mayor a menor: diferencia, operadores unarios, concatenación y unión.
 
-\subsection{Autómatas Finitos Deterministas (AFD)}
+\subsection{Autómatas Finitos Deterministas}
 
-Un AFD se define formalmente como una 5-tupla $M = (Q, \Sigma, \delta, q_0, F)$ donde:
+Un AFD se define formalmente como una 5-tupla $M = (Q, \Sigma, \delta, q_0, F)$, donde $Q$ es un conjunto finito de estados, $\Sigma$ es el alfabeto, $\delta$ es la función de transición, $q_0$ es el estado inicial y $F$ es el conjunto de estados de aceptación.
 
-\begin{itemize}[leftmargin=2em]
-  \item $Q$ es un conjunto finito de estados.
-  \item $\Sigma$ es el alfabeto de entrada.
-  \item $\delta: Q \times \Sigma \rightarrow Q$ es la función de transición.
-  \item $q_0 \in Q$ es el estado inicial.
-  \item $F \subseteq Q$ es el conjunto de estados de aceptación.
-\end{itemize}
+La relevancia de los AFD en este proyecto radica en que permiten ejecutar el reconocimiento léxico de forma determinista, eficiente y completamente independiente de librerías externas de expresiones regulares.
 
-\subsection{Construcción Directa de AFD (Método del Árbol Sintáctico)}
+\subsection{Construcción Directa de AFD}
 
-El método directo evita la construcción intermedia de un AFN y opera directamente sobre el árbol sintáctico de la expresión regular aumentada ($r\#$). Para cada nodo del árbol se calculan cuatro funciones:
+El método directo construye el AFD a partir del árbol sintáctico de la expresión regular aumentada $r\#$, sin pasar por un AFN intermedio. Para cada nodo del árbol se calculan cuatro funciones:
 
 \begin{enumerate}[leftmargin=2em]
-  \item \textbf{anulable}($n$): indica si el subárbol puede generar la cadena vacía ($\varepsilon$).
-  \item \textbf{primeraPos}($n$): conjunto de posiciones (hojas) que pueden ser el primer símbolo en una cadena generada por el subárbol.
-  \item \textbf{últimaPos}($n$): conjunto de posiciones que pueden ser el último símbolo.
-  \item \textbf{siguientePos}($p$): para una posición $p$, el conjunto de posiciones que pueden seguir inmediatamente a $p$ en alguna cadena del lenguaje.
+  \item \textbf{anulable}($n$): indica si el subárbol puede generar la cadena vacía.
+  \item \textbf{primeraPos}($n$): conjunto de posiciones que pueden aparecer primero.
+  \item \textbf{últimaPos}($n$): conjunto de posiciones que pueden aparecer al final.
+  \item \textbf{siguientePos}($p$): posiciones que pueden seguir inmediatamente a una posición dada.
 \end{enumerate}
 
-Con estas funciones, el AFD se construye donde cada estado es un subconjunto de posiciones del árbol, el estado inicial es primeraPos de la raíz, y las transiciones se determinan mediante siguientePos.
+Cada estado del AFD se modela como un conjunto de posiciones del árbol. El estado inicial corresponde a \texttt{primeraPos} de la raíz, mientras que las transiciones se construyen a partir de la relación \texttt{siguientePos}.
 
 \subsection{Minimización de AFD}
 
-El algoritmo de minimización por particiones (Hopcroft) agrupa los estados en clases de equivalencia. Dos estados son equivalentes si, para cada símbolo del alfabeto, sus transiciones conducen a estados en la misma partición. El proceso itera hasta alcanzar un punto fijo donde ninguna partición puede refinarse más, produciendo el AFD mínimo equivalente.
+Una vez construido el AFD, se aplica un algoritmo de minimización por particiones. Dos estados son equivalentes si, para todo símbolo del alfabeto, transitan hacia estados pertenecientes a las mismas clases de equivalencia. El refinamiento iterativo de las particiones produce un AFD mínimo equivalente, reduciendo complejidad estructural y mejorando la claridad de la visualización resultante.
 
-\subsection{YALex: Especificación del Generador}
+\subsection{Especificaciones YALex}
 
-YALex (\emph{Yet Another Lex}) define un formato de archivo \texttt{.yal} con la siguiente estructura:
+YALex (\emph{Yet Another Lex}) define un lenguaje de especificación para analizadores léxicos con la siguiente estructura general:
 
-\begin{lstlisting}[style=yalexstyle, title={\small Estructura de un archivo YALex}]
+\begin{lstlisting}[style=yalexstyle, title={\small Estructura general de una especificación YALex}]
 { header }
 let ident = regexp
 ...
@@ -301,570 +282,286 @@ rule entrypoint [arg1, ..., argn] =
 { trailer }
 \end{lstlisting}
 
-Las secciones \texttt{header} y \texttt{trailer} son opcionales y se copian al inicio y final del archivo generado. Las definiciones \texttt{let} permiten nombrar expresiones regulares frecuentes. La sección \texttt{rule} define los patrones léxicos y sus acciones asociadas.
+Las definiciones \texttt{let} permiten factorizar expresiones, mientras que la sección \texttt{rule} define patrones y acciones. La semántica de matching utilizada por el sistema es \emph{longest match}, con desempate por orden de declaración.
 
-La política de matching es \emph{longest match}: se busca siempre el lexema más largo que haga concordancia; en caso de empate, se prioriza por orden de definición de las reglas.
-
-% ══════════════════════════════════════════════════
-%  3. ARQUITECTURA DEL SISTEMA
-% ══════════════════════════════════════════════════
 \section{Arquitectura del Sistema}
 
-El sistema se organiza en una cadena de procesamiento (\emph{pipeline}) compuesta por módulos con responsabilidades bien definidas. La siguiente figura ilustra el flujo general:
+La plataforma se diseña como un sistema por capas, con separación clara entre interfaz, servicios, compilación y ejecución. La Figura \ref{fig:arquitectura_general} resume el flujo principal del sistema.
 
 \begin{figure}[H]
 \centering
 \resizebox{\textwidth}{!}{
 \begin{tikzpicture}[
-    node distance=0.9cm and 0.4cm,
+    node distance=0.9cm and 0.6cm,
     box/.style={
         rectangle, rounded corners=4pt,
         draw=darkblue, thick,
         fill=blue!6,
-        minimum width=3.2cm, minimum height=1cm,
+        minimum width=3.3cm, minimum height=1cm,
         text centered, font=\small\bfseries,
         text=darkblue
     },
     io/.style={
         trapezium, trapezium left angle=70, trapezium right angle=110,
         draw=uvggreen, thick, fill=green!6,
-        minimum width=2.4cm, minimum height=0.8cm,
+        minimum width=2.6cm, minimum height=0.8cm,
         text centered, font=\small,
         text=uvggreen!80!black
     },
     arr/.style={-{Stealth[length=6pt]}, thick, color=darkblue!70},
 ]
 
-% Fila superior: Entrada
-\node[io] (yalin) {Archivo .yal};
-\node[box, right=1.2cm of yalin] (parser) {yalex\_parser};
-\node[box, right=0.8cm of parser] (regex) {yalex\_regex};
-\node[box, right=0.8cm of regex] (compiler) {yalex\_compiler};
+\node[io] (user) {Usuario};
+\node[box, right=1.2cm of user] (front) {Frontend \\ Next.js + React + TypeScript};
+\node[box, right=1.2cm of front] (api) {API \\ FastAPI};
 
-% Fila media: Pipeline interno
-\node[box, below=1.2cm of parser] (analizador) {analizador};
-\node[box, right=0.8cm of analizador] (arbol) {arbol};
-\node[box, right=0.8cm of arbol] (afdmod) {construccion\_afd};
-\node[box, right=0.8cm of afdmod] (minim) {minimizacion};
+\node[box, below=1.3cm of front] (analysis) {Lexical Analysis};
+\node[box, right=0.8cm of analysis] (generator) {Lexical Generator};
+\node[box, right=0.8cm of generator] (tests) {Test Case Manager};
 
-% Fila inferior: Salida
-\node[box, below=1.2cm of arbol] (codegen) {yalex\_codegen};
-\node[io, right=1.5cm of codegen] (salida) {Lexer .py};
-\node[box, left=1.2cm of codegen] (runtime) {yalex\_runtime};
+\node[box, below=1.3cm of generator] (parser) {Parser + Normalizador YALex};
+\node[box, left=0.8cm of parser] (dfa) {Construcción \\ y minimización de AFD};
+\node[box, right=0.8cm of parser] (runtime) {Runtime + Codegen};
+\node[io, right=1.2cm of runtime] (lexer) {Lexer Python};
 
-% Flechas superiores
-\draw[arr] (yalin) -- (parser);
-\draw[arr] (parser) -- (regex);
-\draw[arr] (regex) -- (compiler);
-
-% Flechas verticales
-\draw[arr] (compiler) -- ++(0,-0.5) -| (analizador);
-\draw[arr] (analizador) -- (arbol);
-\draw[arr] (arbol) -- (afdmod);
-\draw[arr] (afdmod) -- (minim);
-
-% Flechas a salida
-\draw[arr] (minim) -- ++(0,-0.5) -| (codegen);
-\draw[arr] (codegen) -- (salida);
-
-% Runtime
-\draw[arr, dashed, color=gray] (runtime) -- (codegen) node[midway,above,font=\tiny\color{gray}] {API};
+\draw[arr] (user) -- (front);
+\draw[arr] (front) -- (api);
+\draw[arr] (front) -- (analysis);
+\draw[arr] (front) -- (generator);
+\draw[arr] (front) -- (tests);
+\draw[arr] (api) -- (parser);
+\draw[arr] (parser) -- (dfa);
+\draw[arr] (parser) -- (runtime);
+\draw[arr] (runtime) -- (lexer);
+\draw[arr, dashed, color=gray] (dfa) -- (generator);
+\draw[arr, dashed, color=gray] (runtime) -- (analysis);
+\draw[arr, dashed, color=gray] (runtime) -- (tests);
 
 \end{tikzpicture}
 }
-\caption{Pipeline de compilación del generador YALex.}
-\label{fig:pipeline}
+\caption{Arquitectura general de la plataforma integrada.}
+\label{fig:arquitectura_general}
 \end{figure}
 
-\subsection{Descripción de Módulos}
+\subsection{Descripción General}
 
-\begin{longtable}{>{\bfseries\ttfamily\small}p{3.8cm} p{10cm}}
+El frontend web presenta una experiencia integrada que centraliza las operaciones principales del sistema. La API expone contratos estables para los módulos visuales, mientras que el backend conserva la lógica formal del generador y del motor de escaneo. Esta separación permite mantener la exactitud del núcleo léxico en Python y, al mismo tiempo, ofrecer una interfaz moderna para exploración y validación.
+
+\section{Diseño del Backend}
+
+El backend está implementado en Python y se organiza en componentes especializados por responsabilidad. La lógica de dominio se mantiene separada de la capa de transporte HTTP, lo que facilita pruebas, reutilización y mantenibilidad.
+
+\begin{longtable}{>{\bfseries\ttfamily\small}p{4cm} p{9.8cm}}
 \toprule
 \normalfont\textbf{Módulo} & \textbf{Responsabilidad} \\
 \midrule
 \endhead
-tokens.py & Define la representación interna de tokens (\texttt{Token} dataclass) con tipos literal, operador, épsilon y marcador. Incluye funciones auxiliares para clasificación y formateo de tokens. \\[6pt]
-analizador.py & Tokenización de expresiones regulares, validación sintáctica, inserción explícita del operador de concatenación (\texttt{.}) y conversión a notación postfija mediante el algoritmo Shunting-Yard. \\[6pt]
-arbol.py & Construcción del árbol sintáctico a partir de la expresión en postfijo. Cálculo de las funciones \emph{anulable}, \emph{primeraPos}, \emph{últimaPos} y \emph{siguientePos}. \\[6pt]
-construccion\_afd.py & Construcción directa del AFD a partir del árbol sintáctico aumentado, generando estados como conjuntos de posiciones. \\[6pt]
-minimizacion.py & Minimización del AFD mediante el algoritmo de refinamiento de particiones, produciendo el autómata mínimo equivalente. \\[6pt]
-simulador.py & Simulación del AFD sobre cadenas de entrada, retornando el resultado (aceptación/rechazo) y el recorrido de estados. \\[6pt]
-yalex\_parser.py & Parser del formato \texttt{.yal}: extrae header, trailer, definiciones \texttt{let}, entrypoint, argumentos y reglas con sus acciones. \\[6pt]
-yalex\_regex.py & Normalizador de expresiones regulares YALex a formato interno. Maneja conjuntos, rangos, negaciones, literales, strings, diferencia de conjuntos (\texttt{\#}), wildcard (\texttt{\_}) y resolución de identificadores \texttt{let}. \\[6pt]
-yalex\_compiler.py & Orquestador central: conecta el parser, el normalizador de regex, el constructor de AFD y el minimizador para producir un \texttt{CompiledLexer}. \\[6pt]
-yalex\_codegen.py & Generador de código: produce un archivo Python autosuficiente que contiene los AFDs serializados y toda la lógica de scanning necesaria, sin dependencias externas. \\[6pt]
-yalex\_runtime.py & Motor de ejecución del lexer en tiempo de compilación (uso interno). Implementa \emph{longest match} con desempate por prioridad de regla. \\[6pt]
+\texttt{analizador.py} & Tokenización de expresiones regulares, inserción de concatenación explícita y conversión a notación postfija. \\[6pt]
+\texttt{arbol.py} & Construcción del árbol sintáctico aumentado y cálculo de \emph{anulable}, \emph{primeraPos}, \emph{últimaPos} y \emph{siguientePos}. \\[6pt]
+\texttt{construccion\_afd.py} & Construcción directa del AFD a partir del árbol sintáctico. \\[6pt]
+\texttt{minimizacion.py} & Refinamiento de particiones y generación del AFD mínimo equivalente. \\[6pt]
+\texttt{simulador.py} & Simulación de autómatas sobre cadenas de entrada. \\[6pt]
+\texttt{yalex\_parser.py} & Parsing estructural de especificaciones \texttt{.yal}. \\[6pt]
+\texttt{yalex\_regex.py} & Normalización de sintaxis YALex a la representación interna del motor. \\[6pt]
+\texttt{yalex\_compiler.py} & Orquestación de parsing, normalización, construcción de AFD y minimización. \\[6pt]
+\texttt{yalex\_runtime.py} & Ejecución del escaneo con semántica de \emph{longest match}. \\[6pt]
+\texttt{yalex\_codegen.py} & Generación de un lexer Python autosuficiente. \\[6pt]
+\texttt{api/} & Exposición de endpoints HTTP para el frontend y clientes externos. \\
 \bottomrule
 \end{longtable}
 
-% ══════════════════════════════════════════════════
-%  4. IMPLEMENTACIÓN
-% ══════════════════════════════════════════════════
-\section{Implementación}
+\subsection{Parser y Normalizador YALex}
 
-\subsection{Tokenización y Conversión a Postfijo}
+El parser YALex procesa comentarios, bloques \texttt{header} y \texttt{trailer}, definiciones \texttt{let}, entrypoints con argumentos y reglas separadas por \texttt{|}. A continuación, el normalizador convierte la sintaxis de alto nivel a una representación interna uniforme, respetando la precedencia de operadores y resolviendo referencias a definiciones previas.
 
-El módulo \texttt{analizador.py} implementa el pipeline fundamental para procesar expresiones regulares. La función \texttt{tokenizar} transforma una cadena de texto en una lista de objetos \texttt{Token}, reconociendo literales (incluyendo escapes con \texttt{\textbackslash}), operadores (\texttt{|}, \texttt{*}, \texttt{+}, \texttt{?}, paréntesis) y el símbolo épsilon ($\varepsilon$).
+\subsection{Construcción y Minimización de AFD}
 
-La validación sintáctica (\texttt{validarTokens}) verifica el balance de paréntesis, la ausencia de grupos vacíos y la correcta colocación de operadores unarios y binarios. Posteriormente, \texttt{insertarConcat} introduce operadores explícitos de concatenación (\texttt{.}) entre tokens adyacentes que lo requieran.
+Cada regla léxica se traduce a un árbol sintáctico aumentado, a partir del cual se obtiene un AFD directo. El autómata resultante se minimiza antes de ser serializado para el runtime o para la visualización del frontend.
 
-Finalmente, \texttt{aPostfijo} emplea el algoritmo \emph{Shunting-Yard} de Dijkstra para convertir la expresión infija a notación postfija, respetando la precedencia: unión (\texttt{|}) con precedencia 1 y concatenación (\texttt{.}) con precedencia 2.
+\subsection{Runtime y Generación de Código}
 
-\begin{lstlisting}[style=pythonstyle, caption={Tabla de precedencia y conversión a postfijo (fragmento).}]
-precedencia = {'|': 1, '.': 2}
+El runtime implementa la política de \emph{longest match}: para cada posición de la entrada, evalúa todas las reglas disponibles, selecciona el prefijo más largo y, en caso de empate, prioriza la regla de menor índice. Las acciones asociadas se ejecutan de acuerdo con la especificación.
 
-def aPostfijo(toks):
-    salida, pila = [], []
-    for token in toks:
-        if es_literal(token) or es_epsilon(token):
-            salida.append(token)
-        elif es_operador(token, '('):
-            pila.append(token)
-        elif es_operador(token, ')'):
-            while pila and not es_operador(pila[-1], '('):
-                salida.append(pila.pop())
-            pila.pop()
-        elif es_unario(token):
-            salida.append(token)
-        elif es_binario(token):
-            while (pila and es_binario(pila[-1])
-                   and precedencia[pila[-1].value]
-                       >= precedencia[token.value]):
-                salida.append(pila.pop())
-            pila.append(token)
-    while pila:
-        salida.append(pila.pop())
-    return salida
-\end{lstlisting}
+El generador de código produce un archivo Python que contiene:
 
-\subsection{Árbol Sintáctico y Funciones de Posición}
+\begin{itemize}[leftmargin=2em]
+  \item los AFDs serializados como estructuras nativas;
+  \item las clases y funciones necesarias para el escaneo;
+  \item el entrypoint configurado por la especificación;
+  \item las secciones auxiliares copiadas desde el archivo fuente.
+\end{itemize}
 
-El módulo \texttt{arbol.py} construye el árbol sintáctico a partir de la expresión en postfijo. Cada nodo \texttt{Nodo} almacena su valor (token), hijos izquierdo y derecho, y las propiedades calculadas: \texttt{anulable}, \texttt{primeraPos}, \texttt{últimaPos} y \texttt{siguientePos}.
+\section{Diseño del Frontend}
 
-Las reglas de cálculo implementadas son:
+La interfaz web está implementada con \textbf{Next.js}, \textbf{React} y \textbf{TypeScript}. El diseño visual mantiene una sola experiencia integrada, sin delegar navegación a documentos aislados ni duplicar lógica de presentación.
+
+La estructura del frontend se apoya en tres principios:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Responsabilidad única}: cada módulo encapsula su propia vista, estado y comunicación con la API.
+  \item \textbf{Hooks especializados}: la lógica de carga, compilación, ejecución y descarga se modela con hooks reutilizables y tipados.
+  \item \textbf{Paridad visual}: la interfaz preserva una experiencia estética uniforme entre dashboard, análisis, generación y ejecución de pruebas.
+\end{itemize}
+
+\section{Integración entre Frontend y Backend}
+
+La comunicación entre capas se realiza mediante una API HTTP basada en FastAPI. El frontend consume rutas relativas y opera sobre contratos JSON tipados, lo que garantiza independencia entre la presentación y la lógica de compilación.
 
 \begin{table}[H]
 \centering
-\renewcommand{\arraystretch}{1.4}
-\begin{tabularx}{\textwidth}{|c|X|X|X|}
-\hline
-\rowcolor{lightgray}
-\textbf{Nodo} & \textbf{anulable} & \textbf{primeraPos} & \textbf{últimaPos} \\
-\hline
-Hoja ($\varepsilon$) & \texttt{true} & $\emptyset$ & $\emptyset$ \\
-\hline
-Hoja (literal $i$) & \texttt{false} & $\{i\}$ & $\{i\}$ \\
-\hline
-$c_1 | c_2$ & $n(c_1) \lor n(c_2)$ & $pp(c_1) \cup pp(c_2)$ & $up(c_1) \cup up(c_2)$ \\
-\hline
-$c_1 \cdot c_2$ & $n(c_1) \land n(c_2)$ & si $n(c_1)$: $pp(c_1) \cup pp(c_2)$; sino: $pp(c_1)$ & si $n(c_2)$: $up(c_1) \cup up(c_2)$; sino: $up(c_2)$ \\
-\hline
-$c^*$, $c?$ & \texttt{true} & $pp(c)$ & $up(c)$ \\
-\hline
-$c^+$ & $n(c)$ & $pp(c)$ & $up(c)$ \\
-\hline
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\ttfamily\small}l >{\ttfamily\small}l X}
+\toprule
+\normalfont\textbf{Método} & \normalfont\textbf{Endpoint} & \textbf{Propósito} \\
+\midrule
+GET & /api/health & Verificar disponibilidad del servicio. \\
+GET & /api/dashboard/summary & Obtener métricas generales para el dashboard. \\
+GET & /api/fixtures/catalog & Obtener el catálogo de especificaciones y entradas disponibles. \\
+POST & /api/analysis/run & Ejecutar análisis léxico sobre una entrada seleccionada o editada. \\
+POST & /api/generator/compile & Compilar una especificación YALex y devolver autómatas, métricas y lexer generado. \\
+GET & /api/tests/catalog & Obtener el catálogo de casos de prueba. \\
+POST & /api/tests/run & Ejecutar un caso o un lote de casos y devolver resultados agregados. \\
+\bottomrule
 \end{tabularx}
-\caption{Reglas de cálculo para las funciones del árbol sintáctico.}
+\caption{Endpoints principales de integración.}
 \end{table}
 
-El cálculo de \texttt{siguientePos} se realiza en un recorrido postorden: para un nodo de concatenación $c_1 \cdot c_2$, se agrega $\text{primeraPos}(c_2)$ al conjunto siguientePos de cada posición en $\text{últimaPos}(c_1)$. Para nodos con cerradura (\texttt{*} o \texttt{+}), se agrega $\text{primeraPos}(n)$ a siguientePos de cada posición en $\text{últimaPos}(n)$.
+\section{Módulos Funcionales}
 
-\subsection{Construcción Directa del AFD}
+\subsection{Dashboard}
 
-El módulo \texttt{construccion\_afd.py} implementa la construcción directa. El estado inicial es $\text{primeraPos}(\text{raíz})$. Para cada estado (conjunto de posiciones) y cada símbolo del alfabeto, se calcula el nuevo estado como la unión de siguientePos de las posiciones cuyo símbolo coincida. Los estados que contengan la posición del marcador $\#$ se designan como estados de aceptación.
+El dashboard resume información general del sistema: cantidad de especificaciones disponibles, cantidad de casos de prueba, distribución por complejidad y estado de los módulos operativos. Su función es ofrecer una vista consolidada del ecosistema completo del proyecto.
 
-\begin{lstlisting}[style=pythonstyle, caption={Construcción directa del AFD (fragmento central).}]
-def construirAfd(raiz, hojas, alfabeto):
-    idMarcador = next(hid for hid, hoja in hojas.items()
-                      if es_marker(hoja.valor))
-    inicial = frozenset(raiz.primeraPos)
-    porProcesar = [inicial]
-    trans, aceptacion = {}, set()
+\subsection{Lexical Analysis}
 
-    while porProcesar:
-        actual = porProcesar.pop(0)
-        for symbol in alfabeto:
-            nuevo = set()
-            for pos in actual:
-                hoja = hojas[pos]
-                if es_literal(hoja.valor)
-                   and hoja.valor.value == symbol:
-                    nuevo |= hoja.siguientePos
-            if nuevo:
-                nuevoFs = frozenset(nuevo)
-                # registrar estado y transicion...
-\end{lstlisting}
+Este módulo permite seleccionar una complejidad, cargar una entrada desde archivo o editarla manualmente y ejecutar el análisis léxico con el backend real. El resultado se presenta como una tabla de tokens, un panel de errores léxicos estructurados y estadísticas básicas de ejecución.
 
-\subsection{Minimización del AFD}
+\subsection{Lexical Generator}
 
-El módulo \texttt{minimizacion.py} implementa el algoritmo de refinamiento de particiones. El proceso inicia con dos particiones: estados de aceptación y estados de no-aceptación. En cada iteración, se calcula una ``firma'' para cada estado basada en las particiones a las que conducen sus transiciones. Los estados con firmas diferentes dentro de una misma partición se separan.
-
-El proceso itera hasta que no se produzcan más cambios, generando el AFD mínimo con nomenclatura \texttt{M0}, \texttt{M1}, etc.
-
-\subsection{Parser de Archivos YALex}
-
-El módulo \texttt{yalex\_parser.py} implementa un parser completo para la especificación YALex. Las funcionalidades principales incluyen:
+El generador permite editar o cargar una especificación YALex, compilarla y explorar sus resultados. Para cada compilación, la interfaz presenta:
 
 \begin{itemize}[leftmargin=2em]
-  \item \textbf{Eliminación de comentarios}: soporte para delimitadores \texttt{(* ... *)}.
-  \item \textbf{Extracción de header/trailer}: bloques opcionales delimitados por llaves.
-  \item \textbf{Definiciones let}: parseo de \texttt{let ident = regexp} con validación de identificadores.
-  \item \textbf{Cabecera de rule}: extracción del entrypoint y argumentos opcionales.
-  \item \textbf{Reglas léxicas}: separación por \texttt{|} a nivel superior, identificación de patrones y acciones respetando niveles de anidamiento en paréntesis, corchetes, llaves y cadenas.
+  \item una regla activa seleccionable;
+  \item la visualización del autómata correspondiente;
+  \item la matriz de transiciones;
+  \item la lista de tokens reconocidos;
+  \item el código del lexer generado listo para descarga.
 \end{itemize}
 
-El parser produce un objeto \texttt{YalexSpec} que encapsula toda la información estructurada de la especificación.
+\subsection{Test Case Manager}
 
-\subsection{Normalizador de Expresiones Regulares YALex}
+El administrador de casos de prueba consume un catálogo declarativo de entradas y especificaciones. Permite ejecutar casos individuales o lotes completos, registrar resultados de sesión y mostrar indicadores como porcentaje de éxito, ejecuciones acumuladas y casos pendientes de validación.
 
-El módulo \texttt{yalex\_regex.py} convierte la sintaxis rica de YALex a la representación interna del motor de regex. Implementa un parser descendente recursivo con la siguiente jerarquía de precedencia:
+\section{Generación de Lexer Independiente}
 
-\begin{enumerate}[leftmargin=2em]
-  \item \texttt{\_parse\_union}: maneja alternativas (\texttt{|}).
-  \item \texttt{\_parse\_concat}: maneja concatenación implícita.
-  \item \texttt{\_parse\_unary}: maneja \texttt{*}, \texttt{+}, \texttt{?}.
-  \item \texttt{\_parse\_difference}: maneja diferencia de conjuntos (\texttt{\#}).
-  \item \texttt{\_parse\_atom}: maneja literales, strings, conjuntos, identificadores, paréntesis y \texttt{eof}.
-\end{enumerate}
-
-La resolución de identificadores \texttt{let} se realiza con detección de ciclos mediante una pila de nombres para prevenir referencias recursivas.
-
-\subsection{Compilador y Generador de Código}
-
-El módulo \texttt{yalex\_compiler.py} conecta todos los componentes anteriores. Para cada regla del archivo \texttt{.yal}, normaliza la expresión regular, construye el AFD directo y lo minimiza. El resultado es un \texttt{CompiledLexer} que contiene la lista de reglas compiladas con sus respectivos AFDs.
-
-El módulo \texttt{yalex\_codegen.py} toma este \texttt{CompiledLexer} y genera un archivo Python completamente autosuficiente. El archivo generado incluye:
+Uno de los principios centrales del sistema es que el archivo Python generado sea completamente autosuficiente. El lexer exportado no depende del generador ni del paquete interno que lo produce. En su lugar, incorpora:
 
 \begin{itemize}[leftmargin=2em]
-  \item Los AFDs serializados como diccionarios Python.
-  \item Clases \texttt{LexToken} y \texttt{YalexLexError}.
-  \item La función \texttt{scan} con lógica de \emph{longest match} y desempate por prioridad.
-  \item La función del entrypoint nombrada según la especificación.
-  \item Las secciones de header y trailer copiadas literalmente.
+  \item la representación serializada de los autómatas;
+  \item las estructuras básicas de tokens y errores;
+  \item la función de escaneo;
+  \item la lógica de prioridad y \emph{longest match};
+  \item el entrypoint configurado por la especificación.
 \end{itemize}
 
-Este diseño garantiza que el lexer generado no dependa del generador, cumpliendo el requisito de independencia establecido en la rúbrica.
+Esta propiedad garantiza portabilidad y hace posible utilizar el lexer generado como artefacto independiente dentro de otras herramientas o proyectos.
 
-\subsection{Motor de Ejecución (\emph{Runtime})}
+\section{Casos de Prueba}
 
-El módulo \texttt{yalex\_runtime.py} implementa la lógica de scanning utilizada tanto internamente como la que se embebe en el código generado. La función \texttt{\_max\_prefix\_match} simula el AFD de cada regla para encontrar el prefijo más largo que sea aceptado. La función \texttt{scan} aplica la política de \emph{longest match}:
-
-\begin{enumerate}[leftmargin=2em]
-  \item Para cada posición en el texto, se prueban todas las reglas.
-  \item Se selecciona la regla con el match más largo.
-  \item En caso de empate en longitud, se prioriza la regla con menor índice (orden de definición).
-  \item Se ejecuta la acción asociada. Si retorna \texttt{SKIP}, se avanza sin emitir token.
-  \item El proceso continúa hasta consumir toda la entrada.
-\end{enumerate}
-
-% ══════════════════════════════════════════════════
-%  5. RESTRICCIONES Y DECISIONES DE DISEÑO
-% ══════════════════════════════════════════════════
-\section{Restricciones y Decisiones de Diseño}
-
-\subsection{Prohibición de Librerías de Regex}
-
-Una restricción fundamental del proyecto es la prohibición total del uso de librerías de expresiones regulares (como el módulo \texttt{re} de Python). Todo el matching léxico se implementa mediante autómatas finitos construidos desde cero. El incumplimiento de esta restricción conlleva una calificación de 0 puntos.
-
-La implementación respeta esta restricción en su totalidad: la tokenización se realiza carácter por carácter, la construcción de autómatas es directa, y la simulación opera sobre las tablas de transición generadas.
-
-\subsection{Independencia del Lexer Generado}
-
-El archivo Python generado por \texttt{yalex\_codegen.py} es completamente autosuficiente. No importa ningún módulo del paquete \texttt{laboratorio}, sino que incluye dentro de sí mismo todas las estructuras de datos necesarias (clases, funciones de matching, función scan) y los AFDs serializados como diccionarios nativos de Python.
-
-\subsection{Interfaz Gráfica}
-
-El proyecto incluye una interfaz web implementada en HTML, CSS y JavaScript puro, organizada en múltiples vistas especializadas. Esta interfaz permite interactuar con el generador de analizadores léxicos de manera visual e intuitiva, cumpliendo con el requisito de ser ``amigable y estética''.
-
-% ══════════════════════════════════════════════════
-%  6. ARCHIVOS DE PRUEBA
-% ══════════════════════════════════════════════════
-\section{Archivos de Prueba}
-
-Se desarrollaron tres pares de archivos de prueba con complejidades crecientes, almacenados en la carpeta \texttt{examples/} del repositorio.
+La plataforma incluye casos de prueba organizados por complejidad funcional.
 
 \subsection{Complejidad Baja}
 
-La especificación de complejidad baja reconoce tokens aritméticos básicos: identificadores, números enteros (incluyendo negativos), operadores aritméticos y de asignación, y espacios en blanco (que se omiten).
+La especificación de baja complejidad reconoce identificadores, enteros, operadores aritméticos y asignación. Este nivel valida el comportamiento básico del scanner y la omisión correcta de espacios en blanco.
 
-\begin{lstlisting}[style=yalexstyle, caption={Ejemplo de entrada de complejidad baja.}]
+\begin{lstlisting}[style=yalexstyle, caption={Ejemplo representativo de entrada para complejidad baja.}]
 variable + 5 * -11 = otraVariable
 \end{lstlisting}
 
-Tokens esperados: \texttt{ID}, \texttt{PLUS}, \texttt{NUMBER}, \texttt{TIMES}, \texttt{NUMBER}, \texttt{ASSIGN}, \texttt{ID}.
-
 \subsection{Complejidad Media}
 
-La especificación de complejidad media incorpora palabras reservadas (\texttt{if}, \texttt{else}, \texttt{while}), operadores de comparación (\texttt{>=}, \texttt{==}), cadenas entre comillas y una variedad más amplia de tokens.
+La complejidad media incorpora palabras reservadas, operadores de comparación y literales de cadena, ampliando el conjunto de patrones y el nivel de ambigüedad potencial en el proceso de matching.
 
-\begin{lstlisting}[style=yalexstyle, caption={Ejemplo de entrada de complejidad media.}]
+\begin{lstlisting}[style=yalexstyle, caption={Ejemplo representativo de entrada para complejidad media.}]
 if x1 >= 10 else while nombre == "abc"
 \end{lstlisting}
 
 \subsection{Complejidad Alta}
 
-La especificación de complejidad alta simula un subconjunto de un lenguaje tipo C, con tipos de datos (\texttt{int}, \texttt{float}), literales de punto flotante, operadores lógicos (\texttt{\&\&}, \texttt{||}), operadores de comparación compuestos (\texttt{<=}, \texttt{!=}), delimitadores de bloque, punto y coma, y la palabra reservada \texttt{return}.
+La complejidad alta modela un subconjunto más expresivo de un lenguaje imperativo, con tipos, delimitadores, comparaciones compuestas, operadores lógicos y literales de punto flotante.
 
-\begin{lstlisting}[style=yalexstyle, caption={Ejemplo de entrada de complejidad alta.}]
+\begin{lstlisting}[style=yalexstyle, caption={Ejemplo representativo de entrada para complejidad alta.}]
 int x = 10;
 float y = 20.5;
 if (x <= y && x != 0) { return x; }
 \end{lstlisting}
 
-% ══════════════════════════════════════════════════
-%  7. PRUEBAS Y RESULTADOS
-% ══════════════════════════════════════════════════
-\section{Pruebas y Resultados}
+Cada nivel incluye entradas aceptadas y entradas con error, lo que permite validar tanto la identificación correcta de tokens como la detección precisa de fallos léxicos.
 
-El proyecto cuenta con una suite de pruebas automatizadas exhaustiva implementada con \texttt{pytest}. Las pruebas cubren todos los criterios de la rúbrica de evaluación.
+\section{Estrategia de Pruebas y Validación}
 
-\subsection{Estructura de la Suite de Pruebas}
+La calidad del sistema se valida mediante una estrategia de pruebas multinivel:
 
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\textwidth}{>{\ttfamily\small}l X}
-\toprule
-\normalfont\textbf{Archivo de prueba} & \textbf{Cobertura} \\
-\midrule
-test\_analizador.py & Tokenización, validación, inserción de concatenación y conversión a postfijo. \\
-test\_arbol\_y\_afd.py & Construcción del árbol sintáctico y generación directa de AFD. \\
-test\_minimizacion.py & Algoritmo de minimización y métricas comparativas. \\
-test\_integracion.py & Flujos completos de regex a AFD minimizado. \\
-test\_yalex\_parser.py & Parsing de archivos \texttt{.yal} con todas sus variantes. \\
-test\_yalex\_codegen.py & Generación de código autosuficiente y su correcta ejecución. \\
-test\_yalex\_runtime.py & Motor de ejecución con \emph{longest match} y manejo de errores. \\
-test\_yalex\_spec\_completo.py & Especificaciones YALex completas de extremo a extremo. \\
-test\_rubrica\_proyecto01.py & Pruebas alineadas exactamente con la rúbrica de evaluación. \\
-\bottomrule
-\end{tabularx}
-\caption{Archivos de prueba y su cobertura funcional.}
-\end{table}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Pruebas unitarias del backend}: verifican tokenización, parsing, cálculo de funciones de posición, construcción de AFD, minimización, normalización YALex y serialización.
+  \item \textbf{Pruebas de integración del backend}: validan el flujo completo entre parser, compilador, runtime y generación de código.
+  \item \textbf{Pruebas de contrato}: verifican la forma exacta de las respuestas de la API y su consistencia para el frontend.
+  \item \textbf{Pruebas de componentes e integración del frontend}: validan shell, análisis léxico, generación, ejecución de casos y descargas.
+  \item \textbf{Pruebas end-to-end}: validan la experiencia completa de usuario desde la interfaz web hasta la ejecución real del backend.
+  \item \textbf{Validación manual}: comprueba paridad visual, carga de archivos, descargas y ejecución de escenarios representativos.
+\end{itemize}
 
-\subsection{Cumplimiento de la Rúbrica}
+Esta estrategia permite evaluar la corrección del sistema tanto desde la perspectiva algorítmica como desde la experiencia de uso final.
 
-La siguiente tabla detalla el cumplimiento de cada criterio de la rúbrica, incluyendo el test específico que lo valida:
+\section{Resultados del Sistema}
 
-\begin{longtable}{p{7.5cm} c p{4.8cm}}
-\toprule
-\textbf{Criterio} & \textbf{Pts} & \textbf{Test de validación} \\
-\midrule
-\endhead
-Generación de diagrama de transición de estados & 1 & \texttt{test\_diagrama\_transicion} \\[4pt]
-Baja: identificación de tokens & 0.5 & \texttt{test\_baja\_identifica\_tokens} \\[4pt]
-Baja: detección de errores & 0.5 & \texttt{test\_baja\_detecta\_error} \\[4pt]
-Baja modificada: ident. de tokens & 0.5 & \texttt{test\_baja\_mod\_identifica} \\[4pt]
-Baja modificada: detección de errores & 0.5 & \texttt{test\_baja\_mod\_detecta\_error} \\[4pt]
-Media: identificación de tokens & 1 & \texttt{test\_media\_identifica\_tokens} \\[4pt]
-Media: detección de errores & 1 & \texttt{test\_media\_detecta\_error} \\[4pt]
-Media modificada: ident. de tokens & 1 & \texttt{test\_media\_mod\_identifica} \\[4pt]
-Media modificada: detección de errores & 1 & \texttt{test\_media\_mod\_detecta\_error} \\[4pt]
-Alta: identificación de tokens & 1.5 & \texttt{test\_alta\_identifica\_tokens} \\[4pt]
-Alta: detección de errores & 1.5 & \texttt{test\_alta\_detecta\_error} \\[4pt]
-Alta modificada: ident. de tokens & 2 & \texttt{test\_alta\_mod\_identifica} \\[4pt]
-Alta modificada: detección de errores & 2 & \texttt{test\_alta\_mod\_detecta\_error} \\[4pt]
-\midrule
-\textbf{Subtotal funcionalidad} & \textbf{14} & \\
-Preguntas orales (2 por estudiante) & 6 & Evaluación presencial \\
-\midrule
-\textbf{Total} & \textbf{20} & \\
-\bottomrule
-\end{longtable}
-
-\subsection{Penalizaciones Evitadas}
-
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\textwidth}{X c l}
-\toprule
-\textbf{Restricción} & \textbf{Penalización} & \textbf{Estado} \\
-\midrule
-Interfaz gráfica amigable y estética & $-3$ pts & \textcolor{uvggreen}{\textbf{Cumplido}} \\
-Lexer generado independiente del generador & $-3$ pts & \textcolor{uvggreen}{\textbf{Cumplido}} \\
-No usar librerías de regex & $= 0$ pts & \textcolor{uvggreen}{\textbf{Cumplido}} \\
-Archivos de prueba baja/media/alta & $= 0$ pts & \textcolor{uvggreen}{\textbf{Cumplido}} \\
-\bottomrule
-\end{tabularx}
-\caption{Restricciones y estado de cumplimiento.}
-\end{table}
-
-% ══════════════════════════════════════════════════
-%  8. FLUJO DE EJECUCIÓN
-% ══════════════════════════════════════════════════
-\section{Flujo de Ejecución}
-
-El sistema ofrece dos modos de operación principales:
-
-\subsection{Modo Consola (Expresiones Regulares)}
-
-Mediante \texttt{python main.py}, el usuario puede:
-\begin{enumerate}[leftmargin=2em]
-  \item Ingresar una expresión regular arbitraria.
-  \item Visualizar la expresión con concatenación explícita y en notación postfija.
-  \item Inspeccionar el AFD directo y el AFD minimizado (tablas de transición).
-  \item Comparar métricas entre ambos autómatas.
-  \item Validar cadenas contra el AFD minimizado.
-\end{enumerate}
-
-\subsection{Modo Generador YALex (CLI)}
-
-Mediante \texttt{python yalex.py archivo.yal -o nombre\_salida}, el sistema:
-\begin{enumerate}[leftmargin=2em]
-  \item Lee y parsea el archivo \texttt{.yal}.
-  \item Normaliza cada expresión regular de las reglas.
-  \item Construye y minimiza un AFD por cada regla.
-  \item Genera un archivo Python autosuficiente con el lexer.
-  \item Reporta el número de reglas compiladas y la presencia de header/trailer.
-\end{enumerate}
-
-El archivo generado puede utilizarse directamente:
-
-\begin{lstlisting}[style=pythonstyle, caption={Uso del lexer generado.}]
-# Importar el lexer generado
-from thelexer import gettoken  # nombre del entrypoint
-
-# Tokenizar una entrada
-tokens = gettoken("int x = 42;")
-for tok in tokens:
-    print(f"{tok.type}: {tok.lexeme!r}")
-\end{lstlisting}
-
-% ══════════════════════════════════════════════════
-%  9. DIAGRAMA DE CLASES Y ESTRUCTURAS
-% ══════════════════════════════════════════════════
-\section{Estructuras de Datos Principales}
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}[
-    class/.style={
-        rectangle, draw=darkblue, thick, rounded corners=3pt,
-        fill=blue!4, text=darkblue,
-        minimum width=4.5cm,
-        font=\small
-    },
-    field/.style={font=\ttfamily\scriptsize, text=black},
-    arr/.style={-{Stealth[length=5pt]}, thick, darkblue!60},
-    node distance=0.6cm
-]
-
-% Token
-\node[class] (token) {\textbf{Token}};
-\node[field, below=0.1cm of token] (tf) {kind: str, value: str, escaped: bool};
-
-% YalexSpec
-\node[class, right=3cm of token] (spec) {\textbf{YalexSpec}};
-\node[field, below=0.1cm of spec, text width=4.2cm, align=left] (sf) {header, trailer: str\\lets: dict[str, YalexLet]\\entrypoint: str\\rules: list[YalexRule]};
-
-% Nodo
-\node[class, below=2cm of token] (nodo) {\textbf{Nodo (Árbol)}};
-\node[field, below=0.1cm of nodo, text width=4.2cm, align=left] (nf) {valor: Token\\izq, der: Nodo\\anulable: bool\\primeraPos, últimaPos: set\\siguientePos: set};
-
-% CompiledLexer
-\node[class, below=2cm of spec] (compiled) {\textbf{CompiledLexer}};
-\node[field, below=0.1cm of compiled, text width=4.2cm, align=left] (cf) {entrypoint: str\\rules: list[CompiledRule]\\universe: list[str]};
-
-% LexToken
-\node[class, below=3cm of compiled] (lextoken) {\textbf{LexToken}};
-\node[field, below=0.1cm of lextoken, text width=4.2cm, align=left] (lf) {type: str, lexeme: str\\start: int, end: int\\rule\_index: int};
-
-% Arrows
-\draw[arr] (spec.south) -- (compiled.north);
-\draw[arr] (nodo.east) -- (compiled.west) node[midway, above, font=\tiny] {AFD};
-\draw[arr] (compiled.south) -- (lextoken.north);
-
-\end{tikzpicture}
-\caption{Estructuras de datos principales del sistema.}
-\label{fig:clases}
-\end{figure}
-
-% ══════════════════════════════════════════════════
-%  10. CUMPLIMIENTO DE CONSIDERACIONES YALEX
-% ══════════════════════════════════════════════════
-\section{Cumplimiento de Consideraciones YALex}
-
-La siguiente tabla resume el cumplimiento de cada aspecto de las consideraciones YALex proporcionadas en el enunciado del proyecto:
-
-\begin{longtable}{p{6.5cm} c p{5.5cm}}
-\toprule
-\textbf{Consideración} & \textbf{Estado} & \textbf{Implementación} \\
-\midrule
-\endhead
-Estructura del archivo \texttt{.yal} & \textcolor{uvggreen}{\checkmark} & \texttt{yalex\_parser.py} \\[4pt]
-Header y trailer opcionales & \textcolor{uvggreen}{\checkmark} & Extracción por llaves \\[4pt]
-Definiciones \texttt{let ident = regexp} & \textcolor{uvggreen}{\checkmark} & Resolución recursiva con detección de ciclos \\[4pt]
-Comentarios \texttt{(* ... *)} & \textcolor{uvggreen}{\checkmark} & \texttt{\_strip\_comments} \\[4pt]
-Literales de carácter (\texttt{'c'}) & \textcolor{uvggreen}{\checkmark} & \texttt{\_read\_quoted\_char} \\[4pt]
-Constantes tipo cadena (\texttt{"str"}) & \textcolor{uvggreen}{\checkmark} & \texttt{\_read\_quoted\_string} \\[4pt]
-Conjuntos \texttt{[...]} & \textcolor{uvggreen}{\checkmark} & \texttt{\_set\_to\_expr} \\[4pt]
-Conjuntos negados \texttt{[\^{}...]} & \textcolor{uvggreen}{\checkmark} & Complemento sobre universo \\[4pt]
-Rangos \texttt{'a'-'z'} & \textcolor{uvggreen}{\checkmark} & \texttt{\_parse\_set\_item} \\[4pt]
-Diferencia de conjuntos (\texttt{\#}) & \textcolor{uvggreen}{\checkmark} & \texttt{\_parse\_difference} \\[4pt]
-Wildcard (\texttt{\_}) & \textcolor{uvggreen}{\checkmark} & Expansión a todo el universo \\[4pt]
-Cerradura \texttt{*}, \texttt{+}, \texttt{?} & \textcolor{uvggreen}{\checkmark} & \texttt{\_parse\_unary} \\[4pt]
-Concatenación y unión & \textcolor{uvggreen}{\checkmark} & Parser descendente recursivo \\[4pt]
-Identificador \texttt{eof} & \textcolor{uvggreen}{\checkmark} & Manejo especial en \texttt{\_parse\_atom} \\[4pt]
-Secuencias de escape & \textcolor{uvggreen}{\checkmark} & \texttt{\_decode\_escape} \\[4pt]
-Longest match & \textcolor{uvggreen}{\checkmark} & \texttt{\_max\_prefix\_match} \\[4pt]
-Desempate por orden de regla & \textcolor{uvggreen}{\checkmark} & Comparación por \texttt{rule.index} \\[4pt]
-Acciones con \texttt{return} y \texttt{skip} & \textcolor{uvggreen}{\checkmark} & \texttt{\_build\_action\_callable} \\[4pt]
-\bottomrule
-\end{longtable}
-
-% ══════════════════════════════════════════════════
-%  11. EJEMPLO DE EJECUCIÓN COMPLETA
-% ══════════════════════════════════════════════════
-\section{Ejemplo de Ejecución Completa}
-
-A continuación se ilustra el flujo completo para la expresión regular \texttt{(a|b)*abb}:
+La plataforma ofrece un resultado integral sobre cuatro ejes principales:
 
 \begin{enumerate}[leftmargin=2em]
-  \item \textbf{Tokenización}: Se produce la lista de tokens: \texttt{(}, \texttt{a}, \texttt{|}, \texttt{b}, \texttt{)}, \texttt{*}, \texttt{a}, \texttt{b}, \texttt{b}.
-
-  \item \textbf{Inserción de concatenación}: Se insertan operadores explícitos: \texttt{(a|b)*}\textbf{.}\texttt{a}\textbf{.}\texttt{b}\textbf{.}\texttt{b}.
-
-  \item \textbf{Postfijo}: La conversión produce: \texttt{a b | * a . b . b .}
-
-  \item \textbf{Árbol sintáctico aumentado}: Se agrega el marcador \texttt{\#} y se construye el árbol con las funciones de posición calculadas en cada nodo.
-
-  \item \textbf{Construcción del AFD}: Se genera el AFD directo con estados como conjuntos de posiciones de las hojas del árbol.
-
-  \item \textbf{Minimización}: Se aplica el algoritmo de particiones para obtener el AFD mínimo equivalente.
+  \item \textbf{Compilación}: una especificación YALex se traduce a un conjunto de reglas compiladas con autómatas minimizados.
+  \item \textbf{Ejecución}: una entrada textual se procesa con política de \emph{longest match}, devolviendo tokens, offsets, línea, columna y errores léxicos estructurados.
+  \item \textbf{Visualización}: el sistema muestra autómatas por regla, matrices de transición y tokens reconocidos desde una interfaz interactiva.
+  \item \textbf{Validación}: el conjunto de casos de prueba permite verificar el comportamiento del sistema para complejidades baja, media y alta.
 \end{enumerate}
 
-% ══════════════════════════════════════════════════
-%  12. CONCLUSIONES
-% ══════════════════════════════════════════════════
+La combinación de estos resultados convierte al proyecto en una plataforma didáctica y técnica capaz de mostrar tanto la teoría subyacente como su ejecución práctica.
+
+\section{Restricciones y Decisiones de Diseño}
+
+\subsection{Prohibición de Librerías de Regex}
+
+La plataforma implementa el reconocimiento léxico sin recurrir a librerías externas de expresiones regulares. El matching se realiza exclusivamente a partir de autómatas construidos dentro del sistema, lo que asegura fidelidad al enfoque formal del proyecto y control total sobre el proceso de reconocimiento.
+
+\subsection{Independencia del Lexer Generado}
+
+El archivo Python producido por el generador es autosuficiente y portable. Esta decisión de diseño evita dependencias innecesarias y convierte al lexer final en un artefacto reutilizable.
+
+\subsection{Separación por Responsabilidades}
+
+El sistema separa con claridad frontend, API, compilación, runtime y generación de código. Esta modularidad reduce acoplamiento, facilita pruebas y permite evolucionar la interfaz sin comprometer la exactitud del núcleo algorítmico.
+
+\subsection{Interfaz Unificada}
+
+La interfaz se diseña como una experiencia única que centraliza visualización, compilación, análisis y ejecución de pruebas. Esta decisión mejora la trazabilidad del proceso completo y fortalece el valor pedagógico del sistema.
+
 \section{Conclusiones}
 
 \begin{enumerate}[leftmargin=2em]
-  \item Se implementó exitosamente un generador de analizadores léxicos basado en la especificación YALex, cubriendo todos los aspectos funcionales requeridos por la rúbrica del proyecto.
-
-  \item La construcción directa de AFD mediante el método del árbol sintáctico demostró ser una alternativa eficiente a la construcción vía AFN-$\varepsilon$, eliminando la necesidad de la conversión de subconjuntos y produciendo directamente un autómata determinista.
-
-  \item El algoritmo de minimización por particiones reduce de manera efectiva el número de estados, optimizando tanto el uso de memoria como el rendimiento del lexer generado durante la fase de scanning.
-
-  \item La arquitectura modular del sistema, con separación clara entre parsing, normalización, construcción de autómatas, minimización y generación de código, facilita el mantenimiento, la depuración y la extensión futura del proyecto.
-
-  \item La generación de código autosuficiente garantiza que los analizadores léxicos producidos sean portables y no dependan del entorno del generador, lo cual es fundamental para su integración en cadenas de compilación reales.
-
-  \item La implementación completa sin librerías de expresiones regulares demuestra la comprensión profunda de la teoría de autómatas finitos y su aplicación práctica en el diseño de lenguajes de programación.
-
-  \item La suite de pruebas automatizadas proporciona una validación rigurosa del sistema, cubriendo los tres niveles de complejidad (baja, media y alta) tanto en su forma original como modificada.
+  \item La plataforma demuestra que es posible integrar teoría de autómatas, compilación léxica y visualización interactiva en un solo sistema coherente.
+  \item La construcción directa de AFD a partir del árbol sintáctico ofrece una base formal sólida y evita dependencias en etapas intermedias innecesarias.
+  \item La minimización de estados mejora tanto la representación del autómata como la eficiencia del lexer generado.
+  \item La separación entre backend Python, API FastAPI y frontend web permite combinar exactitud algorítmica con una experiencia de usuario moderna.
+  \item La generación de un lexer autosuficiente refuerza el objetivo central del proyecto: producir analizadores léxicos reutilizables e independientes del entorno de compilación.
+  \item La estrategia de pruebas multinivel aporta una validación rigurosa del comportamiento del sistema desde la lógica interna hasta la interacción completa de usuario.
 \end{enumerate}
 
-% ══════════════════════════════════════════════════
-%  13. REFERENCIAS
-% ══════════════════════════════════════════════════
 \section{Referencias}
 
 \begin{enumerate}[leftmargin=2em, label={[\arabic*]}]
   \item Aho, A. V., Lam, M. S., Sethi, R., \& Ullman, J. D. (2006). \emph{Compilers: Principles, Techniques, and Tools} (2nd ed.). Addison-Wesley.
   \item Hopcroft, J. E., Motwani, R., \& Ullman, J. D. (2006). \emph{Introduction to Automata Theory, Languages, and Computation} (3rd ed.). Pearson.
-  \item Leroy, X. et al. \emph{The OCaml system: Documentation and user's manual}. Capítulo sobre ocamllex.
+  \item Leroy, X. et al. \emph{The OCaml system: Documentation and user's manual}. Capítulo correspondiente a \emph{ocamllex}.
   \item Valdez, C. (2026). \emph{Consideraciones de YALex}. Universidad del Valle de Guatemala, CC3071.
-  \item Valdez, C. (2026). \emph{Proyecto 01 -- Rúbrica de evaluación}. Universidad del Valle de Guatemala, CC3071.
 \end{enumerate}
 
 \end{document}

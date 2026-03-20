@@ -1,6 +1,7 @@
 import type { ModuleDefinition } from "../../types/shell";
 import { AnalysisTool } from "../analysis/analysis-tool";
 import { GeneratorTool } from "../generator/generator-tool";
+import { TestManager } from "../test-manager/test-manager";
 
 interface ModulePanelProps {
   moduleDefinition: ModuleDefinition;
@@ -36,6 +37,10 @@ export function ModulePanel({ moduleDefinition }: ModulePanelProps) {
 
   if (moduleDefinition.key === "generator") {
     return <GeneratorTool />;
+  }
+
+  if (moduleDefinition.key === "tests") {
+    return <TestManager />;
   }
 
   const content = PANEL_CONTENT[moduleDefinition.key];
