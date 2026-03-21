@@ -1,24 +1,35 @@
-# Proyecto 01
+# Proyecto 01 - Generador de analizadores lexicos
 
-Implementacion de construccion de AFD por metodo directo, minimizacion de AFD, compilacion YALex e interfaz integrada para analisis, generacion y validacion.
+Implementacion de un generador de analizadores lexicos basado en YALex, con construccion de AFD por metodo directo, minimizacion de automatas, generacion de codigo fuente del lexer y una interfaz grafica web para analisis, generacion y validacion.
 
-Hecho por: `DiegoLop ez#23747`, `JenniferToxcon#21276` y `Rob ertoBarreda#23354`.
+Integrantes: `Diego Lopez#23747`, `Jennifer Toxcon#21276`, `Roberto Barreda#23354`.
 
-La fuente normativa principal del proyecto es `docs/instrucciones_generales.md`.
+Fuente normativa del proyecto: `docs/instrucciones_generales.md`.
 
-El proyecto evita librerias regex para el matching lexico.
+## Cumplimiento de requisitos
 
-## Estructura actual
+- **Entrada del generador**: acepta especificaciones YALex (`.yal`) desde UI y backend.
+- **Salida del generador**:
+  - diagrama de transicion por regla (vista grafica + matriz de transiciones),
+  - codigo fuente de lexer Python descargable.
+- **Analizador lexico**:
+  - reconoce tokens definidos en la especificacion,
+  - reporta errores lexicos con posicion.
+- **Sin librerias regex**: no se usa `re` para reconocimiento lexico; la tokenizacion se hace con AFD.
+- **Interfaz grafica amigable y estetica**: modulo web en `frontend/` con paneles de analisis, generador y gestor de pruebas.
+- **Independencia del lexer generado**: se puede generar archivo Python standalone y ejecutarlo sin depender del servidor web.
+- **Casos baja/media/alta + modificados**: catalogados en `fixtures/catalog.json` con entradas validas e invalidas.
 
-- `backend/`: backend Python, API FastAPI y pruebas del backend.
+## Estructura del repositorio
+
+- `backend/`: API FastAPI, compilador YALex, runtime de escaneo y CLI.
 - `frontend/`: aplicacion Next.js + React + TypeScript.
-- `fixtures/`: catalogo declarativo, especificaciones YALex e inputs de prueba.
+- `fixtures/`: especificaciones YALex e inputs de prueba de la rubrica.
 - `docs/`: documentacion tecnica y academica.
-- `artifacts/`: reportes y salidas generadas por pruebas y herramientas.
 
-El nucleo Python vigente vive en `backend/src/laboratorio/`.
+El nucleo del generador/analizador vive en `backend/src/laboratorio/`.
 
-## Probar el proyecto
+## Ejecucion local
 
 Backend:
 
@@ -35,47 +46,35 @@ $env:BACKEND_API_ORIGIN="http://127.0.0.1:8000"
 npm run dev
 ```
 
-Abrir en el navegador:
+Abrir `http://localhost:3000`.
 
-```text
-http://localhost:3000
+## Demostracion de independencia del analizador generado
+
+Generar lexer standalone desde un `.yal`:
+
+```powershell
+$env:PYTHONPATH="backend/src"
+python -m laboratorio.cli.generate fixtures/cases/yalex/yalex_baja.yal artifacts/lexer_baja.py
 ```
 
-Guia rapida de uso:
+Luego se puede importar y ejecutar `gettoken` (o el entrypoint definido en el YALex) directamente desde `artifacts/lexer_baja.py`, sin levantar la UI ni la API.
 
-- `Panel general`: valida que carguen los conteos y modulos integrados.
-- `Analisis lexico`:
-  - deja el editor vacio y ejecuta `Baja`, `Media` o `Alta` para usar el caso base del catalogo
-  - si quieres probar upload manual, usa por ejemplo:
-    - `fixtures/cases/inputs/yalex_baja_input.txt`
-    - `fixtures/cases/inputs/yalex_media_input.txt`
-    - `fixtures/cases/inputs/yalex_alta_input.txt`
-  - para error lexico, usa:
-    - `fixtures/cases/inputs/yalex_baja_invalid_input.txt`
-    - `fixtures/cases/inputs/yalex_media_invalid_input.txt`
-    - `fixtures/cases/inputs/yalex_alta_invalid_input.txt`
-- `Generador lexico`:
-  - puedes dejar el editor como viene y ejecutar `Generar diagrama`
-  - si quieres cargar un archivo `.yal`, usa por ejemplo:
-    - `fixtures/cases/yalex/yalex_baja.yal`
-    - `fixtures/cases/yalex/yalex_media.yal`
-    - `fixtures/cases/yalex/yalex_alta.yal`
-    - `fixtures/cases/yalex/yalex_full_features.yal`
-  - para probar variantes modificadas:
-    - `fixtures/cases/yalex/variants/yalex_baja_minus.yal`
-    - `fixtures/cases/yalex/variants/yalex_media_for.yal`
-    - `fixtures/cases/yalex/variants/yalex_alta_bang.yal`
-  - para error de compilacion, pega algo invalido como:
-    ```text
-    let digit = ['0'-'9']
-    ```
-- `Gestor de pruebas`:
-  - usa `Ejecutar caso` para una fila puntual
-  - usa `Ejecutar todas las pruebas` para correr todos los casos de la rubrica desde la interfaz
+## Casos de prueba de la rubrica
 
-Validacion rapida:
+Los pares de especificacion + input estan declarados en `fixtures/catalog.json`:
 
-```bash
+- Baja: validacion base, error lexico y version modificada.
+- Media: validacion base, error lexico y version modificada.
+- Alta: validacion base, error lexico y version modificada.
+
+Archivos clave:
+
+- Especificaciones: `fixtures/cases/yalex/` y `fixtures/cases/yalex/variants/`.
+- Entradas: `fixtures/cases/inputs/`.
+
+## Validacion rapida
+
+```powershell
 python -m pytest -q backend/tests
 cd frontend
 npm test
@@ -83,17 +82,10 @@ npm run build
 npm run test:e2e
 ```
 
-Si necesitas regenerar snapshots visuales:
+## Referencias tecnicas
 
-```bash
-cd frontend
-npm run test:e2e:update
-```
-
-## Estructura relevante
-
-- `docs/instrucciones_generales.md`: fuente normativa principal.
-- `docs/manual_validation.md`: checklist manual de validacion.
-- `backend/src/laboratorio/`: implementacion Python del nucleo.
-- `frontend/src/`: shell, features, hooks, tipos y utilidades del frontend.
-- `fixtures/catalog.json`: catalogo declarativo de fixtures y casos.
+- `backend/src/laboratorio/yalex_parser.py`: parser de YALex.
+- `backend/src/laboratorio/yalex_compiler.py`: compilacion a reglas con AFD.
+- `backend/src/laboratorio/yalex_runtime.py`: escaneo de texto con estrategia de prefijo mas largo.
+- `backend/src/laboratorio/yalex_codegen.py`: generacion de codigo del lexer.
+- `frontend/src/`: interfaz grafica de analisis/generacion/pruebas.
