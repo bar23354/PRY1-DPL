@@ -2,6 +2,8 @@
 
 Implementacion de construccion de AFD por metodo directo, minimizacion de AFD, compilacion YALex e interfaz integrada para analisis, generacion y validacion.
 
+Hecho por: `DiegoLop ez#23747`, `JenniferToxcon#21276` y `Rob ertoBarreda#23354`.
+
 La fuente normativa principal del proyecto es `docs/instrucciones_generales.md`.
 
 El proyecto evita librerias regex para el matching lexico.
@@ -16,7 +18,7 @@ El proyecto evita librerias regex para el matching lexico.
 
 El nucleo Python vigente vive en `backend/src/laboratorio/`.
 
-## Ejecutar la aplicacion integrada
+## Probar el proyecto
 
 Backend:
 
@@ -33,44 +35,55 @@ $env:BACKEND_API_ORIGIN="http://127.0.0.1:8000"
 npm run dev
 ```
 
-Abrir:
+Abrir en el navegador:
 
 ```text
 http://localhost:3000
 ```
 
-## Pruebas
+Guia rapida de uso:
 
-Backend:
+- `Panel general`: valida que carguen los conteos y modulos integrados.
+- `Analisis lexico`:
+  - deja el editor vacio y ejecuta `Baja`, `Media` o `Alta` para usar el caso base del catalogo
+  - si quieres probar upload manual, usa por ejemplo:
+    - `fixtures/cases/inputs/yalex_baja_input.txt`
+    - `fixtures/cases/inputs/yalex_media_input.txt`
+    - `fixtures/cases/inputs/yalex_alta_input.txt`
+  - para error lexico, usa:
+    - `fixtures/cases/inputs/yalex_baja_invalid_input.txt`
+    - `fixtures/cases/inputs/yalex_media_invalid_input.txt`
+    - `fixtures/cases/inputs/yalex_alta_invalid_input.txt`
+- `Generador lexico`:
+  - puedes dejar el editor como viene y ejecutar `Generar diagrama`
+  - si quieres cargar un archivo `.yal`, usa por ejemplo:
+    - `fixtures/cases/yalex/yalex_baja.yal`
+    - `fixtures/cases/yalex/yalex_media.yal`
+    - `fixtures/cases/yalex/yalex_alta.yal`
+    - `fixtures/cases/yalex/yalex_full_features.yal`
+  - para probar variantes modificadas:
+    - `fixtures/cases/yalex/variants/yalex_baja_minus.yal`
+    - `fixtures/cases/yalex/variants/yalex_media_for.yal`
+    - `fixtures/cases/yalex/variants/yalex_alta_bang.yal`
+  - para error de compilacion, pega algo invalido como:
+    ```text
+    let digit = ['0'-'9']
+    ```
+- `Gestor de pruebas`:
+  - usa `Ejecutar caso` para una fila puntual
+  - usa `Ejecutar todas las pruebas` para correr todos los casos de la rubrica desde la interfaz
+
+Validacion rapida:
 
 ```bash
 python -m pytest -q backend/tests
-```
-
-Frontend:
-
-```bash
 cd frontend
 npm test
 npm run build
-```
-
-End-to-end:
-
-```bash
-cd frontend
 npm run test:e2e
 ```
 
-La suite E2E valida:
-
-- shell integrado sin `iframe`
-- panel general con datos reales
-- analisis lexico con entrada valida e invalida
-- generador lexico con compilacion valida, error de compilacion y descarga de lexer
-- gestor de pruebas con ejecucion individual, ejecucion total y cobertura de todos los casos de la rubrica
-
-Actualizacion de snapshots visuales:
+Si necesitas regenerar snapshots visuales:
 
 ```bash
 cd frontend
