@@ -39,7 +39,7 @@ export default defineConfig({
         BACKEND_API_ORIGIN: "http://127.0.0.1:8000",
       },
       url: "http://127.0.0.1:3000",
-      reuseExistingServer: true,
+      reuseExistingServer: false,
       timeout: 120_000,
     },
   ],

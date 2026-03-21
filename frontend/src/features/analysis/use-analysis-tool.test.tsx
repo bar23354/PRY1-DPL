@@ -13,9 +13,9 @@ describe("useAnalysisTool", () => {
       new Response(
         JSON.stringify({
           fixtures: [
-            { id: "analysis-low", module: "analysis", complexity: "low", label: "Low", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_baja.yal", inputPath: "fixtures/legacy/inputs/yalex_baja_input.txt", hasInput: true },
-            { id: "analysis-medium", module: "analysis", complexity: "medium", label: "Medium", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_media.yal", inputPath: "fixtures/legacy/inputs/yalex_media_input.txt", hasInput: true },
-            { id: "analysis-high", module: "analysis", complexity: "high", label: "High", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_alta.yal", inputPath: "fixtures/legacy/inputs/yalex_alta_input.txt", hasInput: true },
+            { id: "analysis-low", module: "analysis", complexity: "low", label: "Low", kind: "yalex", specPath: "fixtures/cases/yalex/yalex_baja.yal", inputPath: "fixtures/cases/inputs/yalex_baja_input.txt", hasInput: true },
+            { id: "analysis-medium", module: "analysis", complexity: "medium", label: "Medium", kind: "yalex", specPath: "fixtures/cases/yalex/yalex_media.yal", inputPath: "fixtures/cases/inputs/yalex_media_input.txt", hasInput: true },
+            { id: "analysis-high", module: "analysis", complexity: "high", label: "High", kind: "yalex", specPath: "fixtures/cases/yalex/yalex_alta.yal", inputPath: "fixtures/cases/inputs/yalex_alta_input.txt", hasInput: true },
           ],
         }),
         { status: 200 },
@@ -37,9 +37,9 @@ describe("useAnalysisTool", () => {
         new Response(
           JSON.stringify({
             fixtures: [
-              { id: "analysis-low", module: "analysis", complexity: "low", label: "Low", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_baja.yal", inputPath: "fixtures/legacy/inputs/yalex_baja_input.txt", hasInput: true },
-              { id: "analysis-medium", module: "analysis", complexity: "medium", label: "Medium", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_media.yal", inputPath: "fixtures/legacy/inputs/yalex_media_input.txt", hasInput: true },
-              { id: "analysis-high", module: "analysis", complexity: "high", label: "High", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_alta.yal", inputPath: "fixtures/legacy/inputs/yalex_alta_input.txt", hasInput: true },
+              { id: "analysis-low", module: "analysis", complexity: "low", label: "Low", kind: "yalex", specPath: "fixtures/cases/yalex/yalex_baja.yal", inputPath: "fixtures/cases/inputs/yalex_baja_input.txt", hasInput: true },
+              { id: "analysis-medium", module: "analysis", complexity: "medium", label: "Medium", kind: "yalex", specPath: "fixtures/cases/yalex/yalex_media.yal", inputPath: "fixtures/cases/inputs/yalex_media_input.txt", hasInput: true },
+              { id: "analysis-high", module: "analysis", complexity: "high", label: "High", kind: "yalex", specPath: "fixtures/cases/yalex/yalex_alta.yal", inputPath: "fixtures/cases/inputs/yalex_alta_input.txt", hasInput: true },
             ],
           }),
           { status: 200 },
@@ -87,9 +87,9 @@ describe("useAnalysisTool", () => {
         new Response(
           JSON.stringify({
             fixtures: [
-              { id: "analysis-low", module: "analysis", complexity: "low", label: "Low", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_baja.yal", inputPath: "fixtures/legacy/inputs/yalex_baja_input.txt", hasInput: true },
-              { id: "analysis-medium", module: "analysis", complexity: "medium", label: "Medium", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_media.yal", inputPath: "fixtures/legacy/inputs/yalex_media_input.txt", hasInput: true },
-              { id: "analysis-high", module: "analysis", complexity: "high", label: "High", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_alta.yal", inputPath: "fixtures/legacy/inputs/yalex_alta_input.txt", hasInput: true },
+              { id: "analysis-low", module: "analysis", complexity: "low", label: "Low", kind: "yalex", specPath: "fixtures/cases/yalex/yalex_baja.yal", inputPath: "fixtures/cases/inputs/yalex_baja_input.txt", hasInput: true },
+              { id: "analysis-medium", module: "analysis", complexity: "medium", label: "Medium", kind: "yalex", specPath: "fixtures/cases/yalex/yalex_media.yal", inputPath: "fixtures/cases/inputs/yalex_media_input.txt", hasInput: true },
+              { id: "analysis-high", module: "analysis", complexity: "high", label: "High", kind: "yalex", specPath: "fixtures/cases/yalex/yalex_alta.yal", inputPath: "fixtures/cases/inputs/yalex_alta_input.txt", hasInput: true },
             ],
           }),
           { status: 200 },

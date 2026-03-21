@@ -33,7 +33,7 @@
 2. Seleccionar `Baja`.
 3. Ejecutar `Ejecutar analisis` con el editor vacio.
 4. Confirmar que aparezcan tokens en la tabla.
-5. Cargar `fixtures/legacy/inputs/yalex_baja_invalid_input.txt`.
+5. Cargar `fixtures/cases/inputs/yalex_baja_invalid_input.txt`.
 6. Ejecutar `Ejecutar analisis` y verificar que aparezca un error lexico.
 7. Ejecutar `Exportar tokens` despues de una corrida exitosa y confirmar descarga de `tokens_analisis.tsv`.
 

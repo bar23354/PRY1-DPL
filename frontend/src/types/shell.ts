@@ -6,5 +6,4 @@ export interface ModuleDefinition {
   cardTitle: string;
   cardDescription: string;
   activeTitle: string;
-  standalonePath: string;
 }

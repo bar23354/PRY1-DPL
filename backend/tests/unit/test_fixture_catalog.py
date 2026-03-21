@@ -40,8 +40,8 @@ def test_load_fixture_catalog_rejects_missing_referenced_files(tmp_path: Path):
       "module": "analysis",
       "complexity": "low",
       "label": "Low",
-      "specPath": "legacy/yalex/missing.yal",
-      "inputPath": "legacy/inputs/missing.txt",
+      "specPath": "cases/yalex/missing.yal",
+      "inputPath": "cases/inputs/missing.txt",
       "kind": "yalex"
     }
   ],

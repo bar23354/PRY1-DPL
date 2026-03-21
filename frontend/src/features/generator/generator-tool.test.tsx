@@ -27,8 +27,8 @@ describe("GeneratorTool", () => {
         new Response(
           JSON.stringify({
             fixtures: [
-              { id: "generator-low", module: "generator", complexity: "low", label: "Generator Low", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_baja.yal", inputPath: null, hasInput: false },
-              { id: "generator-full-features", module: "generator", complexity: "high", label: "Full Features", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_full_features.yal", inputPath: null, hasInput: false },
+              { id: "generator-low", module: "generator", complexity: "low", label: "Generator Low", kind: "yalex", specPath: "fixtures/cases/yalex/yalex_baja.yal", inputPath: null, hasInput: false },
+              { id: "generator-full-features", module: "generator", complexity: "high", label: "Full Features", kind: "yalex", specPath: "fixtures/cases/yalex/yalex_full_features.yal", inputPath: null, hasInput: false },
             ],
           }),
           { status: 200 },
@@ -88,7 +88,7 @@ describe("GeneratorTool", () => {
       .mockResolvedValueOnce(
         new Response(
           JSON.stringify({
-            fixtures: [{ id: "generator-low", module: "generator", complexity: "low", label: "Generator Low", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_baja.yal", inputPath: null, hasInput: false }],
+            fixtures: [{ id: "generator-low", module: "generator", complexity: "low", label: "Generator Low", kind: "yalex", specPath: "fixtures/cases/yalex/yalex_baja.yal", inputPath: null, hasInput: false }],
           }),
           { status: 200 },
         ),

@@ -38,21 +38,13 @@ export function AppShell() {
       </section>
 
       <section className="overflow-hidden rounded-2xl border border-slate-700/30 bg-[color:var(--color-panel)]/85">
-        <div className="flex items-center justify-between bg-slate-900/60 p-3 md:p-4">
+        <div className="bg-slate-900/60 p-3 md:p-4">
           <div>
             <p className="text-xs uppercase tracking-[0.16em] text-slate-400">{messages.shared.activeModuleLabel}</p>
             <h3 className="font-headline text-lg" data-testid="active-title">
               {activeModule.activeTitle}
             </h3>
           </div>
-          <a
-            className="rounded-md bg-[linear-gradient(135deg,var(--color-primary),#8390f2)] px-3 py-2 text-xs font-semibold text-[#152383] md:text-sm"
-            href={`../legacy/web/interfaz/${activeModule.standalonePath}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {messages.shared.openStandalone}
-          </a>
         </div>
         <ModulePanel moduleDefinition={activeModule} />
       </section>

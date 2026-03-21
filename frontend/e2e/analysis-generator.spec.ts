@@ -3,7 +3,7 @@ import path from "node:path";
 import { expect, test } from "@playwright/test";
 
 const repoRoot = path.resolve(__dirname, "..", "..");
-const lowInvalidInput = path.join(repoRoot, "fixtures", "legacy", "inputs", "yalex_baja_invalid_input.txt");
+const lowInvalidInput = path.join(repoRoot, "fixtures", "cases", "inputs", "yalex_baja_invalid_input.txt");
 
 test("runs lexical analysis with valid and invalid inputs", async ({ page }) => {
   await page.goto("/");

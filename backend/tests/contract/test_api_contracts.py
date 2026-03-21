@@ -40,8 +40,8 @@ def test_fixture_catalog_contract():
         "complexity": "low",
         "label": "Lexical Analysis Low",
         "kind": "yalex",
-        "specPath": "fixtures/legacy/yalex/yalex_baja.yal",
-        "inputPath": "fixtures/legacy/inputs/yalex_baja_input.txt",
+        "specPath": "fixtures/cases/yalex/yalex_baja.yal",
+        "inputPath": "fixtures/cases/inputs/yalex_baja_input.txt",
         "hasInput": True,
     }
 
@@ -103,7 +103,7 @@ def test_analysis_run_contract_for_lexical_error():
 
 def test_generator_compile_contract():
     client = TestClient(create_app())
-    source = (ROOT / "fixtures" / "legacy" / "yalex" / "yalex_baja.yal").read_text(encoding="utf-8")
+    source = (ROOT / "fixtures" / "cases" / "yalex" / "yalex_baja.yal").read_text(encoding="utf-8")
 
     response = client.post("/api/generator/compile", json={"yalexSource": source})
     body = response.json()

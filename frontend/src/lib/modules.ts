@@ -8,7 +8,6 @@ export const MODULES: ModuleDefinition[] = [
     cardTitle: messages.shell.modules.dashboard.cardTitle,
     cardDescription: messages.shell.modules.dashboard.cardDescription,
     activeTitle: messages.shell.modules.dashboard.activeTitle,
-    standalonePath: "dashboard_project_01/code.html",
   },
   {
     key: "analysis",
@@ -16,7 +15,6 @@ export const MODULES: ModuleDefinition[] = [
     cardTitle: messages.shell.modules.analysis.cardTitle,
     cardDescription: messages.shell.modules.analysis.cardDescription,
     activeTitle: messages.shell.modules.analysis.activeTitle,
-    standalonePath: "analysis_tool/code.html",
   },
   {
     key: "generator",
@@ -24,7 +22,6 @@ export const MODULES: ModuleDefinition[] = [
     cardTitle: messages.shell.modules.generator.cardTitle,
     cardDescription: messages.shell.modules.generator.cardDescription,
     activeTitle: messages.shell.modules.generator.activeTitle,
-    standalonePath: "lexical_generator/code.html",
   },
   {
     key: "tests",
@@ -32,7 +29,6 @@ export const MODULES: ModuleDefinition[] = [
     cardTitle: messages.shell.modules.tests.cardTitle,
     cardDescription: messages.shell.modules.tests.cardDescription,
     activeTitle: messages.shell.modules.tests.activeTitle,
-    standalonePath: "test_case_manager/code.html",
   },
 ];
 

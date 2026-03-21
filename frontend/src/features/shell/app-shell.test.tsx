@@ -47,7 +47,7 @@ describe("AppShell", () => {
         new Response(
           JSON.stringify({
             fixtures: [
-              { id: "generator-low", module: "generator", complexity: "low", label: "Generator Low", kind: "yalex", specPath: "fixtures/legacy/yalex/yalex_baja.yal", inputPath: null, hasInput: false },
+              { id: "generator-low", module: "generator", complexity: "low", label: "Generator Low", kind: "yalex", specPath: "fixtures/cases/yalex/yalex_baja.yal", inputPath: null, hasInput: false },
             ],
           }),
           { status: 200 },
@@ -61,10 +61,7 @@ describe("AppShell", () => {
 
     expect(screen.getByTestId("active-title")).toHaveTextContent("Generador lexico");
     expect(screen.getByRole("button", { name: /generar diagrama/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Abrir vista independiente" })).toHaveAttribute(
-      "href",
-      "../legacy/web/interfaz/lexical_generator/code.html",
-    );
+    expect(screen.queryByRole("link", { name: /abrir vista independiente/i })).not.toBeInTheDocument();
   });
 
   it("mounts the test case manager inside the shell", async () => {
@@ -89,8 +86,8 @@ describe("AppShell", () => {
                 complexity: "low",
                 label: "Low Valid",
                 fixtureId: "analysis-low",
-                specPath: "fixtures/legacy/yalex/yalex_baja.yal",
-                inputPath: "fixtures/legacy/inputs/yalex_baja_input.txt",
+                specPath: "fixtures/cases/yalex/yalex_baja.yal",
+                inputPath: "fixtures/cases/inputs/yalex_baja_input.txt",
                 expectation: "accept",
                 expectedTokens: ["IDENT"],
                 expectedError: null,

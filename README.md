@@ -11,9 +11,8 @@ El proyecto evita librerias regex para el matching lexico.
 - `backend/`: backend Python, API FastAPI y pruebas del backend.
 - `frontend/`: aplicacion Next.js + React + TypeScript.
 - `fixtures/`: catalogo declarativo, especificaciones YALex e inputs de prueba.
-- `legacy/`: referencia historica de entrypoints Python e interfaz web estatica.
 - `docs/`: documentacion tecnica y academica.
-- `e2e/`: pruebas end-to-end y soporte de validacion visual.
+- `artifacts/`: reportes y salidas generadas por pruebas y herramientas.
 
 El nucleo Python vigente vive en `backend/src/laboratorio/`.
 
@@ -85,4 +84,3 @@ npm run test:e2e:update
 - `backend/src/laboratorio/`: implementacion Python del nucleo.
 - `frontend/src/`: shell, features, hooks, tipos y utilidades del frontend.
 - `fixtures/catalog.json`: catalogo declarativo de fixtures y casos.
-- `legacy/`: referencia historica preservada para comparacion.

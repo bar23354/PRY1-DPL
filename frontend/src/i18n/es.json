@@ -3,7 +3,6 @@
     "appTitle": "Proyecto 01 - Interfaz Integrada",
     "moduleSelectorAria": "Selector de modulos",
     "activeModuleLabel": "Modulo activo",
-    "openStandalone": "Abrir vista independiente",
     "loading": "Cargando...",
     "moduleLabels": {
       "analysis": "Analisis lexico",
