@@ -2,10 +2,10 @@ from pathlib import Path
 
 import pytest
 
-from laboratorio.application.catalog import FixtureCatalogService, load_default_fixture_catalog
-from laboratorio.yalex_compiler import compile_yalex
-from laboratorio.yalex_parser import parse_yalex
-from laboratorio.yalex_runtime import YalexLexError, scan
+from generador_lexico.application.catalog import FixtureCatalogService, load_default_fixture_catalog
+from generador_lexico.yalex.compiler import compile_yalex
+from generador_lexico.yalex.parser import parse_yalex
+from generador_lexico.yalex.runtime import YalexLexError, scan
 
 
 ROOT = Path(__file__).resolve().parents[3]

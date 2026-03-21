@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import textwrap
 
-from laboratorio.yalex_compiler import CompiledLexer, CompiledRule
+from generador_lexico.yalex.compiler import CompiledLexer, CompiledRule
 
 
 @dataclass(frozen=True)

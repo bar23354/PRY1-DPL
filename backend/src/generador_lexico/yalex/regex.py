@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from laboratorio.tokens import simbolo_a_texto
-from laboratorio.yalex_parser import YalexLet
+from generador_lexico.core.tokens import simbolo_a_texto
+from generador_lexico.yalex.parser import YalexLet
 
 
 class YalexRegexError(ValueError):

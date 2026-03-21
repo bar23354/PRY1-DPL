@@ -1,4 +1,4 @@
-from laboratorio.application.serialization import serialize_afd
+from generador_lexico.application.serialization import serialize_afd
 
 
 def test_serialize_afd_normaliza_estructura_basica():
@@ -18,4 +18,3 @@ def test_serialize_afd_normaliza_estructura_basica():
     assert serialized["acceptingStates"] == ["S2"]
     assert serialized["transitions"]["S1"] == {"a": "S1", "b": "S2"}
     assert serialized["stateSets"]["S1"] == [1, 2]
-

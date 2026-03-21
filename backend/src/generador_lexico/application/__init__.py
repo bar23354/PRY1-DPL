@@ -1,6 +1,6 @@
 """Capa de aplicacion del backend."""
 
-from laboratorio.application.catalog import (
+from generador_lexico.application.catalog import (
     DEFAULT_CATALOG_PATH,
     FixtureCatalog,
     FixtureCatalogError,

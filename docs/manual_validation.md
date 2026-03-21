@@ -5,7 +5,7 @@
 1. Iniciar el backend desde la raiz del proyecto:
    ```powershell
    $env:PYTHONPATH="backend/src"
-   python -m laboratorio.cli.serve
+   python -m generador_lexico.cli.serve
    ```
 2. Iniciar el frontend en otra terminal:
    ```powershell

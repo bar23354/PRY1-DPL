@@ -10,13 +10,26 @@ El proyecto evita librerias regex para el matching lexico.
 
 ## Estructura actual
 
-- `backend/`: backend Python, API FastAPI y pruebas del backend.
-- `frontend/`: aplicacion Next.js + React + TypeScript.
-- `fixtures/`: catalogo declarativo, especificaciones YALex e inputs de prueba.
-- `docs/`: documentacion tecnica y academica.
-- `artifacts/`: reportes y salidas generadas por pruebas y herramientas.
+```text
+PRY1-DPL/
+|-- backend/                  # Backend Python, API FastAPI y pruebas del backend
+|   |-- src/generador_lexico/ # Nucleo del generador, analizador y casos de uso
+|   `-- tests/                # Pruebas unitarias, de contrato y de regresion
+|-- frontend/                 # Aplicacion Next.js + React + TypeScript
+|   |-- app/                  # App Router de Next.js
+|   |-- src/                  # Features, hooks, tipos, i18n y utilidades
+|   |-- e2e/                  # Pruebas Playwright y snapshots visuales
+|   `-- scripts/              # Scripts auxiliares del frontend
+|-- fixtures/                 # Casos y especificaciones usadas por backend y frontend
+|   |-- cases/                # Inputs y archivos YALex base/modificados
+|   `-- catalog.json          # Catalogo declarativo de fixtures y casos
+|-- docs/                     # Informe, instrucciones y guia manual de validacion
+|-- e2e/                      # Recursos auxiliares de automatizacion end-to-end
+|-- artifacts/                # Reportes y salidas generadas por pruebas y herramientas
+`-- README.md                 # Guia principal del proyecto
+```
 
-El nucleo Python vigente vive en `backend/src/laboratorio/`.
+El nucleo Python vigente vive en `backend/src/generador_lexico/`.
 
 ## Probar el proyecto
 
@@ -24,7 +37,7 @@ Backend:
 
 ```powershell
 $env:PYTHONPATH="backend/src"
-python -m laboratorio.cli.serve
+python -m generador_lexico.cli.serve
 ```
 
 Frontend:
@@ -94,6 +107,6 @@ npm run test:e2e:update
 
 - `docs/instrucciones_generales.md`: fuente normativa principal.
 - `docs/manual_validation.md`: checklist manual de validacion.
-- `backend/src/laboratorio/`: implementacion Python del nucleo.
+- `backend/src/generador_lexico/`: implementacion Python del nucleo.
 - `frontend/src/`: shell, features, hooks, tipos y utilidades del frontend.
 - `fixtures/catalog.json`: catalogo declarativo de fixtures y casos.

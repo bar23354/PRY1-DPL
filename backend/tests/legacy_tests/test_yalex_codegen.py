@@ -1,9 +1,9 @@
 from pathlib import Path
 import importlib.util
 
-from laboratorio.yalex_codegen import write_lexer_file
-from laboratorio.yalex_compiler import compile_yalex
-from laboratorio.yalex_parser import parse_yalex
+from generador_lexico.yalex.codegen import write_lexer_file
+from generador_lexico.yalex.compiler import compile_yalex
+from generador_lexico.yalex.parser import parse_yalex
 
 
 def test_codegen_genera_archivo_python(tmp_path: Path):
@@ -19,7 +19,7 @@ rule tokens =
     assert out.name == "thelexer.py"
     assert "def tokens(text, *args, **kwargs):" in content
     assert "_RULES = [" in content
-    assert "laboratorio.yalex_runtime" not in content
+    assert "generador_lexico.yalex.runtime" not in content
 
     spec = importlib.util.spec_from_file_location("thelexer", out)
     module = importlib.util.module_from_spec(spec)

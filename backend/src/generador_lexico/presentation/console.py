@@ -1,7 +1,7 @@
 # visualizacion de la tabla de transiciones y detalles de la construccion
 
-from laboratorio.analizador import formatearSimbolo, formatearToken
-from laboratorio.minimizacion import contarMetricas
+from generador_lexico.core.analizador import formatearSimbolo, formatearToken
+from generador_lexico.core.minimizacion import contarMetricas
 
 
 def _indice_estado(estado):
@@ -99,4 +99,3 @@ def mostrarComparacion(afd_directo, afd_minimizado):
         f'{metricas_directo["transiciones"] - metricas_min["transiciones"]}'
     )
     print()
-

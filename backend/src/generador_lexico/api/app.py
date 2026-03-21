@@ -3,8 +3,8 @@ from __future__ import annotations
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
-from laboratorio.api.schemas import AnalysisRunRequest, ApiErrorResponse, GeneratorCompileRequest, TestsRunRequest
-from laboratorio.application.use_cases import (
+from generador_lexico.api.schemas import AnalysisRunRequest, ApiErrorResponse, GeneratorCompileRequest, TestsRunRequest
+from generador_lexico.application.use_cases import (
     build_dashboard_summary,
     compile_generator_source,
     list_fixture_catalog,
@@ -19,7 +19,7 @@ def _error_payload(code: str, message: str) -> dict:
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(title="laboratorio-api")
+    app = FastAPI(title="generador-lexico-api")
 
     @app.exception_handler(KeyError)
     async def handle_not_found(_: Request, error: KeyError):
@@ -35,7 +35,7 @@ def create_app() -> FastAPI:
 
     @app.get("/api/health")
     async def health():
-        return {"status": "ok", "service": "laboratorio-api"}
+        return {"status": "ok", "service": "generador-lexico-api"}
 
     @app.get("/api/fixtures/catalog")
     async def fixture_catalog():

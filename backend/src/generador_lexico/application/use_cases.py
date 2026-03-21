@@ -2,13 +2,13 @@ from __future__ import annotations
 
 from io import StringIO
 
-from laboratorio.application.catalog import FixtureCatalogService, load_default_fixture_catalog
-from laboratorio.application.positions import offset_to_line_column
-from laboratorio.application.serialization import serialize_afd
-from laboratorio.yalex_codegen import generate_lexer_source
-from laboratorio.yalex_compiler import CompiledLexer, compile_yalex
-from laboratorio.yalex_parser import parse_yalex
-from laboratorio.yalex_runtime import LexToken, YalexLexError, scan
+from generador_lexico.application.catalog import FixtureCatalogService, load_default_fixture_catalog
+from generador_lexico.application.positions import offset_to_line_column
+from generador_lexico.application.serialization import serialize_afd
+from generador_lexico.yalex.codegen import generate_lexer_source
+from generador_lexico.yalex.compiler import CompiledLexer, compile_yalex
+from generador_lexico.yalex.parser import parse_yalex
+from generador_lexico.yalex.runtime import LexToken, YalexLexError, scan
 
 
 def _build_catalog_service() -> FixtureCatalogService:

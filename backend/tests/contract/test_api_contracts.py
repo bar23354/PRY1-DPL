@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from fastapi.testclient import TestClient
-from laboratorio.api.app import create_app
+from generador_lexico.api.app import create_app
 
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -14,7 +14,7 @@ def test_health_contract():
 
     assert response.status_code == 200
     assert response.headers["content-type"].startswith("application/json")
-    assert response.json() == {"status": "ok", "service": "laboratorio-api"}
+    assert response.json() == {"status": "ok", "service": "generador-lexico-api"}
 
 
 def test_fixture_catalog_contract():
@@ -114,7 +114,7 @@ def test_generator_compile_contract():
     assert body["stats"]["ruleCount"] == 6
     assert body["recognizedTokens"] == ["IDENT", "NUM", "PLUS", "TIMES", "ASSIGN"]
     assert "def tokens(text, *args, **kwargs):" in body["lexerSource"]
-    assert "laboratorio.yalex_runtime" not in body["lexerSource"]
+    assert "generador_lexico.yalex.runtime" not in body["lexerSource"]
     first_rule = body["rules"][0]
     assert list(first_rule.keys()) == [
         "index",

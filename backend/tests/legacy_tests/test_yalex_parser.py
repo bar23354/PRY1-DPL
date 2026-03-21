@@ -1,4 +1,4 @@
-from laboratorio.yalex_parser import parse_yalex
+from generador_lexico.yalex.parser import parse_yalex
 
 
 def test_parsea_yalex_basico():

@@ -1,6 +1,6 @@
-from laboratorio.yalex_compiler import compile_yalex
-from laboratorio.yalex_parser import parse_yalex
-from laboratorio.yalex_runtime import scan
+from generador_lexico.yalex.compiler import compile_yalex
+from generador_lexico.yalex.parser import parse_yalex
+from generador_lexico.yalex.runtime import scan
 
 
 def _compile(src: str):

@@ -1,6 +1,6 @@
 import pytest
 
-from laboratorio.application.positions import build_line_starts, offset_to_line_column
+from generador_lexico.application.positions import build_line_starts, offset_to_line_column
 
 
 def test_build_line_starts_detecta_inicio_de_lineas():
@@ -19,4 +19,3 @@ def test_offset_to_line_column_mapea_offsets_a_linea_y_columna():
 def test_offset_to_line_column_valida_rango(offset):
     with pytest.raises(ValueError):
         offset_to_line_column("abc", offset)
-

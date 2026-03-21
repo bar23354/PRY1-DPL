@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from laboratorio.application.catalog import (
+from generador_lexico.application.catalog import (
     FixtureCatalogError,
     FixtureCatalogService,
     load_fixture_catalog,

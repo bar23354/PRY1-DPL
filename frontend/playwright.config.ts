@@ -19,13 +19,13 @@ export default defineConfig({
   },
   webServer: [
     {
-      command: "python -m laboratorio.cli.serve",
+      command: "python -m generador_lexico.cli.serve",
       cwd: repoRoot,
       env: {
         ...process.env,
         PYTHONPATH: "backend/src",
-        LABORATORIO_API_HOST: "127.0.0.1",
-        LABORATORIO_API_PORT: "8000",
+        GENERADOR_LEXICO_API_HOST: "127.0.0.1",
+        GENERADOR_LEXICO_API_PORT: "8000",
       },
       url: "http://127.0.0.1:8000/api/health",
       reuseExistingServer: true,

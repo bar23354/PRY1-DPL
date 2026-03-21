@@ -1,6 +1,6 @@
-from laboratorio.analizador import prepararExpresion
-from laboratorio.arbol import construirArbolDirecto
-from laboratorio.construccion_afd import construirAfd
+from generador_lexico.core.analizador import prepararExpresion
+from generador_lexico.core.arbol import construirArbolDirecto
+from generador_lexico.core.construccion_afd import construirAfd
 
 
 def test_arbol_directo_calcula_followpos_para_kleene():

@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 
-from laboratorio.analizador import prepararExpresion
-from laboratorio.arbol import construirArbolDirecto
-from laboratorio.construccion_afd import construirAfd
-from laboratorio.minimizacion import minimizarAfd
-from laboratorio.yalex_parser import YalexRule, YalexSpec
-from laboratorio.yalex_regex import RegexExpr, default_universe, normalize_regex
+from generador_lexico.core.analizador import prepararExpresion
+from generador_lexico.core.arbol import construirArbolDirecto
+from generador_lexico.core.construccion_afd import construirAfd
+from generador_lexico.core.minimizacion import minimizarAfd
+from generador_lexico.yalex.parser import YalexRule, YalexSpec
+from generador_lexico.yalex.regex import RegexExpr, default_universe, normalize_regex
 
 @dataclass(frozen=True)
 class CompiledRule:

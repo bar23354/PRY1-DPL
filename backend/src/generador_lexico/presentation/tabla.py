@@ -1,4 +1,4 @@
-from laboratorio.presentation.console import (
+from generador_lexico.presentation.console import (
     mostrarComparacion,
     mostrarDetalle,
     mostrarDetalleMinimizacion,

@@ -1,6 +1,6 @@
 import pytest
 
-from laboratorio.analizador import RegexSyntaxError, formatearTokens, prepararExpresion, tokenizar
+from generador_lexico.core.analizador import RegexSyntaxError, formatearTokens, prepararExpresion, tokenizar
 
 
 def test_tokeniza_operador_escapado_como_literal():

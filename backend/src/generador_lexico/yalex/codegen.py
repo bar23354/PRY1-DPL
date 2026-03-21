@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from laboratorio.yalex_compiler import CompiledLexer
+from generador_lexico.yalex.compiler import CompiledLexer
 
 
 def _py_string(value: str) -> str:

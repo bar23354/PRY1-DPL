@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-laboratorio-api = "laboratorio.cli.serve:main"
+generador-lexico-api = "generador_lexico.cli.serve:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10"]

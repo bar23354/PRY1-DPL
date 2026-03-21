@@ -1,9 +1,9 @@
 import pytest
 
-from laboratorio.analizador import prepararExpresion
-from laboratorio.arbol import construirArbolDirecto
-from laboratorio.construccion_afd import construirAfd
-from laboratorio.simulador import simularAfd
+from generador_lexico.core.analizador import prepararExpresion
+from generador_lexico.core.arbol import construirArbolDirecto
+from generador_lexico.core.construccion_afd import construirAfd
+from generador_lexico.core.simulador import simularAfd
 
 
 def construir_pipeline(expr):
