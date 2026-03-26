@@ -422,12 +422,11 @@ temp/
 rubrica_extracted.txt
 yalex_consideraciones_extracted.txt
 
-# Local tests directory
-tests/
-!backend/tests/
-!backend/tests/**
-backend/tests/**/__pycache__/
-backend/tests/**/*.pyc
+# Test directories should be versioned
+!**/tests/
+!**/tests/**
+**/tests/**/__pycache__/
+**/tests/**/*.pyc
 
 # Next.js frontend artifacts
 frontend/node_modules/
